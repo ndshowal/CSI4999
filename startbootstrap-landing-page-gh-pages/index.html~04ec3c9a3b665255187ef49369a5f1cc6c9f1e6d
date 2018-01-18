@@ -141,23 +141,23 @@
           </div>
           <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-3.png" alt="">
+              <img class="img-fluid rounded-circle mb-3" src="" alt="">
               <h5>Anthony Polito</h5>
-              <p class="font-weight-light mb-0">"Website and App Developer"</p>
+              <p class="font-weight-light mb-0">""</p>
             </div>
           </div>
 		   <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-2.jpg.jpg" alt="">
+              <img class="img-fluid rounded-circle mb-3" src="" alt="">
               <h5>Nathan Showalter</h5>
-              <p class="font-weight-light mb-0">Website Designer</p>
+              <p class="font-weight-light mb-0">""</p>
             </div>
           </div>
 		   <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-4.jpg" alt="">
+              <img class="img-fluid rounded-circle mb-3" src="" alt="">
               <h5>Zehua Zhao</h5>
-              <p class="font-weight-light mb-0">Website Designer</p>
+              <p class="font-weight-light mb-0">""</p>
             </div>
           </div>
         </div>
