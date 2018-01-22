@@ -1,5 +1,4 @@
 .register-form {
-	
 	padding: 4vw 0 6vw;
 }
 
@@ -8,9 +7,7 @@
 }
 
 .register-form .form-row button.btn {
-	
 	text-align: center;
 	display: inline-block;
-
-	
-	}
+	cursor: pointer;
+}
