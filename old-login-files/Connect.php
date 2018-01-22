@@ -5,7 +5,7 @@
     $servername = getenv('127.0.0.1');
     $username = getenv('C9_USER');
     $password = "";
-    $database = "projectDB";
+    $database = "c9";
     $dbport = 3306;
 
     // Create connection
