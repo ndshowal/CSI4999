@@ -1,0 +1,74 @@
+body {
+	font-family: "Arial", Sans-serif;
+	background-color: #A9A9A9;
+	width: 960px; 
+	margin: 0 auto;
+}
+table, td, th {
+	color: white;
+	font-family: "Arial", Sans-serif;
+	border: solid 1px #FFFFFF;
+	border-collapse: collapse;
+	background-color: #33ADFF;
+}
+
+td, th {
+	padding: 5px
+}
+
+table {
+	width: 50%;
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+.plumber_list a {
+	color: inherit;
+}
+
+.login {
+	width: 400px; 
+}
+
+.register {
+	width: 400px;
+}
+
+.review {
+	width: 30% !important;
+}
+
+.reviews {
+	width: 100%;
+}
+
+.reviews th:hover {
+	background-color: #1E90FF;
+	color: #33ADFF;
+}
+
+.reviews a {
+	padding: 10px 20px;
+}
+
+.review_box {
+	height: 200px;
+	width: 400px;
+}
+
+.navbar th:hover {
+	background-color: #1E90FF;
+	color: #33ADFF;
+}
+
+.navbar a {
+	padding: 15px 90px;
+}
+
+.active {
+	background-color: #1E90FF;
+	color:#33ADFF;
+}
