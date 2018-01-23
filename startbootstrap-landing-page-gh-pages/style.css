@@ -11,3 +11,8 @@
 	display: inline-block;
 	cursor: pointer;
 }
+
+.overlay + * {
+	z-index: 3;
+	position: relative;
+}
