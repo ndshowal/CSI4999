@@ -25,11 +25,14 @@
 
   <body>
 
-    <!-- Navigation -->
+       <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">CardGuard</a>
-        <a class="btn btn-primary" href="signin.html">Sign In</a>
+        <a class="navbar-brand" href="index.php">CardGuard</a>
+        <div>
+        	<a class="btn btn-primary" href="signin.php">Sign In</a>
+			<a class="btn btn-primary" href="register.php">Register</a>
+        </div>
       </div>
     </nav>
 	
@@ -72,31 +75,6 @@ color:black'><h1>CardGuard is a smartphone security app which validates purchase
         </div>
       </div>
     </section>
-
-    <!-- Call to Action -->
-    <section class="call-to-action text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
-                </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-basic">Sign up!</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-	
 	
     <!-- Footer -->
     <footer class="footer bg-light">
@@ -105,19 +83,19 @@ color:black'><h1>CardGuard is a smartphone security app which validates purchase
           <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
             <ul class="list-inline mb-2">
               <li class="list-inline-item">
-                <a href="about.html">About</a>
+                <a href="about.php">About</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="termsfeed-terms-service-html-english.html">Terms of Use</a>
+                <a href="termsfeed-terms-service-html-english.php">Terms of Use</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="privacypolicy.html">Privacy Policy</a>
+                <a href="privacypolicy.php">Privacy Policy</a>
               </li>
             </ul>
             <p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap 2017. All Rights Reserved.</p>
