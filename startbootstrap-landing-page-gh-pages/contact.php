@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -12,7 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -26,99 +25,82 @@
 
   <body>
 
-      <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">CardGuard</a>
+        <a class="navbar-brand" href="index.php">CardGuard</a>
         <div>
-        	<a class="btn btn-primary" href="signin.html">Sign In</a>
-			<a class="btn btn-primary" href="register.html">Register</a>
+        	<a class="btn btn-primary" href="signin.php">Sign In</a>
+			<a class="btn btn-primary" href="register.php">Register</a>
         </div>
       </div>
     </nav>
-	
-<!-- Masthead -->
-    <header class="masthead text-black text-center">
-	    
-	  <h1>Register for CardGuard</h1>
-      <div class="overlay"></div>
-      
-    </header>
-    
-    <section class="register-form">
+
+ 
+ <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
       <div class="container">
+        <h2 class="mb-5">Developers</h2>
         <div class="row">
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              
-			  <div class="">
-				<label><b>First Name</b></label>
-                  <input type="name" class="form-control form-control-lg" placeholder="First name" required>
-				  <br />
-                </div>
-				
-				
-				
-				<div class="">
-				<label><b>Last Name</b></label>
-                  <input type="name" class="form-control form-control-lg" placeholder="Last name" required>
-				  <br />
-                </div>
-				
-				
-				
-                <div class="">
-				<label><b>Email</b></label>
-                  <input type="email" class="form-control form-control-lg" placeholder="Email" required>
-				  <br />
-                </div>
-				
-				
-				
-				<div class="">
-				<label><b>Password</b></label>
-                  <input type="password" class="form-control form-control-lg" placeholder="Password" required>
-				  <br />
-                </div>
-				
-               
-			<div class="form-row">
-				<button type="submit" align="middle" class="btn  btn-lg btn-basic">Register</button>
-             
-              </div>
-            </form>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/developer-1.jpg" alt="">
+              <h5>John Ivezaj</h5>
+              <p class="font-weight-light mb-0">Website Designer</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="" alt="">
+              <h5>Kaitlin Pawloski</h5>
+              <p class="font-weight-light mb-0">""</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/developer-3.png" alt="">
+              <h5>Anthony Polito</h5>
+              <p class="font-weight-light mb-0">Website and App Designer</p>
+            </div>
+          </div>
+		   <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/developer-2.jpg.jpg" alt="">
+              <h5>Nathan Showalter</h5>
+              <p class="font-weight-light mb-0">Website Designer</p>
+            </div>
+          </div>
+		   <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/developer-4.jpg" alt="">
+              <h5>Zehua Zhao</h5>
+              <p class="font-weight-light mb-0">Website Designer</p>
+            </div>
           </div>
         </div>
       </div>
-	  <!--- <div class="container-fluid">
-	  <div class="form-row">
-
-                  <button type="submit" class="btn btn-block btn-lg btn-basic">Register</button>
-       </div> --->
-	</div>
-
-	</section>
+    </section>
 	
-    <!-- Footer -->
+	 <!-- Footer -->
     <footer class="footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
             <ul class="list-inline mb-2">
               <li class="list-inline-item">
-                <a href="about.html">About</a>
+                <a href="about.php">About</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="termsfeed-terms-service-html-english.html">Terms of Use</a>
+                <a href="termsfeed-terms-service-html-english.php">Terms of Use</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="privacypolicy.html">Privacy Policy</a>
+                <a href="privacypolicy.php">Privacy Policy</a>
               </li>
             </ul>
             <p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap 2017. All Rights Reserved.</p>
