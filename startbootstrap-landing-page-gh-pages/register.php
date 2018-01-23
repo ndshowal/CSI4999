@@ -74,13 +74,19 @@
                 </div>
 				
 				
-				
 				<div class="">
 				<label><b>Password</b></label>
                   <input type="password" class="form-control form-control-lg" placeholder="Password" required>
 				  <br />
                 </div>
 				
+				<div class="form-group">
+  <label><b>Account Type:</b></label>
+  <select class="form-control" id="AccountType">
+    <option>Buyer</option>
+    <option>Seller</option>
+  </select>
+</div>
                
 			<div class="form-row">
 				<button type="submit" align="middle" class="btn  btn-lg btn-basic">Register</button>
