@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -37,12 +38,12 @@
     </nav>
 	
 <!-- Masthead -->
-    <header class="masthead text-white text-center">
+    <header class="masthead text-black text-center">
+		<h1>Sign into CardGuard</h1>
       <div class="overlay"></div>
-      <div class="container">
+     <!-- <div class="container">
         <div class="row">
-          <div class="col-xl-9 mx-auto">
-          </div>
+          
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>
               <div class="form-row">
@@ -59,8 +60,44 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> -->
+	  
     </header>
+	
+	<section class="register-form">
+		<div class="container">
+        <div class="row">
+          
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              
+			  
+                <div class="">
+					
+					<label><b>Email</b></label>
+                  <input type="email" class="form-control form-control-lg" placeholder="Email">
+				  <br />
+                </div>
+				
+				<div class="">
+					<label><b>Password</b></label>
+                  <input type="password" class="form-control form-control-lg" placeholder="Password">
+				  <br />
+                </div>
+                
+				<div class="form-row">
+                  <button type="submit" align="middle" class="btn btn-lg btn-basic">Sign in</button>
+                
+				</div>
+              
+			  
+            </form>
+          </div>
+        </div>
+      </div>
+	
+	
+	</section>
 
     <!-- Footer -->
     <footer class="footer bg-light">
