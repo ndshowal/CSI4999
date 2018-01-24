@@ -59,8 +59,8 @@
 				        <div class="form-group">
                   <label><b>Account Type:</b></label>
                   <select class="form-control" id="AccountType" name="reg_account_type" required>
-                    <option>Merchant</option>
                     <option>Standard</option>
+                    <option>Merchant</option>
                   </select>
                 </div>
                
