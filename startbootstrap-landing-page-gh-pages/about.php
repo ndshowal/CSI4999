@@ -24,7 +24,13 @@
   </head>
 
   <body>
-
+  <?php
+    if(!isset($db)){
+			require_once('Connect.php');
+		}
+    session_start();
+		$current_user = $_SESSION['username'];
+  ?>
        <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
@@ -126,7 +132,7 @@ color:black'><h1>CardGuard is a smartphone security app which validates purchase
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  
   </body>
-
+  
 </html>
