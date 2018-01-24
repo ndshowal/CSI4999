@@ -20,25 +20,17 @@
 		$response = @mysqli_query($db, $query2);
 		
 		if($response) {
-			if($row == null) {
-				echo 'Registration successful! Welcome, ' . $reg_first_name . '!';
-		        echo '<br><br> <a href="profile.php">Proceed</a>';
-		        mysqli_query($db, $query);
-		        $_SESSION['username'] = $reg_username;
-		        $_SESSION['logged_in'] = true;
-		        exit();
-			}
 		    while($row = mysqli_fetch_array($response)) {
 		        if(($reg_first_name == $row['first_name'] && $reg_last_name == $row['last_name'])) {
-		           	echo 'A user with that name already exists.';
+		           	echo 'An account with the name "' . $reg_first_name . ' ' . $reg_last_name . '" already exists.';
 		           	echo '<br><br> <a href="register.php">Back</a>';
 		           	exit();
 		        } else if ($row['username'] == $reg_username) {
-		        	echo 'A user with that username already exists.';
+		        	echo 'An account with the username ' . $reg_username . ' already exists.';
 		        	echo '<br><br> <a href="register.php">Back</a>';
 		        	exit();
 		        } else if ($reg_email == $row['email_address']) {
-		        	echo 'A user with that email already exists.';
+		        	echo 'A user with the email ' . $reg_email . ' already exists.';
 		        	echo '<br><br> <a href="register.php">Back</a>';
 		        	exit();
 		        } else {
