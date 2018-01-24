@@ -1,137 +1,37 @@
- <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Landing Page - Start Bootstrap Theme</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
-    <link href="css/landing-page.min.css" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-        <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.php">CardGuard</a>
-        <div>
-        	<a class="btn btn-primary" href="signin.php">Sign In</a>
-			<a class="btn btn-primary" href="register.php">Register</a>
-        </div>
-      </div>
-    </nav>
+<?php include('header.php');?>
 
  
- <!-- Testimonials -->
-    <section class="testimonials text-center bg-light">
+    <section class="contact text-center standard-page">
       <div class="container">
-        <h2 class="mb-5">Developers</h2>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-1.jpg" alt="">
+        <h2 class="mb-3">Developers</h2>
+        <div class="profiles">
+            <div class="developer  mb-5 mb-lg-0">
+	          <div class="img-fluid rounded-circle mb-3 profile-img" style="background: url('img/developer-1.jpg');"></div>
               <h5>John Ivezaj</h5>
               <p class="font-weight-light mb-0">Website Designer</p>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="" alt="">
+            <div class="developer  mb-5 mb-lg-0">
+              <div class="img-fluid rounded-circle mb-3 profile-img" style="background: url('img/developer-5.jpg');"></div>
               <h5>Kaitlin Pawloski</h5>
-              <p class="font-weight-light mb-0">""</p>
+              <p class="font-weight-light mb-0">Website Developer</p>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-3.png" alt="">
+            <div class="developer  mb-5 mb-lg-0">
+	          <div class="img-fluid rounded-circle mb-3 profile-img" style="background: url('img/developer-3.png');"></div>
               <h5>Anthony Polito</h5>
               <p class="font-weight-light mb-0">Website and App Designer</p>
             </div>
-          </div>
-		   <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-2.jpg.jpg" alt="">
+            <div class="developer  mb-5 mb-lg-0">
+	          <div class="img-fluid rounded-circle mb-3 profile-img" style="background: url('img/developer-2.jpg.jpg');"></div>
               <h5>Nathan Showalter</h5>
               <p class="font-weight-light mb-0">Website Designer</p>
             </div>
-          </div>
-		   <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="img/developer-4.jpg" alt="">
+            <div class="developer  mb-5 mb-lg-0">
+	          <div class="img-fluid rounded-circle mb-3 profile-img" style="background: url('img/developer-4.jpg');"></div>
               <h5>Zehua Zhao</h5>
               <p class="font-weight-light mb-0">Website Designer</p>
             </div>
           </div>
-        </div>
       </div>
     </section>
 	
-	 <!-- Footer -->
-    <footer class="footer bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="about.php">About</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="contact.php">Contact</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="termsfeed-terms-service-html-english.php">Terms of Use</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="privacypolicy.php">Privacy Policy</a>
-              </li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap 2017. All Rights Reserved.</p>
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-facebook fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-twitter fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-instagram fa-2x fa-fw"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  </body>
-
-</html>
+<?php include('footer.php');?>
