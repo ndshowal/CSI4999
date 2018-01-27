@@ -3,17 +3,13 @@
   <?php include("header.php");?>
   
   <body>
-  <style>
-	p{margin-left: 70px; margin-right: 15px; margin-top: 50px; margin-bottom: 50px;}
-	h1{margin-left: 30px; margin-bottom: 10px; text-align: center; font-size: 295%;}
-	h2{margin-left: 55px; margin-bottom: 10px;}
-	</style>
+
  
+ <header class="masthead text-center">
  <div class= "container">
- <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal'><span style='font-size:21.0pt;font-family:"Verdana",sans-serif;
-color:black'><h1>CardGuard is a smartphone security app which validates purchases by requiring confirmation from both customers and merchants, allowing for double the protection from fraud or theft.</h1></span></p>
+ <h1>CardGuard is a smartphone security app which validates purchases by requiring confirmation from both customers and merchants, allowing for double the protection from fraud or theft.</h1>
  </div>
+ </header>
  
  <!-- Image Showcases -->
     <section class="showcase">

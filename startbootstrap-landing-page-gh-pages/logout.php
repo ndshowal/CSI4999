@@ -3,6 +3,6 @@
     session_destroy();
     session_start();
     $_SESSION['logged_in'] = false;
-    header("location: about.php");
+    header("location: index.php");
     exit();
 ?>

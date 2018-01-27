@@ -35,10 +35,19 @@
       echo'
       <body>
         <!-- Navigation -->
-        <nav class="navbar navbar-light bg-light static-top">
+        <nav class="navbar navbar-light bg-light static-top navbar-expand-md">
           <div class="container">
+         
             <a class="navbar-brand" href="index.php">CardGuard</a>
-            <div>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+            <div class="nav-menu collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav>
+                <li><a href="about.php"></a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a></li>
+              </ul>
             	<a class="btn btn-primary" href="signin.php">Sign In</a>
     			    <a class="btn btn-primary" href="register.php">Register</a>
             </div>
@@ -54,7 +63,7 @@
             <a class="navbar-brand" href="index.php">CardGuard</a>
             <div>
             	<a class="btn btn-primary" href="profile.php">' . $current_user . '</a>
-    			    <a class="btn btn-primary" href="logout.php">Logout</a>
+    			    <a class="btn btn-primary" href="logout.php">Logout </a>
             </div>
           </div>
         </nav>

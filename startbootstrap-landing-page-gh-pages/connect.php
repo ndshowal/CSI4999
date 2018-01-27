@@ -2,9 +2,9 @@
     unset($_SESSION);
     session_start();
 
-    $servername = getenv('127.0.0.1');
-    $username = getenv('C9_USER');
-    $password = "";
+    $servername = "cardguard-db.mysql.database.azure.com";
+    $username = "cardguard-admin@cardguard-db";
+    $password = "password12345!";
     $database = "cardguard_db";
     $dbport = 3306;
 
