@@ -3,6 +3,6 @@
     session_destroy();
     session_start();
     $_SESSION['logged_in'] = false;
-    header("location: signin.php");
+    header("location: about.php");
     exit();
 ?>

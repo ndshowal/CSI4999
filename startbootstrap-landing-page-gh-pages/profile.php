@@ -1,78 +1,189 @@
-<?php include("header.php");
-    $query_user_info = "SELECT * 
-						FROM users 
-						WHERE username = '" . $username . "'";
-    $user_info_response = @mysqli_query($db, $query_user_info);
-    
-    if($user_info_response) {  
-		while($row = mysqli_fetch_array($user_info_response)) {
-		    echo 'Hello';
-            echo '<h3>Logged in as: <strong>' . $username . '</strong></h3>
-            <br>
-        	Not you? Click <a href="Logout.php">here</a> to switch users.<br><br>' .
-        	'<h3>User info: </h3>' .
-        	'<h4>Name: ' . $row['cust_first_name'] . ' ' . $row['cust_last_name'] . '</h4>' .
-        	'<h4>E-mail: ' . $row['email_address'] . '<br><br>';
-		}
-    }
-    
-    $query_user_info = "SELECT * 
-						FROM Customer 
-						WHERE username = '" . $username . "'";
-		
-		$user_info_response = @mysqli_query($db, $query_user_info); 
-		
-		if($user_info_response) {
-			while($row = mysqli_fetch_array($user_info_response)) {
-        		echo '<h3>Logged in as: <strong>' . $username . '</strong></h3>
-        		Not you? Click <a href="Logout.php">here</a> to switch users.<br><br>' .
-        		'<h3>User info: </h3>' .
-        		'<h4>Name: ' . $row['cust_first_name'] . ' ' . $row['cust_last_name'] . '</h4>' .
-        		'<h4>E-mail: ' . $row['email_address'] . '<br><br>';
-			}
-	        
-	        echo '</tr>';
-		} else {
-			echo "Couldn't issue database query<br />";
-			echo mysqli_error($db);
-		}
-		
-		$query = "SELECT Review.username, Review.review_date, Review.service_date, 
-				Review.review_rating, Review.review_details, Review.service_id,
-				Plumber.company_name, Plumber.internal_url
-				FROM Review
-				INNER JOIN Plumber
-				ON Review.service_id = Plumber.service_id
-				WHERE Review.username = '$username'
-				ORDER BY Plumber.company_name DESC";
+<!DOCTYPE html>
+<html lang="en">
 
-		$response = @mysqli_query($db, $query);
+  <?php
+  	include("header.php");
+  ?>
 
-		if($response){
-			echo '<h3> Your reviews:</h3>' .
-	    	'<table class="reviews" align="left" cellspacing="5" cellpadding="8" width="50%">
-				<td align="left"><b>Company Name</b></td>
-				<td align="left"><b>Review Date</b></td>
-				<td align="left"><b>Service Date</b></td>
-				<td align="left"><b>Review Rating</b></td>
-				<td align="left"><b>Review Details</b></td>';
+  <body>
+			<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+			<h2 class="page-title">
+			<i class="icon-th-large"></i>				
+			</h1>
+				<div class="row">
+					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+						<div class="widget">
+							<div class="widget-content">
+								<div class="tabbable">
+
+							<div class="tab-content">
+
+								<div class="tab-pane active" id="1">
+
+								<form id="edit-profile" class="form-horizontal">
+
+									<fieldset>
+
+										
+
+										<div class="control-group">											
+											<h3>Your Account Details</h3>
+											<label class="control-label" for="username">Username</label>
+
+											<div class="controls">
+
+												<input type="text" class="input-medium disabled" id="username" value="user" disabled>
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+
+										
+
+										
+
+										<div class="control-group">											
+
+											<label class="control-label" for="firstname">First Name</label>
+
+											<div class="controls">
+
+												<input type="text" class="input-medium" id="firstname" value="Rod" disabled>
+ 
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+
+										
+
+										
+
+										<div class="control-group">											
+
+											<label class="control-label" for="lastname">Last Name</label>
+
+											<div class="controls">
+
+												<input type="text" class="input-medium" id="lastname" value="Lee" disabled>
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+
+										
+
+										
+
+										<div class="control-group">											
+
+											<label class="control-label" for="email">Email Address</label>
+
+											<div class="controls">
+
+												<input type="text" class="input-large" id="email" value="example@example.com" disabled>
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+
+										
+
+										
+
+										<br /><br />
+
+										
+
+										<div class="control-group">											
+											<h4>Change Password</h4>
+											
+											<label class="control-label" for="password1">Enter Current Password</label>
+
+											<div class="controls">
+
+												<input type="password" class="input-medium" id="password1" value="password">
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+											
+											<label class="control-label" for="password1">New Password</label>
+
+											<div class="controls">
+
+												<input type="password" class="input-medium" id="password1" value="password">
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+
+										
+
+										
+
+										<div class="control-group">											
+
+											<label class="control-label" for="password2">Confirm New Password</label>
+
+											<div class="controls">
+
+												<input type="password" class="input-medium" id="password2" value="password">
+
+											</div> <!-- /controls -->				
+
+										</div> <!-- /control-group -->
+										<div class="form-actions">
+										<button type="delete account" class="btn btn-primary">Delete</button>
+										</div>
+
+										
+
+										
+
+											
+
+											<br />
+
+										
+
+											
+
+										<div class="form-actions">
+
+											<button type="submit" class="btn btn-primary">Save</button> 
+
+											<button class="btn">Cancel</button>
+
+										</div> <!-- /form-actions -->
+
+									</fieldset>
+
+								</form>
+
+								</div>
+
+
+</div> <!-- /widget-content -->
+</div> <!-- /widget -->
+</div> <!-- /co-md-10 col-lg-8 col-xl-7 mx-auto -->
+</div> <!-- /row -->
+
+
+</div> <!-- /col-md-10 col-lg-8 col-xl-7 mx-auto-->
+</div> <!-- /row -->
+</div> <!-- /container -->
+</div> <!-- /content -->
+
+					
+
 	
-    		while($row = mysqli_fetch_array($response)) {
-        		echo '<tr>
-        		<td align="left"><a color="black" href="Plumber.php?id='. 
-        			$row['service_id'] .'">' . $row['company_name'].'</a></td>
-        		<td align="left">' . $row['review_date'] . '</td>
-        		<td align="left">' . $row['service_date'] . '</td>
-	    		<td align="left">' . $row['review_rating'] . '</td>
-		    	<td align="left">' . $row['review_details'] . '</td>';
-        
-        	echo '</tr>';
-    		}
 
-    	echo '</table>';
-		} else {
-			echo "Couldn't issue database query<br />";
-			echo mysqli_error($db);
-		}
-    
-include("footer.php");?>
+ <?php
+	include("footer.php");
+?>
+
+
+
+  </body>
+
+</html>

@@ -15,13 +15,13 @@
     if($reg_password == $reg_confirm_password) {
 	    $query = "INSERT INTO users(first_name, last_name, username, email_address, password, account_type)
                 VALUES('$reg_first_name', '$reg_last_name', '$reg_username', '$reg_email', '$reg_password', '$reg_account_type')";	
-        $query2 = "SELECT first_name, last_name, username, email_address FROM users";
+        $query2 = "SELECT * FROM users";
         
 		$response = @mysqli_query($db, $query2);
 		
 		if($response) {
 		    while($row = mysqli_fetch_array($response)) {
-		        if(($reg_first_name == $row['first_name'] && $reg_last_name == $row['last_name'])) {
+		        if($reg_first_name == $row['first_name'] && $reg_last_name == $row['last_name']) {
 		           	echo 'An account with the name "' . $reg_first_name . ' ' . $reg_last_name . '" already exists.';
 		           	echo '<br><br> <a href="register.php">Back</a>';
 		           	exit();
@@ -48,6 +48,11 @@
 		echo '<br><br> <a href="register.php">Back</a>';
 		exit();
 	}
-	
+	echo 'Registration successful! Welcome, ' . $reg_first_name . '!';
+		            echo '<br><br> <a href="profile.php">Proceed</a>';
+		            mysqli_query($db, $query);
+		            $_SESSION['username'] = $reg_username;
+		            $_SESSION['logged_in'] = true;
+		            exit();
 	$response = @mysqli_query($db, $query);
 ?>
