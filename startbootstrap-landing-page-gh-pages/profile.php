@@ -3,6 +3,7 @@
 
   <?php
   	include("header.php");
+  	$username = $_SESSION['username'];
 	echo'
 
 	<body>
@@ -23,25 +24,25 @@
 					<div class="control-group">											
 						<label class="control-label" for="username">Username</label>
 						<div class="controls">
-							<input type="text" class="form-control form-control-lg" id="username" value="user" disabled>
+							<input type="text" class="form-control form-control-lg" id="username" value="'. $_SESSION['username'] .'" disabled>
 						</div> <!-- /controls -->				
 					</div> <!-- /control-group -->
 					<div class="control-group">											
 						<label class="control-label" for="firstname">First Name</label>
 						<div class="controls">
-								<input type="text" class="form-control form-control-lg" id="firstname" value="Rod" disabled>
+								<input type="text" class="form-control form-control-lg" id="firstname" value="'. $_SESSION['first_name'] .'" disabled>
 	 					</div> <!-- /controls -->				
 					</div> <!-- /control-group -->
 					<div class="control-group">											
 						<label class="control-label" for="lastname">Last Name</label>
 						<div class="controls">
-							<input type="text" class="form-control form-control-lg" id="lastname" value="Lee" disabled>
+							<input type="text" class="form-control form-control-lg" id="lastname" value="'. $_SESSION['last_name'] .'" disabled>
 						</div> <!-- /controls -->				
 					</div> <!-- /control-group -->
 					<div class="control-group">											
 						<label class="control-label" for="email">Email Address</label>
 							<div class="controls">
-								<input type="text" class="form-control form-control-lg" id="email" value="example@example.com" disabled>
+								<input type="text" class="form-control form-control-lg" id="email" value="'. $_SESSION['email_address'] .'" disabled>
 							</div> <!-- /controls -->				
 					</div> <!-- /control-group -->
 			</div>								

@@ -21,6 +21,8 @@ body {
 
 .nav-menu ul {
 	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .nav-menu ul li {
@@ -29,6 +31,7 @@ body {
 
 .nav-menu .btn {
 	margin: 3px;
+	display: block;
 }
 
 header.masthead {
@@ -147,6 +150,10 @@ footer {
 		padding: .375rem .75rem;
 	}
 	
+	.nav-menu .btn {
+		display: inline-block;
+	}
+		
 	.profiles .developer {
 		flex-basis: 50%;
 		padding: 20px;

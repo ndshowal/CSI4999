@@ -9,7 +9,7 @@
     $login_password = $_POST['login_password'];
     $user_firstname;
     
-    $query = "SELECT username, password, first_name FROM users
+    $query = "SELECT username, password, first_name, last_name, email_address FROM users
                 WHERE username='$login_username' AND password='$login_password'";
     
     $response = @mysqli_query($db, $query);
@@ -19,6 +19,9 @@
             if($row['username'] == $login_username && $row['password'] == $login_password) {
                 $_SESSION['username'] = $login_username;
                 $_SESSION['logged_in'] = true;
+                $_SESSION['first_name'] = $row['first_name'];
+                $_SESSION['last_name'] = $row['last_name'];
+                $_SESSION['email_address'] = $row['email_address'];
                 $user_firstname = $row['first_name'];
                 
                 echo 'Login successful! Welcome back, ' . $user_firstname . '!';

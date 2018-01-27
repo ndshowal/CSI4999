@@ -39,6 +39,9 @@
 		            mysqli_query($db, $query);
 		            $_SESSION['username'] = $reg_username;
 		            $_SESSION['logged_in'] = true;
+		            $_SESSION['first_name'] = $row['first_name'];
+                	$_SESSION['last_name'] = $row['last_name'];
+                	$_SESSION['email_address'] = $row['email_address'];
 		            exit();
 		        }
 		    }
@@ -49,10 +52,12 @@
 		exit();
 	}
 	echo 'Registration successful! Welcome, ' . $reg_first_name . '!';
-		            echo '<br><br> <a href="profile.php">Proceed</a>';
-		            mysqli_query($db, $query);
-		            $_SESSION['username'] = $reg_username;
-		            $_SESSION['logged_in'] = true;
-		            exit();
-	$response = @mysqli_query($db, $query);
+	echo '<br><br> <a href="profile.php">Proceed</a>';
+	
+	$_SESSION['username'] = $reg_username;
+	$_SESSION['logged_in'] = true;
+	$_SESSION['first_name'] = $row['first_name'];
+    $_SESSION['last_name'] = $row['last_name'];
+    $_SESSION['email_address'] = $row['email_address'];
+	exit();
 ?>
