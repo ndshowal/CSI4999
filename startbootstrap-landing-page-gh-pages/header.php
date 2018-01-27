@@ -6,8 +6,10 @@
 		}
 		
     session_start();
+		$current_user = $_SESSION['username'];
 		
-	  echo'
+		//
+      echo'
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,8 +48,8 @@
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
+              <a class="btn btn-primary" href="register.php">Register</a>
             	<a class="btn btn-primary" href="signin.php">Sign In</a>
-    			    <a class="btn btn-primary" href="register.php">Register</a>
             </div>
           </div>
         </nav>
@@ -68,8 +70,8 @@
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
-            	<a class="btn btn-primary" href="profile.php">' . $_SESSION['username'] . '</a>
-    			    <a class="btn btn-primary" href="signout.php">Sign Out</a>
+            	<a class="btn btn-primary" href="profile.php">' . $current_user . '</a>
+    			    <a class="btn btn-primary" href="signout.php">Sign Out </a>
             </div>
           </div>
         </nav>

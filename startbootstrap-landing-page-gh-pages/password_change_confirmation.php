@@ -1,7 +1,17 @@
 <?php
     include("header.php");
     include("footer.php");
+    
+    echo' 
+    <section class="register-form">
+	  <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <h1>Password changed succesfully!</h1>
+            <head><meta http-equiv="refresh" content="2;profile.php"></head>
+          </div>
+        </div>
+      </div>
+    </section>';
 
-    echo 'Password change successful!';
-    echo '<br><br> <a href="profile.php">Proceed</a>';
 ?>

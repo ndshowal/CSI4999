@@ -1,11 +1,16 @@
 <?php include('header.php');
+  
+  if($_SESSION['logged_in']) {
+    echo'<head><meta http-equiv="refresh" content="0;profile.php"></head>';
+  }
+  
   echo'
     <header class="masthead text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-          <h1>Sign in to your CardGuard Account</h1>
-    </div>
-  </header>
+      <div class="overlay"></div>
+      <div class="container">
+        <h1>Sign in to your CardGuard Account</h1>
+      </div>
+    </header>
   	
   	<section class="register-form">
 		  <div class="container">
@@ -30,4 +35,5 @@
         </div>
       </div>
     </section>';
+  
 include('footer.php');?>

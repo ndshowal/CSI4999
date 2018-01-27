@@ -1,4 +1,9 @@
 <?php
+	if(!isset($db)){
+		require_once('connect.php');
+	}
+	session_start;
+	
 	$reg_first_name = $_POST['reg_first_name'];
 	$reg_last_name = $_POST['reg_last_name'];
 	$reg_username = $_POST['reg_username'];
@@ -29,14 +34,16 @@
 		        	echo '<br><br> <a href="register.php">Back</a>';
 		        	exit();
 		        } else {
-		        	echo 'Registration successful! Welcome, ' . $reg_first_name . '!';
-		            echo '<br><br> <a href="profile.php">Proceed</a>';
+		        	echo'<head><meta http-equiv="refresh" content="0;confirmation.php"></head>';
+		        	
 		            mysqli_query($db, $query);
+		            
 		            $_SESSION['username'] = $reg_username;
-		            $_SESSION['logged_in'] = true;
-		            $_SESSION['first_name'] = $row['first_name'];
-                	$_SESSION['last_name'] = $row['last_name'];
-                	$_SESSION['email_address'] = $row['email_address'];
+		            $_SESSION['password'] = $reg_password;
+ 		            $_SESSION['logged_in'] = true;
+		            $_SESSION['first_name'] = $reg_first_name;
+                	$_SESSION['last_name'] = $reg_last_name;
+                	$_SESSION['email_address'] = $reg_email;
 		            exit();
 		        }
 		    }
@@ -46,13 +53,15 @@
 		echo '<br><br> <a href="register.php">Back</a>';
 		exit();
 	}
-	echo 'Registration successful! Welcome, ' . $reg_first_name . '!';
-	echo '<br><br> <a href="profile.php">Proceed</a>';
-	
+	echo'<head><meta http-equiv="refresh" content="0;confirmation.php"></head>';
+		
+	mysqli_query($db, $query);
+	   
 	$_SESSION['username'] = $reg_username;
+	$_SESSION['password'] = $reg_password;
 	$_SESSION['logged_in'] = true;
-	$_SESSION['first_name'] = $row['first_name'];
-    $_SESSION['last_name'] = $row['last_name'];
-    $_SESSION['email_address'] = $row['email_address'];
+	$_SESSION['first_name'] = $reg_first_name;
+    $_SESSION['last_name'] = $reg_last_name;
+    $_SESSION['email_address'] = $reg_email;
 	exit();
 ?>
