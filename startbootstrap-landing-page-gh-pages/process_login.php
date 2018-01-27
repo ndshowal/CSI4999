@@ -1,9 +1,6 @@
 <?php
-    if(!isset($db)) {
-		require_once('connect.php');
-	} 
-	
-	session_start();
+    include("header.php");
+    include("footer.php");
 		
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
@@ -17,15 +14,14 @@
     if ($response) {
         while($row = mysqli_fetch_array($response)) {
             if($row['username'] == $login_username && $row['password'] == $login_password) {
-                $_SESSION['username'] = $login_username;
                 $_SESSION['logged_in'] = true;
+                $_SESSION['username'] = $login_username;
+                $_SESSION['password'] = $login_password;
                 $_SESSION['first_name'] = $row['first_name'];
                 $_SESSION['last_name'] = $row['last_name'];
                 $_SESSION['email_address'] = $row['email_address'];
                 $user_firstname = $row['first_name'];
-                
-                echo 'Login successful! Welcome back, ' . $user_firstname . '!';
-                echo '<br><br> <a href="profile.php">Proceed</a>';
+                echo'<head><meta http-equiv="refresh" content="0;login_confirmation.php"></head>';
             } 
         }
         

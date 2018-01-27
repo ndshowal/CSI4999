@@ -1,9 +1,4 @@
 <?php
-	if(!isset($db)){
-		require_once('connect.php');
-	}
-	session_start;
-	
 	$reg_first_name = $_POST['reg_first_name'];
 	$reg_last_name = $_POST['reg_last_name'];
 	$reg_username = $_POST['reg_username'];
