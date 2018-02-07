@@ -1,25 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-
   <?php
   	include("header.php");
-  	$username = $_SESSION['username'];
-  	$account_type = $_SESSION['account_type'];
+  	include("footer.php");
+    $account_type = $_SESSION['account_type'];
   	
   	if(!$_SESSION['logged_in']) {
   		echo'<head><meta http-equiv="refresh" content="0;signin.php"></head>';
   	}
   	
-  	if($account_type == 'Admin') {
-  		echo'<head><meta http-equiv="refresh" content="0;admin.php"></head>';
+  	if($account_type != 'Admin') {
+  		echo'<head><meta http-equiv="refresh" content="0;profile.php"></head>';
   	} else {
-  		echo'
-
+  	    
+  	    $username_search = $_POST['username_search'];
+        
+        $query = "SELECT * FROM users
+                WHERE username='$username_search'";
+    
+        $response = @mysqli_query($db, $query);
+                
+        if ($response) {
+            while($row = mysqli_fetch_array($response)) {
+                if($row['username'] == $username_search) {
+                    $user_exists = true;
+                    $searched_username = $username_search;
+                    $searched_password = $row['password'];
+                    $searched_first_name = $row['first_name'];
+                    $searched_last_name = $row['last_name'];
+                    $searched_email_address = $row['email_address'];
+                    $searched_account_type = $row['account_type'];
+                    
+                    $_SESSION['searched_username'] = $searched_username;
+                    $_SESSION['searched_password'] = $searched_password;
+                    $_SESSION['searched_first_name'] = $searched_first_name;
+                    $_SESSION['searched_last_name'] = $searched_last_name;
+                    $_SESSION['searched_email_address'] = $searched_email_address;
+                    $_SESSION['searched_account_type'] = $searched_account_type;
+                    $_SESSION['admin_change'] = true;
+                } 
+            }
+            if(!$user_exists) {
+                echo 'User not found, please try again.';
+                echo'<head><meta http-equiv="refresh" content="2;profile.php"></head>';
+                exit();
+            }
+        } 
+  	
+  	    echo'
 		<body>
   		<!-- Masthead -->
     	<header class="masthead narrow text-white text-center">
 	  	    <div class="overlay"></div>   
-	    	<h1>Your Account Settings</h1>
+	    	<h1>Modify User Account Details</h1>
     	</header>
 	      
 	  	<section class="standard-page profile">
@@ -31,18 +62,18 @@
 							<h4>Account Details</h4>
 							
 							<!-- USERNAME -->
-								<div class="control-group">											
-									<label class="control-label" for="username">Username &emsp; <a href="modify_account_settings.php?to_be_modified=username">Edit</a></label>
-									<div class="controls">
-										<input type="text" class="form-control form-control-lg" id="username" value="'. $_SESSION['username'] .'" disabled>
-									</div> <!-- /controls -->
-								</div> <!-- /control-group -->
+							<div class="control-group">											
+								<label class="control-label" for="username">Username &emsp; <a href="modify_account_settings.php?to_be_modified=username">Edit</a></label>
+								<div class="controls">
+									<input type="text" class="form-control form-control-lg" id="username" value="'. $searched_username .'" disabled>
+								</div> <!-- /controls -->
+							</div> <!-- /control-group -->
 								
 								<!-- FIRST NAME -->
 								<div class="control-group">											
 									<label class="control-label" for="firstname">First Name &emsp; <a href="modify_account_settings.php?to_be_modified=first_name">Edit</a></label>
 									<div class="controls">
-										<input type="text" class="form-control form-control-lg" id="firstname" value="'. $_SESSION['first_name'] .'" disabled>
+										<input type="text" class="form-control form-control-lg" id="firstname" value="'. $searched_first_name .'" disabled>
 									</div> <!-- /controls -->
 								</div> <!-- /control-group -->
 								
@@ -50,7 +81,7 @@
 								<div class="control-group">											
 									<label class="control-label" for="lastname">Last Name &emsp; <a href="modify_account_settings.php?to_be_modified=last_name">Edit</a></label>
 									<div class="controls">
-										<input type="text" class="form-control form-control-lg" id="lastname" value="'. $_SESSION['last_name'] .'" disabled>
+										<input type="text" class="form-control form-control-lg" id="lastname" value="'. $searched_last_name .'" disabled>
 									</div> <!-- /controls -->				
 								</div> <!-- /control-group -->
 								
@@ -58,7 +89,7 @@
 								<div class="control-group">											
 									<label class="control-label" for="email">Email Address &emsp; <a href="modify_account_settings.php?to_be_modified=email_address">Edit</a></label>
 									<div class="controls">
-										<input type="text" class="form-control form-control-lg" id="email" value="'. $_SESSION['email_address'] .'" disabled>
+										<input type="text" class="form-control form-control-lg" id="email" value="'. $searched_email_address .'" disabled>
 									</div> <!-- /controls -->				
 								</div> <!-- /control-group -->
 							</div>								
@@ -71,9 +102,9 @@
 								
 								<!-- CURRENT PASSWORD -->
 								<div class="control-group">											
-									<label class="control-label" for="password1">Enter Current Password</label>
+									<label class="control-label" for="password1">Current Password</label>
 									<div class="controls">
-										<input type="password" class="form-control form-control-lg" id="password1" name="entered_password">
+										<input type="text" class="form-control form-control-lg" id="password1" value="'.$searched_password.'" name="entered_password">
 									</div> <!-- /controls -->				
 								</div> <!-- /control-group -->
 								
@@ -113,8 +144,5 @@
 				<!/form>
 			</div>
 		</section>';
-  	}	
-	include("footer.php");?>
-	
-  </body>
-</html>
+  	}
+  	?>

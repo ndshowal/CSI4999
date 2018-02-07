@@ -27,6 +27,10 @@
                 <input type="password" class="form-control form-control-lg" name="login_password" placeholder="Password">
 				        <br />
               </div>
+              <!-- FORGOT PASSWORD BUTTON -->
+						  <div class="form-actions">
+							  <label class="control-label"><a href="recover_password.php">Forgot password?</a></label>
+						  </div>
               <div class="form-row">
                 <button type="submit" align="middle" class="btn btn-lg btn-basic" name="login_btn">Sign in</button>
               </div>
