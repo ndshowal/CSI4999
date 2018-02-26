@@ -8,6 +8,6 @@ public class Account extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.Account);
+        setContentView(R.layout.account);
     }
 }
