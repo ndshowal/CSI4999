@@ -1,6 +1,5 @@
 package CardGuard;
 
-import CardGuard.Transaction;
 import java.util.ArrayList;
 
 public class User {
