@@ -10,4 +10,22 @@
     <string name="forgot_my_password">Forgot My Password</string>
     <string name="user">User</string>
     <string name="notifications">Notifications</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="recent_transaction_history">Recent Transaction History</string>
+    <string name="_1_31_18">1/31/18</string>
+    <string name="_2_2_18">2/2/18</string>
+    <string name="_2_5_18">2/5/18</string>
+    <string name="ndshowal">ndshowal</string>
+    <string name="_100">$100</string>
+    <string name="zzhao">zzhao</string>
+    <string name="_50">$50</string>
+    <string name="ampolito">ampolito</string>
+    <string name="_25">$25</string>
+    <string name="_2_11_18">2/11/18</string>
+    <string name="kypawloski">kypawloski</string>
+    <string name="_75">$75</string>
+    <string name="sender">Sender</string>
+    <string name="receiver">Receiver</string>
+    <string name="receiver">Receiver</string>
+    <string name="sender">Sender</string>
 </resources>
