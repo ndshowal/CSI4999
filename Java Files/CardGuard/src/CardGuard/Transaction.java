@@ -31,6 +31,7 @@ public class Transaction {
         createTransactionID();
     }
     
+    @Override
     public String toString() {
         return "Transaction ID: " + getTransactionID()
                 + " Transaction Initiated:" + getTransactionStartDateString() 
