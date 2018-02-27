@@ -32,14 +32,14 @@
     <string name="receive">Receive</string>
     <string name="username_of_receiver">Username of Receiver</string>
     <string name="amount_of_transaction">Amount of Transaction</string>
-    <string name="username">Username</string>
+    <string name="username3">Username</string>
     <string name="amount_of_transaction_in_us_dollars">Amount of Transaction (in US dollars)</string>
     <string name="amount">Amount</string>
-    <string name="amount">Amount</string>
+    <string name="amount2">Amount</string>
     <string name="username_of_sender">Username of Sender</string>
-    <string name="amount_of_transaction">Amount of Transaction</string>
-    <string name="username">Username</string>
-    <string name="amount">Amount</string>
+    <string name="amount_of_transaction2">Amount of Transaction</string>
+    <string name="username4">Username</string>
+    <string name="amount3">Amount</string>
     <string name="request">Request</string>
-    <string name="send">Send</string>
+    <string name="send2">Send</string>
 </resources>
