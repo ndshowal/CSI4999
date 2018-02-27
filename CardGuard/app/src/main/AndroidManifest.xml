@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Account" />
         <activity android:name=".SendReceivePage" />
-        <activity android:name=".SendingPage"></activity>
+        <activity android:name=".SendingPage" />
+        <activity android:name=".ReceivingPage"></activity>
     </application>
 
 </manifest>
