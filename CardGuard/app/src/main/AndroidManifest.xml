@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Account" />
-        <activity android:name=".SendReceivePage"></activity>
+        <activity android:name=".SendReceivePage" />
+        <activity android:name=".SendingPage"></activity>
     </application>
 
 </manifest>
