@@ -11,8 +11,4 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.sign_in);
         
     }
-    public void buttonOnClick(View v) {
-        Button button=(Button) v;
-        ((Button) v).setText("clicked");
-    }
 }
