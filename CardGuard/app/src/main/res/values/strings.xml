@@ -1,4 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="account_array">
+        <item>Standard</item>
+        <item>Merchant</item>
+    </string-array>
     <string name="app_name">Test</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome_to_cardguard">Welcome to CardGuard!</string>
