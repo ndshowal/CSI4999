@@ -19,7 +19,10 @@
         <activity android:name=".Account" />
         <activity android:name=".SendReceivePage" />
         <activity android:name=".SendingPage" />
-        <activity android:name=".ReceivingPage"></activity>
+        <activity android:name=".ReceivingPage" />
+        <activity android:name=".BiometricRegistration" />
+        <activity android:name=".PhoneNumberRegistration" />
+        <activity android:name=".PhoneNumberValidation"></activity>
     </application>
 
 </manifest>

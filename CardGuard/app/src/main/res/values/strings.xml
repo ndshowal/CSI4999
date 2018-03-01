@@ -47,4 +47,13 @@
     <string name="amount3">Amount</string>
     <string name="request">Request</string>
     <string name="send2">Send</string>
+    <string name="fingerprint_registration">Fingerprint Registration</string>
+    <string name="please_scan_your_fingerprint_now">Please Scan Your Fingerprint Now</string>
+    <string name="enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="phone_number">Phone number</string>
+    <string name="submit">Submit</string>
+    <string name="we_will_send_you_a_text_message_with_a_code_please_enter_it_on_the_next_screen_to_validate_your_phone_number">We will send you a text message with a code. Please enter it on the next screen to validate your phone number.</string>
+    <string name="validate_your_phone_number">Validate Your Phone Number</string>
+    <string name="enter_the_code_that_we_sent_you_below">Enter the code that we sent you below.</string>
+    <string name="submit">Submit</string>
 </resources>
