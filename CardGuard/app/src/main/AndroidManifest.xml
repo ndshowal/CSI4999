@@ -22,7 +22,9 @@
         <activity android:name=".ReceivingPage" />
         <activity android:name=".BiometricRegistration" />
         <activity android:name=".PhoneNumberRegistration" />
-        <activity android:name=".PhoneNumberValidation"></activity>
+        <activity android:name=".PhoneNumberValidation" />
+        <activity android:name=".TransactionSent" />
+        <activity android:name=".RequestSent"></activity>
     </application>
 
 </manifest>

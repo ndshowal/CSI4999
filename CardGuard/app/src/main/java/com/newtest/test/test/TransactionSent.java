@@ -6,19 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SendingPage extends AppCompatActivity {
+public class TransactionSent extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sendingpage);
+        setContentView(R.layout.transactionsent);
 
-        Button btn = (Button)findViewById(R.id.button9);
+        Button btn = (Button)findViewById(R.id.button13);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendingPage.this, TransactionSent.class));
+                startActivity(new Intent(TransactionSent.this, Account.class));
             }
         });
     }

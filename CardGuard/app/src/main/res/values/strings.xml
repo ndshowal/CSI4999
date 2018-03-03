@@ -85,4 +85,11 @@
     <string name="password3">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="username8">Username</string>
+    <string name="password4">Password</string>
+    <string name="downarrow">↓</string>
+    <string name="register2">Register</string>
+    <string name="your_request_has_been_sent">Your Request Has Been Sent!</string>
+    <string name="your_transaction_has_been_sent">Your Transaction Has Been Sent!</string>
+    <string name="return_to_your_account">Return To Your Account</string>
 </resources>
