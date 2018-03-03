@@ -55,5 +55,23 @@
     <string name="we_will_send_you_a_text_message_with_a_code_please_enter_it_on_the_next_screen_to_validate_your_phone_number">We will send you a text message with a code. Please enter it on the next screen to validate your phone number.</string>
     <string name="validate_your_phone_number">Validate Your Phone Number</string>
     <string name="enter_the_code_that_we_sent_you_below">Enter the code that we sent you below.</string>
-    <string name="submit">Submit</string>
+    <string name="submit2">Submit</string>
+    <string name="settings">Settings</string>
+    <string name="date">Date</string>
+    <string name="sender">Sender</string>
+    <string name="amount">Amount</string>
+    <string name="memo">Memo</string>
+    <string name="receiver">Receiver</string>
+    <string name="birthday">Birthday</string>
+    <string name="lunch">Lunch</string>
+    <string name="_10">$10</string>
+    <string name="pizza_party">Pizza party</string>
+    <string name="_2_18_18">2/18/18</string>
+    <string name="jivezaj">jivezaj</string>
+    <string name="_8">$8</string>
+    <string name="movie_night">Movie night</string>
+    <string name="username">Username</string>
+    <string name="amount">Amount</string>
+    <string name="memo">Memo</string>
+    <string name="memo">Memo</string>
 </resources>
