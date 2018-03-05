@@ -180,12 +180,12 @@ style='font-family:"Times New Roman",serif;color:black'><br>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-align:
 justify;text-justify:inter-ideograph;line-height:normal'><span
-style='font-family:"Times New Roman",serif;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;Understand
+style='font-family:"Times New Roman",serif;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;Understand
 and save user's preferences for future visits.</span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-align:
 justify;text-justify:inter-ideograph;line-height:normal'><span
-style='font-family:"Times New Roman",serif;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;Compile
+style='font-family:"Times New Roman",serif;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;Compile
 aggregate data about site traffic and site interactions in order to offer
 better site experiences and tools in the future. We may also use trusted
 third-party services that track this information on our behalf.</span></p>
