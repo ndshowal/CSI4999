@@ -3,8 +3,6 @@ package com.newtest.test.test;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,7 +13,7 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 
-public class cardscan extends AppCompatActivity {
+public class CardScan extends AppCompatActivity {
     private static final int REQUEST_SCAN = 101;
     private static final int REQUEST_AUTOTEST = 200;
 
@@ -33,7 +31,7 @@ public class cardscan extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(cardscan.this, CardIOActivity.class);
+                Intent intent = new Intent(CardScan.this, CardIOActivity.class);
                 intent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true);
                 intent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true);
                 intent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true);
