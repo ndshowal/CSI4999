@@ -1,5 +1,5 @@
 package com.newtest.test.test;
-
+//Main activity is the registration page. I left the name the same because there may be some strings that declare it
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
