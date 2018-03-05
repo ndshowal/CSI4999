@@ -24,7 +24,8 @@
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
         <activity android:name=".TransactionSent" />
-        <activity android:name=".RequestSent"></activity>
+        <activity android:name=".RequestSent" />
+        <activity android:name=".SignIn"></activity>
     </application>
 
 </manifest>
