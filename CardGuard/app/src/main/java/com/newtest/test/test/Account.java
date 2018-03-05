@@ -21,14 +21,5 @@ public class Account extends AppCompatActivity {
                 startActivity(new Intent(Account.this, SendReceivePage.class));
             }
         });
-
-        Button btn2 = (Button)findViewById(R.id.button3);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Account.this, cardscan.class));
-            }
-        });
     }
 }

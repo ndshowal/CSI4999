@@ -3,7 +3,7 @@
 
   <?php
   	include("header.php");
-  	$username = $current_user;
+  	$username = $_SESSION['username'];
   	$account_type = $_SESSION['account_type'];
   	
   	if(!$_SESSION['logged_in']) {
@@ -19,7 +19,7 @@
   			<!-- Masthead -->
     		<header class="masthead narrow text-white text-center">
   	    		<div class="overlay"></div>   
-	    		<h1>Account Administration</h1>
+	    		<h1>Your Account</h1>
     		</header>
 		      
   			<section class="standard-page profile">
@@ -27,24 +27,7 @@
 					<!form id="edit-profile" class="form-horizontal">
 						<fieldset>
 							<div class="settings-section">
-								<!-- TRANSACTIONS LINK -->
-								<a href="transactions.php">To view your transaction history, please click here</a>
-								<br><br>
-							
-								<!-- SEARCH FOR USERNAME -->
-								<form method="post" action="admin_process_user_search.php" id="search">
-									<div class="control-group">											
-										<label class="control-label" for="search-username">Search for a User</label>
-										<div class="controls">
-											<input type="text" class="form-control form-control-lg" id="username" name="username_search"> 
-											<br>
-											<button type="submit" class="btn btn-primary">Search</button>
-										</div> 
-									</div>
-								</form>
-				
-								<br>
-				
+					
 								<h4>Account Details</h4>
 							
 								<!-- USERNAME -->
@@ -119,8 +102,26 @@
 							<div class="form-actions">
 								<button type="delete account" class="delete-account">Delete Account</button>
 							</div>
+							
+							<!-- SAVE SETTINGS BUTTON -->
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save Settings</button> 
+								<button class="btn">Cancel</button>
+							</div> <!-- /form-actions -->
+							
 						</fieldset>
 					<!/form>
+					<br><br>
+					<!-- SEARCH FOR USERNAME -->
+					<form method="post" action="admin_process_user_search.php" id="search">
+						<div class="control-group">											
+							<label class="control-label" for="search-username">Search for a User</label>
+							<div class="controls">
+								<input type="text" class="form-control form-control-lg" id="username" name="username_search">
+								<button type="submit" class="btn btn-primary">Search</button>
+							</div> 
+						</div>
+					</form>
 				</div>
 			</section>
 		</body>';

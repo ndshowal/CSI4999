@@ -13,10 +13,6 @@
   	    
   	    $username_search = $_POST['username_search'];
         
-        if($username_search == $_SESSION['username']) {
-        	echo'<head><meta http-equiv="refresh" content="0;profile.php"></head>';
-        }
-        
         $query = "SELECT * FROM users
                 WHERE username='$username_search'";
     
@@ -62,18 +58,6 @@
 				<!form id="edit-profile" class="form-horizontal">
 					<fieldset>
 						<div class="settings-section">
-						
-							<!-- SEARCH FOR USERNAME -->
-								<form method="post" action="admin_process_user_search.php" id="search">
-									<div class="control-group">											
-										<label class="control-label" for="search-username">Search for Another User</label>
-										<div class="controls">
-											<input type="text" class="form-control form-control-lg" id="username" name="username_search"> 
-											<br>
-											<button type="submit" class="btn btn-primary">Search</button>
-										</div> 
-									</div>
-								</form>
 						
 							<h4>Account Details</h4>
 							

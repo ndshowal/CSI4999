@@ -28,9 +28,6 @@
 					<fieldset>
 						<div class="settings-section">
 						
-							<a href="transactions.php">To view your transaction history, please click here</a>
-								<br><br>
-						
 							<h4>Account Details</h4>
 							
 							<!-- USERNAME -->
@@ -105,6 +102,12 @@
 						<div class="form-actions">
 							<button type="delete account" class="delete-account">Delete Account</button>
 						</div>
+						
+						<!-- SAVE SETTINGS BUTTON -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Save Settings</button> 
+							<button class="btn">Cancel</button>
+						</div> <!-- /form-actions -->
 						
 					</fieldset>
 				<!/form>

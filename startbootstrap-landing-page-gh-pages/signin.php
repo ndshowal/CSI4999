@@ -18,7 +18,7 @@
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form method="post" action="process_login.php">
               <div class="">
-  							<label><b>Enter Username</b></label>
+  							<label><b>Username</b></label>
                 <input type="text" class="form-control form-control-lg" name="login_username" placeholder="Username">
 				        <br />
               </div>

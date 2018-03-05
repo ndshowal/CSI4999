@@ -6,23 +6,8 @@
 		}
 		
     session_start();
+		$current_user = $_SESSION['username'];
 		
-	  $id = $_SESSION['id'];
-	  $current_user = $_SESSION['username'];
-		
-		$query = "SELECT * FROM users WHERE id=$id";
-		
-		$response = @mysqli_query($db, $query);
-                
-    if ($response) {
-        while($row = mysqli_fetch_array($response)) {
-            if($row['username'] == $login_username) {
-                $_SESSION['username'] = $row['username'];
-                $current_user = $row['username'];
-                echo $current_user;
-            } 
-        }
-    }
 		//
       echo'
       <head>

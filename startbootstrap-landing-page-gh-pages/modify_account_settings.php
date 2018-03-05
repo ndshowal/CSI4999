@@ -3,13 +3,13 @@
     include("footer.php");
     
     $to_be_modified = $_GET['to_be_modified'];
-    $error;
+    $error = $_GET['error'];
     
     echo'<div class="tab-pane active col-md-1 col-lg-8 col-xl-4 mx-auto" id="1">';
     
     switch($to_be_modified) {
         case 'username':
-        	if($error == null) {
+        	if($error != null) {
         		echo'<!-- CHANGE USERNAME FORM -->
 				<form method="post" action="process_profile_change.php?to_be_modified='.$to_be_modified.'" id="username">
 					<div class="settings-section">				
@@ -70,7 +70,7 @@
         	}
         	
         case 'email_address':
-        	if($error == null) {
+        	if($error != null) {
         		echo'<!-- CHANGE EMAIL FORM -->
 				<form method="post" action="process_profile_change.php?to_be_modified='.$to_be_modified.'" id="email_address">
 					<div class="settings-section">				
@@ -131,7 +131,7 @@
             	break;
         	}
         case 'first_name':
-        	if($error == null) {
+        	if($error != null) {
         		echo'<!-- CHANGE FIRST NAME FORM -->
 				<form method="post" action="process_profile_change.php?to_be_modified='.$to_be_modified.'" id="first_name">
 					<div class="settings-section">				
@@ -193,7 +193,7 @@
             	break;
         	}
         case 'last_name':
-        	if($error == null) {
+        	if($error != null) {
         		echo'<!-- CHANGE LAST NAME FORM -->
 				<form method="post" action="process_profile_change.php?to_be_modified='.$to_be_modified.'" id="last_name">
 					<div class="settings-section">				

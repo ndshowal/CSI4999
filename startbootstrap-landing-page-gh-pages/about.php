@@ -5,8 +5,7 @@
   <body>
 
  
- <header class="masthead text-center text-white">
-  <div class="overlay"></div>
+ <header class="masthead text-center">
  <div class= "container">
  <h1>CardGuard is a smartphone security app which validates purchases by requiring confirmation from both customers and merchants, allowing for double the protection from fraud or theft.</h1>
  </div>

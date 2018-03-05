@@ -10,13 +10,14 @@
     
     if($entered_password != $password) {
         echo'The password you provided does not match your current password. Please retry.
-            <br><br> <a href="profile.php#password">Return</a>';
+        '. $password . '' . $entered_password .'
+        <br><br> <a href="profile.php#password">Return</a>';
     } else if($entered_password == $new_password) {
         echo'Please enter a new password different than your current one.
-            <br><br> <a href="profile.php#password">Return</a>';
+        <br><br> <a href="profile.php#password">Return</a>';
     } else if($new_password != $confirm_new_password) {
         echo'The confirmation password you entered does not match. Please retry.
-            <br><br> <a href="profile.php#password">Return</a>';
+        <br><br> <a href="profile.php#password">Return</a>';
     } else {
         $query = "SELECT username, password FROM users
                 WHERE username='$username' AND password='$password'";
