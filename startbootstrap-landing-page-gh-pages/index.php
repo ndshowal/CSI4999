@@ -13,7 +13,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">[]
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
               <i class="icon-layers m-auto text-primary"></i>
             </div>
@@ -35,7 +35,7 @@
             <div class="features-icons-icon d-flex">
               <i class="icon-check m-auto text-primary"></i>
             </div>
-            <h3>Face and Fingerprint Identification</h3>
+            <h3>Biometric Identification</h3>
               <p class="lead mb-0">Easily access your account so you never have to remember a password!</p>
           </div>
         </div>
