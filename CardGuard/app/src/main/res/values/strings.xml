@@ -93,4 +93,5 @@
     <string name="your_transaction_has_been_sent">Your Transaction Has Been Sent!</string>
     <string name="return_to_your_account">Return To Your Account</string>
     <string name="btn_register">Register</string>
+    <string name="title_activity_main1">MainActivity1</string>
 </resources>
