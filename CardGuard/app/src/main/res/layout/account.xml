@@ -10,7 +10,7 @@
         android:id="@+id/button3"
         android:layout_width="129dp"
         android:layout_height="38dp"
-        android:text="@string/settings"
+        android:text="@string/user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -72,36 +72,26 @@
                 android:id="@+id/textView6"
                 android:layout_width="73dp"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:textStyle="bold"
+                android:text="@string/_1_31_18"
                 tools:layout_editor_absoluteX="25dp"
                 tools:layout_editor_absoluteY="227dp" />
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="76dp"
+                android:layout_width="99dp"
                 android:layout_height="wrap_content"
-                android:text="@string/sender"
-                android:textStyle="bold" />
+                android:text="@string/ndshowal" />
 
             <TextView
-                android:layout_width="83dp"
+                android:layout_width="91dp"
                 android:layout_height="wrap_content"
-                android:text="@string/receiver"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="61dp"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:textStyle="bold" />
+                android:text="@string/_100" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:text="@string/memo"
-                android:textStyle="bold"
+                android:text="@string/sender"
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="373dp" />
         </TableRow>
@@ -127,17 +117,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/_50" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/birthday" />
+                android:text="@string/receiver" />
         </TableRow>
 
         <TableRow
@@ -160,17 +145,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/_25" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lunch" />
+                android:text="@string/receiver" />
         </TableRow>
 
         <TableRow
@@ -193,51 +173,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
+                android:text="@string/_75" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_10" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pizza_party" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_18_18"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="330dp" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/jivezaj" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_8" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/movie_night" />
+                android:text="@string/sender" />
         </TableRow>
     </TableLayout>
 
