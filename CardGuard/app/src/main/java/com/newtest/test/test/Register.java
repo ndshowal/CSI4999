@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
             signupPassword = (EditText) findViewById(R.id.Input_Password);
             signupConfirmPassword = (EditText) findViewById(R.id.Input_ConfirmPassword);
 
-            btnSignUp = (Button) findViewById(R.id.btn_register);
+          /*  btnSignUp = (Button) findViewById(R.id.btn_register); */
 
             btnSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,7 +154,7 @@ public class Register extends AppCompatActivity {
                     params.put("password", password);
                     params.put("gender", confirmpassword);
                     //params.put("accounttype", spaccounttype);
-                    spaccounttype = (Spinner) findViewById(R.id.Account_Type);
+                  /*  spaccounttype = (Spinner) findViewById(R.id.Account_Type);   */
                     return params;
                 }
             };
@@ -175,7 +175,7 @@ public class Register extends AppCompatActivity {
 
         private void addListenerOnButton() {
 
-            spaccounttype = (Spinner) findViewById(R.id.Account_Type);
+          //  spaccounttype = (Spinner) findViewById(R.id.Account_Type);
             btnSignUp.setOnClickListener(new OnClickListener() {
 
 
