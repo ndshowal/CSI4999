@@ -25,7 +25,9 @@
         <activity android:name=".PhoneNumberValidation" />
         <activity android:name=".TransactionSent" />
         <activity android:name=".RequestSent" />
-        <activity android:name=".CardScan"></activity>
+        <activity android:name=".CardScan" />
+            <activity android:name=".Register"></activity>
+
     </application>
 
 </manifest>
