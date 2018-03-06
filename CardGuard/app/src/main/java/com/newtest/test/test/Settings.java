@@ -21,5 +21,14 @@ public class Settings extends AppCompatActivity {
                 startActivity(new Intent(Settings.this, SignIn.class));
             }
         });
+
+        Button btn2 = (Button)findViewById(R.id.button12);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, AccountSettings.class));
+            }
+        });
     }
 }

@@ -27,7 +27,8 @@
         <activity android:name=".RequestSent" />
         <activity android:name=".CardScan" />
         <activity android:name=".Register" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".AccountSettings"></activity>
     </application>
 
 </manifest>
