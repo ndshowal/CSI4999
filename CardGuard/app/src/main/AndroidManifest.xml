@@ -28,7 +28,8 @@
         <activity android:name=".CardScan" />
         <activity android:name=".Register" />
         <activity android:name=".Settings" />
-        <activity android:name=".AccountSettings"></activity>
+        <activity android:name=".AccountSettings" />
+        <activity android:name=".BillingInformation"></activity>
     </application>
 
 </manifest>
