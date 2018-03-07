@@ -13,17 +13,19 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 
-public class CardScan extends AppCompatActivity {
+public class CardScan extends AppCompatActivity
+{
     private static final int REQUEST_SCAN = 101;
     private static final int REQUEST_AUTOTEST = 200;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardscan);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         Button btnscan = (Button)findViewById(R.id.btnScan);
         btnscan.setOnClickListener(new View.OnClickListener()
@@ -37,7 +39,7 @@ public class CardScan extends AppCompatActivity {
                 intent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true);
                 intent.putExtra(CardIOActivity.EXTRA_REQUIRE_CARDHOLDER_NAME, true);
                 intent.putExtra(CardIOActivity.EXTRA_LANGUAGE_OR_LOCALE, "en");
-                intent.putExtra(CardIOActivity.EXTRA_GUIDE_COLOR, Color.GREEN);
+                intent.putExtra(CardIOActivity.EXTRA_GUIDE_COLOR, Color.RED);
                 intent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
                 startActivityForResult(intent, REQUEST_SCAN);
 

@@ -30,6 +30,13 @@ public class Account extends AppCompatActivity {
                 startActivity(new Intent(Account.this, Settings.class));
             }
         });
+        Button btn3 = (Button)findViewById(R.id.button4);
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Account.this, CardScan.class));
+            }
+        });
     }
 }
