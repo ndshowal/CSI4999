@@ -117,4 +117,5 @@
     <string name="cvv">CVV</string>
     <string name="cvv2">CVV</string>
     <string name="identification_settings">Identification Settings</string>
+    <string name="scan_card">Scan Card</string>
 </resources>

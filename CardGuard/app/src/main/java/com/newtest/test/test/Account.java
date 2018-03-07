@@ -35,7 +35,7 @@ public class Account extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, CardScan.class));
+                startActivity(new Intent(Account.this, Notifications.class));
             }
         });
     }
