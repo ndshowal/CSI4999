@@ -24,10 +24,19 @@ public class Settings extends AppCompatActivity {
 
         Button btn2 = (Button)findViewById(R.id.button12);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, AccountSettings.class));
+            }
+        });
+
+        Button btn3 = (Button)findViewById(R.id.button15);
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, BillingInformation.class));
             }
         });
     }

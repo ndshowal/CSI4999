@@ -108,4 +108,12 @@
     <string name="settings2">Settings</string>
     <string name="account_information">Account Information</string>
     <string name="save_changes">Save Changes</string>
+    <string name="billing_information">Billing Information</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="name_of_cardholder">Name of Cardholder</string>
+    <string name="name_of_cardholder">Name of Cardholder</string>
+    <string name="cvv">CVV</string>
+    <string name="cvv">CVV</string>
 </resources>
