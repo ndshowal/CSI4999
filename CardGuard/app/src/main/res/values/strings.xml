@@ -116,4 +116,5 @@
     <string name="name_of_cardholder2">Name of Cardholder</string>
     <string name="cvv">CVV</string>
     <string name="cvv2">CVV</string>
+    <string name="identification_settings">Identification Settings</string>
 </resources>

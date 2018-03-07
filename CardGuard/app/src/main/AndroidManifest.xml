@@ -29,7 +29,8 @@
         <activity android:name=".Register" />
         <activity android:name=".Settings" />
         <activity android:name=".AccountSettings" />
-        <activity android:name=".BillingInformation"></activity>
+        <activity android:name=".BillingInformation" />
+        <activity android:name=".IdentificationSettings"></activity>
     </application>
 
 </manifest>

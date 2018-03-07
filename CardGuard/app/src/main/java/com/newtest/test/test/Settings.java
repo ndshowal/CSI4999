@@ -39,5 +39,14 @@ public class Settings extends AppCompatActivity {
                 startActivity(new Intent(Settings.this, BillingInformation.class));
             }
         });
+
+        Button btn4 = (Button)findViewById(R.id.button16);
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, IdentificationSettings.class));
+            }
+        });
     }
 }
