@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="account_array">
-        <item>Standard</item>
-        <item>Merchant</item>
-    </string-array>
+
+
     <string name="app_name">Test</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome_to_cardguard">Welcome to CardGuard!</string>
@@ -93,5 +91,21 @@
     <string name="your_transaction_has_been_sent">Your Transaction Has Been Sent!</string>
     <string name="return_to_your_account">Return To Your Account</string>
     <string name="btn_register">Register</string>
-    <string name="title_activity_main1">MainActivity1</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="update_account_information">Update Account Information</string>
+    <string name="update_billing_information">Update Billing Information</string>
+    <string name="update_identification_settings">Update Identification Settings</string>
+    <string name="log_out">Log Out</string>
+    <string name="website">Website</string>
+    <string name="first_name2">First Name</string>
+    <string name="last_name2">Last Name</string>
+    <string name="username9">Username</string>
+    <string name="password5">Password</string>
+    <string name="confirm_password2">Confirm Password</string>
+    <string name="register3">Register</string>
+    <string name="email2">Email</string>
+    <string name="identification_type">Identification Type</string>
+    <string name="settings2">Settings</string>
+    <string name="account_information">Account Information</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

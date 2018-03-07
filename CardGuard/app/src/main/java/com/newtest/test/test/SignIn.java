@@ -13,12 +13,21 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
-        Button btn = (Button)findViewById(R.id.button15);
+        Button btn = (Button)findViewById(R.id.button2);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignIn.this, Account.class));
+            }
+        });
+
+        Button btn2 = (Button)findViewById(R.id.button);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignIn.this, Register.class));
             }
         });
     }

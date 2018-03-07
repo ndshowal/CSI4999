@@ -6,30 +6,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Account extends AppCompatActivity {
+public class Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account);
+        setContentView(R.layout.settings);
 
-        Button btn = (Button)findViewById(R.id.button5);
+        Button btn = (Button)findViewById(R.id.button17);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, SendReceivePage.class));
+                startActivity(new Intent(Settings.this, SignIn.class));
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.button3);
+        Button btn2 = (Button)findViewById(R.id.button12);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, Settings.class));
+                startActivity(new Intent(Settings.this, AccountSettings.class));
             }
         });
-
     }
 }
