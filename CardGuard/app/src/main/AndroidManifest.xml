@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.newtest.test.test">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="CardGuard"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Splash screen -->
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+            <activity android:name=".SignIn">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Account" />
+        <activity android:name=".SendReceivePage" />
+        <activity android:name=".SendingPage" />
+        <activity android:name=".ReceivingPage" />
+        <activity android:name=".BiometricRegistration" />
+        <activity android:name=".PhoneNumberRegistration" />
+        <activity android:name=".PhoneNumberValidation" />
+        <activity android:name=".TransactionSent" />
+        <activity android:name=".RequestSent" />
+        <activity android:name=".CardScan" />
+        <activity android:name=".Register" />
+        <activity android:name=".Settings" />
+        <activity android:name=".AccountSettings" />
+        <activity android:name=".BillingInformation" />
+        <activity android:name=".IdentificationSettings" />
+        <activity android:name=".Notifications"></activity>
+
+
+    </application>
+
+</manifest>

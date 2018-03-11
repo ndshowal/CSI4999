@@ -12,9 +12,11 @@
                 $username = $_SESSION['username'];
                 $new_username = $_POST['new_username'];
                 if($username == $new_username) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username"></head>';
+                    exit;
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username"></head>';
+                    exit;
                 }
                 
                 $query = "UPDATE users 
@@ -37,9 +39,13 @@
                 $new_email = $_GET['new_email'];
                 
                 if($email == $new_email) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=email_address&error=1"></head>';
+                    echo'New email address must be different from your existing one. Please try again.';
+                    echo'<head><meta http-equiv="refresh" content="2;modify_account_settings.php?to_be_modified=email_address"></head>';
+                    exit;
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=email_address&error=1"></head>';
+                    echo'Incorrect password, please try again.';
+                    echo'<head><meta http-equiv="refresh" content="2;modify_account_settings.php?to_be_modified=email_address"></head>';
+                    exit;
                 }
             
                 $query = "UPDATE users 
@@ -63,9 +69,9 @@
                 $new_first_name = $_POST['new_first_name'];
                 
                 if($first_name == $new_first_name) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name"></head>';
                 }
                  
                 $query = "UPDATE users 
@@ -89,9 +95,9 @@
                 $new_last_name = $_POST['new_last_name'];
                 
                 if($last_name == $new_last_name) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name"></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name"></head>';
                 }
                 
                 $query = "UPDATE users 
@@ -116,9 +122,9 @@
                 $username = $_SESSION['searched_username'];
                 $new_username = $_POST['new_username'];
                 if($username == $new_username) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username"></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=username"></head>';
                 }
                 
                 $query = "UPDATE users 
@@ -141,9 +147,11 @@
                 $new_email = $_GET['new_email'];
                 
                 if($email == $new_email) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=email_address&error=1"></head>';
+                    echo'Your new email address must be different than your existing one. Please try again.';
+                    echo'<head><meta http-equiv="refresh" content="2;modify_account_settings.php?to_be_modified=email_address"></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=email_address&error=1"></head>';
+                    echo'Incorrect password. Please try again.';
+                    echo'<head><meta http-equiv="refresh" content="2;modify_account_settings.php?to_be_modified=email_address"></head>';
                 }
             
                 $query = "UPDATE users 
@@ -155,7 +163,7 @@
                 if ($db->query($query) === TRUE) {
                     echo "Record updated successfully";
                     $_SESSION['searched_email_address'] = $new_email;
-                    echo'<head><meta http-equiv="refresh" content="1;profile.php"></head>';
+                    echo'<head><meta http-equiv="refresh" content=";profile.php"></head>';
                 } else {
                     echo "Error updating record: " . $db->error;
                 }
@@ -167,9 +175,9 @@
                 $new_first_name = $_POST['new_first_name'];
                 
                 if($first_name == $new_first_name) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name"></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=first_name"></head>';
                 }
                 
                 $query = "UPDATE users 
@@ -193,9 +201,9 @@
                 $new_last_name = $_POST['new_last_name'];
                 
                 if($last_name == $new_last_name) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name"></head>';
                 } else if($password != $_SESSION['password']) {
-                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name&error=1"></head>';
+                    echo'<head><meta http-equiv="refresh" content="0;modify_account_settings.php?to_be_modified=last_name"></head>';
                 }
                 
                 $query = "UPDATE users 
