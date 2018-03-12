@@ -2,7 +2,7 @@
 <resources>
 
 
-    <string name="app_name">Test</string>
+    <string name="app_name">CardGuard</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome_to_cardguard">Welcome to CardGuard!</string>
     <string name="username">Username</string>

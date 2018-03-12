@@ -30,7 +30,8 @@ public class Transaction {
         this.isVerified = isVerified;
         createTransactionID();
     }
-    
+
+    //Returns a string representation of this object
     @Override
     public String toString() {
         return "Transaction ID: " + getTransactionID()

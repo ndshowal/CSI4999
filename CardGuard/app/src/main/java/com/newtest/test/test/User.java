@@ -19,7 +19,8 @@ public class User {
         this.emailAddress = emailAddress;
         this.accountType = accountType;
     }
-    
+
+    /// Returns a string representation of this object
     @Override
     public String toString() {
         return "Username: " + getUsername() 
