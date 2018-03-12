@@ -13,7 +13,8 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
 
-        Button btn = (Button)findViewById(R.id.button5);
+        //to create button to redirect to Sending and Receiving page
+        Button btn = (Button)findViewById(R.id.new_transaction_button);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,7 +23,8 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.button3);
+        //to create button to redirect to settings page
+        Button btn2 = (Button)findViewById(R.id.settings_button);
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +32,9 @@ public class Account extends AppCompatActivity {
                 startActivity(new Intent(Account.this, Settings.class));
             }
         });
-        Button btn3 = (Button)findViewById(R.id.button4);
+
+        //to create button to redirect to notifications page
+        Button btn3 = (Button)findViewById(R.id.notifications_button);
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
   <?php
   	include("header.php");
   	include("footer.php");
+  	
     $account_type = $_SESSION['account_type'];
   	
   	if(!$_SESSION['logged_in']) {
@@ -11,8 +12,12 @@
   		echo'<head><meta http-equiv="refresh" content="0;profile.php"></head>';
   	} else {
   	    
-  	    $username_search = $_POST['username_search'];
-        
+  	    if($_POST['username_search'] == null) {
+  	    	$username_search = $_SESSION['searched_username'];
+  	    } else {
+  	    	$username_search = $_POST['username_search'];
+  	    }
+  	    
         if($username_search == $_SESSION['username']) {
         	echo'<head><meta http-equiv="refresh" content="0;profile.php"></head>';
         }
@@ -120,7 +125,7 @@
 								<div class="control-group">											
 									<label class="control-label" for="password1">Current Password</label>
 									<div class="controls">
-										<input type="text" class="form-control form-control-lg" id="password1" value="'.$searched_password.'" name="entered_password">
+										<input type="text" class="form-control form-control-lg" id="password1" value="'.$searched_password.'" name="old_password">
 									</div> <!-- /controls -->				
 								</div> <!-- /control-group -->
 								
@@ -144,18 +149,14 @@
             					</div>
 							</div>
 						</form>
-			
+						
 						<!-- DELETE ACCOUNT BUTTON -->
-						<div class="form-actions">
-							<button type="delete account" class="delete-account">Delete Account</button>
-						</div>
-						
-						<!-- SAVE SETTINGS BUTTON -->
-						<div class="form-actions">
-							<button type="submit" class="btn btn-primary">Save Settings</button> 
-							<button class="btn">Cancel</button>
-						</div> <!-- /form-actions -->
-						
+						<form method="post" action="delete_account.php" id="delete">
+							<div class="form-actions">
+								<button type="delete account" class="delete-account">Delete Account</button>
+							</div>
+						</form>
+							
 					</fieldset>
 				<!/form>
 			</div>

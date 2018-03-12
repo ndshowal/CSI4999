@@ -10,7 +10,7 @@
 	$reg_email = $_POST['reg_email'];
     $reg_password = $_POST['reg_password'];
     $reg_confirm_password = $_POST['reg_confirm_password'];
-    $reg_account_type = $_POST['reg_account_type'];
+    $reg_account_type = "Standard";
     
     if($reg_password == $reg_confirm_password) {
 	    $query = "INSERT INTO users(first_name, last_name, username, email_address, password, account_type)
@@ -53,15 +53,4 @@
 		echo '<br><br> <a href="register.php">Back</a>';
 		exit();
 	}
-	echo'<head><meta http-equiv="refresh" content="0;confirmation.php"></head>';
-		
-	mysqli_query($db, $query);
-	   
-	$_SESSION['username'] = $reg_username;
-	$_SESSION['password'] = $reg_password;
-	$_SESSION['logged_in'] = true;
-	$_SESSION['first_name'] = $reg_first_name;
-    $_SESSION['last_name'] = $reg_last_name;
-    $_SESSION['email_address'] = $reg_email;
-	exit();
 ?>

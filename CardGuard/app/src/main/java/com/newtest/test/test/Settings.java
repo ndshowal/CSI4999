@@ -13,36 +13,40 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        Button btn = (Button)findViewById(R.id.button17);
+        //to create a logout button
+        Button logoutBtn = (Button)findViewById(R.id.logout_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, SignIn.class));
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.button12);
+        //to create a button to update your account info
+        Button updateAccountInfoBtn = (Button)findViewById(R.id.update_account_info_button);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        updateAccountInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, AccountSettings.class));
             }
         });
 
-        Button btn3 = (Button)findViewById(R.id.button15);
+        //to create a button to update billing info
+        Button updateBillingInfoBtn = (Button)findViewById(R.id.update_billing_info_button);
 
-        btn3.setOnClickListener(new View.OnClickListener() {
+        updateBillingInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, BillingInformation.class));
             }
         });
 
-        Button btn4 = (Button)findViewById(R.id.button16);
+        //to create a button to update your identification settings
+        Button updateIdentificationSettingsBtn = (Button)findViewById(R.id.update_identification_settings_button);
 
-        btn4.setOnClickListener(new View.OnClickListener() {
+        updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, IdentificationSettings.class));

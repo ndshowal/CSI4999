@@ -36,7 +36,7 @@
               <i class="icon-check m-auto text-primary"></i>
             </div>
             <h3>Biometric Identification</h3>
-              <p class="lead mb-0">Easily access your account so you never have to remember a password!</p>
+              <p class="lead mb-0">Easily access your account so you never have to remember a password! Verify transactions with just your fingerprint!</p>
           </div>
         </div>
       </div>

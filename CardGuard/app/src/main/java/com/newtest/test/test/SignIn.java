@@ -13,7 +13,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
-        Button btn = (Button)findViewById(R.id.button2);
+        Button btn = (Button)findViewById(R.id.signin_button);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,7 +22,7 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.button);
+        Button btn2 = (Button)findViewById(R.id.signup_button);
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override

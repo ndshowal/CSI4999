@@ -99,6 +99,7 @@
             			</div>
 					</div>
 				</form>';
+				break;
         	} else {
             	echo'<!-- CHANGE EMAIL FORM -->
 				<form method="post" action="process_profile_change.php?to_be_modified='.$to_be_modified.'" id="email_address">

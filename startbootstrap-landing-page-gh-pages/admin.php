@@ -5,6 +5,7 @@
   	include("header.php");
   	$username = $current_user;
   	$account_type = $_SESSION['account_type'];
+  	$_SESSION['admin_change'] = false;
   	
   	if(!$_SESSION['logged_in']) {
   		echo'<head><meta http-equiv="refresh" content="0;signin.php"></head>';
@@ -90,7 +91,7 @@
 									<div class="control-group">											
 										<label class="control-label" for="password1">Enter Current Password</label>
 										<div class="controls">
-											<input type="password" class="form-control form-control-lg" id="password1" name="entered_password">
+											<input type="password" class="form-control form-control-lg" id="password1" name="old_password">
 										</div> <!-- /controls -->				
 									</div> <!-- /control-group -->
 									
@@ -116,9 +117,12 @@
 							</form>
 				
 							<!-- DELETE ACCOUNT BUTTON -->
-							<div class="form-actions">
-								<button type="delete account" class="delete-account">Delete Account</button>
-							</div>
+							<form method="post" action="delete_account.php" id="delete">
+								<div class="form-actions">
+									<button type="delete account" class="delete-account">Delete Account</button>
+								</div>
+							</form>
+						
 						</fieldset>
 					<!/form>
 				</div>

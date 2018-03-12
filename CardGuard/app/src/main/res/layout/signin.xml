@@ -8,7 +8,7 @@
     tools:context="com.newtest.test.test.SignIn">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_cardguard"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.057" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signup_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Username_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/username"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.245" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/Username_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.318" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
@@ -71,12 +71,12 @@
         app:layout_constraintVertical_bias="0.469" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/password_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.556" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/ForgotPassword_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_my_password"
@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.662" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"

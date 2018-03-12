@@ -95,16 +95,20 @@
 										<input type="password" class="form-control form-control-lg" id="password2" name="confirm_new_password">
 									</div> <!-- /controls -->				
 								</div> <!-- /control-group -->
-								<div class="form-row">
+								
+								<!-- SUBMIT BUTTON -->
+								<div class="control-group">
 	                				<button type="submit" align="middle" class="btn btn-lg btn-basic" name="submit_btn">Submit</button>
             					</div>
 							</div>
 						</form>
 			
 						<!-- DELETE ACCOUNT BUTTON -->
-						<div class="form-actions">
-							<button type="delete account" class="delete-account">Delete Account</button>
-						</div>
+						<form method="post" action="delete_account.php" id="delete">
+							<div class="form-actions">
+								<button type="delete account" class="delete-account">Delete Account</button>
+							</div>
+						</form>
 						
 					</fieldset>
 				<!/form>
