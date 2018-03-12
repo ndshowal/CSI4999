@@ -56,15 +56,7 @@
 				          <br />
                 </div>
 				
-				        <div class="form-group">
-                  <label><b>Account Type:</b></label>
-                  <select class="form-control" id="AccountType" name="reg_account_type" required>
-                    <option>Standard</option>
-                    <option>Merchant</option>
-                  </select>
-                </div>
-               
-			          <div class="form-row">
+				        <div class="form-row">
   				        <button type="submit" align="middle" class="btn  btn-lg btn-basic">Register</button>
                 </div>
               </form>
