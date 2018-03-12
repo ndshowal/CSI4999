@@ -13,18 +13,20 @@ public class SendReceivePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sendreceivepage);
 
-        Button btn = (Button)findViewById(R.id.button6);
+        //to create a send button
+        Button sendBtn = (Button)findViewById(R.id.send_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SendReceivePage.this, SendingPage.class));
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.button7);
+        //to create a receive button
+        Button receiveBtn = (Button)findViewById(R.id.receive_button);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SendReceivePage.this, ReceivingPage.class));

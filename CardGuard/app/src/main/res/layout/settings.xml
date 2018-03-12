@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.Settings">
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/user_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ndshowal"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.177" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/settings_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.068" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/update_account_info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update_account_information"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.408" />
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/update_billing_info_button"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:text="@string/update_billing_information"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.529" />
 
     <Button
-        android:id="@+id/button16"
+        android:id="@+id/update_identification_settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update_identification_settings"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.66" />
 
     <Button
-        android:id="@+id/button17"
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.84" />
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/website_link_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/website"

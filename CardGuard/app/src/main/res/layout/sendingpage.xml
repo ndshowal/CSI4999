@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.SendingPage">
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/username_of_receiver_label"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:text="@string/username_of_receiver"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.09" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/Amount_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/amount_of_transaction_in_us_dollars"
@@ -31,13 +31,13 @@
         app:layout_constraintVertical_bias="0.292" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/usernameofreceiver_textbox"
         android:layout_width="206dp"
         android:layout_height="45dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
-        android:labelFor="@+id/textView13"
+        android:labelFor="@+id/username_of_receiver_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,13 +46,13 @@
         app:layout_constraintVertical_bias="0.163" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/amount_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/amount"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/textView14"
+        android:inputType="numberDecimal"
+        android:labelFor="@+id/Amount_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.374" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/send_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send"
@@ -72,7 +72,7 @@
         app:layout_constraintVertical_bias="0.876" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/memo_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/memo"
@@ -83,12 +83,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText11"
+        android:id="@+id/memo_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/memo"
-        android:inputType="textPersonName"
+        android:inputType="textShortMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintLeft_toLeftOf="parent"

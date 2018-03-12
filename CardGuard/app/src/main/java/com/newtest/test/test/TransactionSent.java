@@ -13,9 +13,10 @@ public class TransactionSent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transactionsent);
 
-        Button btn = (Button)findViewById(R.id.button13);
+        //to create a return to account button
+        Button returnBtn = (Button)findViewById(R.id.return_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(TransactionSent.this, Account.class));

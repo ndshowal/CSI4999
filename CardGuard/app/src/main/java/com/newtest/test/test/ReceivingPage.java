@@ -13,9 +13,10 @@ public class ReceivingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receiving_page);
 
-        Button btn = (Button)findViewById(R.id.button8);
+        //to create a request button
+        Button requestBtn = (Button)findViewById(R.id.request_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ReceivingPage.this, RequestSent.class));

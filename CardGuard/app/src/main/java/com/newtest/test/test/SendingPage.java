@@ -13,9 +13,10 @@ public class SendingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sendingpage);
 
-        Button btn = (Button)findViewById(R.id.button9);
+        //to create a send button
+        Button sendBtn = (Button)findViewById(R.id.send_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SendingPage.this, TransactionSent.class));
