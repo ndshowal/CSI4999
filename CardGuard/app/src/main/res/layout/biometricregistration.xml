@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.BiometricRegistration">
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/fingerprint_registration_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fingerprint_registration"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.052" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/please_scan_finger_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/please_scan_your_fingerprint_now"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.199" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/down_arrow_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/downarrow"

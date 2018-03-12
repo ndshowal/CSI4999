@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.PhoneNumberRegistration">
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/enter_phone_number_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_your_phone_number"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.121" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/phone_number_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.335" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/submit_button"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:text="@string/submit"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/description_label"
         android:layout_width="274dp"
         android:layout_height="69dp"
         android:text="@string/we_will_send_you_a_text_message_with_a_code_please_enter_it_on_the_next_screen_to_validate_your_phone_number"

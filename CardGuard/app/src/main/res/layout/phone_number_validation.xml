@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.PhoneNumberValidation">
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/validate_your_phone_number_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/validate_your_phone_number"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/enter_code_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_the_code_that_we_sent_you_below"
@@ -30,19 +30,19 @@
         app:layout_constraintVertical_bias="0.284" />
 
     <EditText
-        android:id="@+id/editText9"
+        android:id="@+id/code_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/textView23"
+        android:inputType="number"
+        android:labelFor="@+id/enter_code_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/submit_button"
         android:layout_width="167dp"
         android:layout_height="wrap_content"
         android:text="@string/submit"

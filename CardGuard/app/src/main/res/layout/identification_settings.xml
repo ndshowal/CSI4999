@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.IdentificationSettings">
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/identification_settings_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/identification_settings"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/identificationtype_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/identification_type"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.29" />
 
     <Button
-        android:id="@+id/button22"
+        android:id="@+id/save_changes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_changes"
