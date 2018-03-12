@@ -13,6 +13,7 @@ public class PhoneNumberValidation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_number_validation);
 
+        //to create a submit button
         Button submitBtn = (Button)findViewById(R.id.submit_button);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {

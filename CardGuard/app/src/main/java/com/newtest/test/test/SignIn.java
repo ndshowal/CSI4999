@@ -13,6 +13,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
+        //to create a Sign In Button
         Button signinBtn = (Button)findViewById(R.id.signin_button);
 
         signinBtn.setOnClickListener(new View.OnClickListener() {
@@ -22,6 +23,7 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        //to create a sign up button
         Button signupBtn = (Button)findViewById(R.id.signup_button);
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
