@@ -13,9 +13,10 @@ public class PhoneNumberRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_number_registration);
 
-        Button btn = (Button)findViewById(R.id.button10);
+        //to create a submit button
+        Button submitBtn = (Button)findViewById(R.id.submit_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(PhoneNumberRegistration.this, PhoneNumberValidation.class));

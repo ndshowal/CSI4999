@@ -1,6 +1,7 @@
 package com.newtest.test.test;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,16 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, IdentificationSettings.class));
+            }
+        });
+
+        Button websiteBtn = (Button)findViewById(R.id.website_button);
+
+        websiteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cardguardwebsite.azurewebsites.net/"));
+                startActivity(browserIntent);
             }
         });
     }

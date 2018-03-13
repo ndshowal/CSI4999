@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:labelFor="@+id/textView35"
+    android:labelFor="@+id/last_name_label"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
@@ -12,7 +12,7 @@
     tools:context="com.newtest.test.test.AccountSettings">
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/account_information_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account_information"
@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.01" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/first_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/first_name"
@@ -37,12 +37,12 @@
         app:layout_constraintVertical_bias="0.109" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/first_name_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:labelFor="@+id/textView34"
+        android:labelFor="@+id/first_name_label"
         android:text="@string/first_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/last_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/last_name"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.272" />
 
     <EditText
-        android:id="@+id/editText12"
+        android:id="@+id/last_name_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.329" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/email_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
@@ -90,12 +90,12 @@
         app:layout_constraintVertical_bias="0.436" />
 
     <EditText
-        android:id="@+id/editText13"
+        android:id="@+id/email_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:labelFor="@+id/textView36"
+        android:labelFor="@+id/email_label"
         android:text="@string/email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
@@ -105,12 +105,12 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <EditText
-        android:id="@+id/editText14"
+        android:id="@+id/password_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:labelFor="@+id/textView37"
+        android:labelFor="@+id/password_label"
         android:text="@string/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
@@ -120,7 +120,7 @@
         app:layout_constraintVertical_bias="0.675" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
@@ -132,7 +132,7 @@
         app:layout_constraintVertical_bias="0.599" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/confirm_password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confirm_password"
@@ -144,12 +144,12 @@
         app:layout_constraintVertical_bias="0.764" />
 
     <EditText
-        android:id="@+id/editText15"
+        android:id="@+id/confirm_password_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:labelFor="@+id/textView38"
+        android:labelFor="@+id/confirm_password_label"
         android:text="@string/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
@@ -159,7 +159,7 @@
         app:layout_constraintVertical_bias="0.851" />
 
     <Button
-        android:id="@+id/button19"
+        android:id="@+id/save_changes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_changes"

@@ -7,7 +7,7 @@
     tools:context="com.newtest.test.test.BillingInformation">
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/billing_information_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/billing_information"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/card_number_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/card_number"
@@ -32,12 +32,12 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <EditText
-        android:id="@+id/editText16"
+        android:id="@+id/card_number_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/card_number"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.221" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/expiration_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/expiration_date"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.361" />
 
     <EditText
-        android:id="@+id/editText17"
+        android:id="@+id/expiration_date_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -72,7 +72,7 @@
         app:layout_constraintVertical_bias="0.423" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/cardholder_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name_of_cardholder"
@@ -84,7 +84,7 @@
         app:layout_constraintVertical_bias="0.55" />
 
     <EditText
-        android:id="@+id/editText18"
+        android:id="@+id/cardholder_name_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -98,7 +98,7 @@
         app:layout_constraintVertical_bias="0.623" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/cvv_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cvv"
@@ -110,7 +110,7 @@
         app:layout_constraintVertical_bias="0.729" />
 
     <EditText
-        android:id="@+id/editText19"
+        android:id="@+id/cvv_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -124,7 +124,7 @@
         app:layout_constraintVertical_bias="0.812" />
 
     <Button
-        android:id="@+id/button20"
+        android:id="@+id/save_changes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_changes"
@@ -136,7 +136,7 @@
         app:layout_constraintVertical_bias="0.965" />
 
     <Button
-        android:id="@+id/button21"
+        android:id="@+id/scan_card_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scan_card"

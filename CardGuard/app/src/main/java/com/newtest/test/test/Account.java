@@ -14,9 +14,9 @@ public class Account extends AppCompatActivity {
         setContentView(R.layout.account);
 
         //to create button to redirect to Sending and Receiving page
-        Button btn = (Button)findViewById(R.id.new_transaction_button);
+        Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        newTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Account.this, SendReceivePage.class));
@@ -24,9 +24,9 @@ public class Account extends AppCompatActivity {
         });
 
         //to create button to redirect to settings page
-        Button btn2 = (Button)findViewById(R.id.settings_button);
+        Button settingsBtn = (Button)findViewById(R.id.settings_button);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Account.this, Settings.class));
@@ -34,9 +34,9 @@ public class Account extends AppCompatActivity {
         });
 
         //to create button to redirect to notifications page
-        Button btn3 = (Button)findViewById(R.id.notifications_button);
+        Button notificationsBtn = (Button)findViewById(R.id.notifications_button);
 
-        btn3.setOnClickListener(new View.OnClickListener() {
+        notificationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Account.this, Notifications.class));

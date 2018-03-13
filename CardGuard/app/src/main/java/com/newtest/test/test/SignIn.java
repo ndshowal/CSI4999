@@ -13,18 +13,20 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
-        Button btn = (Button)findViewById(R.id.signin_button);
+        //to create a Sign In Button
+        Button signinBtn = (Button)findViewById(R.id.signin_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignIn.this, Account.class));
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.signup_button);
+        //to create a sign up button
+        Button signupBtn = (Button)findViewById(R.id.signup_button);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignIn.this, Register.class));

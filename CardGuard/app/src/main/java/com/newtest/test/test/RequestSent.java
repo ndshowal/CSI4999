@@ -13,9 +13,10 @@ public class RequestSent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requestsent);
 
-        Button btn = (Button)findViewById(R.id.button14);
+        //to create a button to return to your account
+        Button returnToAccountBtn = (Button)findViewById(R.id.return_to_account_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        returnToAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RequestSent.this, Account.class));
