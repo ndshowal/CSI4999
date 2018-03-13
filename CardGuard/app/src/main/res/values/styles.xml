@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:buttonStyle">@style/CGButton</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,4 +19,8 @@
     +
     +    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CGButton">
+        <item name="android:borderlessButtonStyle" />
+        <item name="android:background">@drawable/background_bg</item>
+    </style>
 </resources>
