@@ -58,7 +58,7 @@ public class Settings extends AppCompatActivity {
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Settings.this, IdentificationSettings.class);
+                Intent intent = new Intent(Settings.this, FingerprintAuthentication.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

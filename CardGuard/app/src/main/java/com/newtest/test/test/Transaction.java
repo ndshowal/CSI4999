@@ -1,9 +1,15 @@
 package com.newtest.test.test;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.net.IDN;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
+import static android.os.Build.ID;
+
+public class Transaction implements Parcelable {
     
     private String transactionID;
     private Date transactionStartDate;
@@ -11,14 +17,14 @@ public class Transaction {
     private User initiator;
     private User sender;
     private User recipient;
-    private double transactionAmount;
+    private float transactionAmount;
     private String memo;
     private Boolean inProgress;
     private Boolean confirmed;
     
     // CONSTRUCTOR //
-    public Transaction(Date transactionStartDate, User initiator,
-            User sender, User recipient, double transactionAmount, String memo,
+    public Transaction(String transactionID, User sender, User recipient, User initiator,
+                       float transactionAmount, String memo, Date transactionStartDate, Date transactionCompleteDate,
             Boolean inProgress, Boolean confirmed) {
         this.transactionStartDate = transactionStartDate;
         this.initiator = initiator;
@@ -28,22 +34,47 @@ public class Transaction {
         this.memo = memo;
         this.inProgress = inProgress;
         this.confirmed = confirmed;
-        setTransactionID();
+        this.transactionID = transactionID;
     }
+
+    protected Transaction(Parcel in) {
+        transactionID = in.readString();
+        initiator = in.readParcelable(User.class.getClassLoader());
+        sender = in.readParcelable(User.class.getClassLoader());
+        recipient = in.readParcelable(User.class.getClassLoader());
+        transactionAmount = in.readFloat();
+        memo = in.readString();
+        byte tmpInProgress = in.readByte();
+        inProgress = tmpInProgress == 0 ? null : tmpInProgress == 1;
+        byte tmpConfirmed = in.readByte();
+        confirmed = tmpConfirmed == 0 ? null : tmpConfirmed == 1;
+    }
+
+    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel in) {
+            return new Transaction(in);
+        }
+
+        @Override
+        public Transaction[] newArray(int size) {
+            return new Transaction[size];
+        }
+    };
 
     //Returns a string representation of this object
     @Override
     public String toString() {
         return "Transaction ID: " + getTransactionID()
-                + " Transaction Initiated:" + getTransactionStartDateString() 
-                + " Transaction Completed:" + getTransactionCompleteDateString() 
-                + " Initiated By: " + initiator.getUsername()
-                + " Sender: " + sender.getUsername()
-                + " Recipient: " + recipient.getUsername() 
-                + " Transaction Amount: " + getTransactionAmount()
-                + " Memo: " + getMemo()
-                + " In Progress: " + inProgress()
-                + " Confirmed: " + isConfirmed();
+                + " \nTransaction Initiated:" + getTransactionStartDateString()
+                + " \nTransaction Completed:" + getTransactionCompleteDateString()
+                + " \nInitiated By: " + initiator.getUsername()
+                + " \nSender: " + sender.getUsername()
+                + " \nRecipient: " + recipient.getUsername()
+                + " \nTransaction Amount: " + getTransactionAmount()
+                + " \nMemo: " + getMemo()
+                + " \nIn Progress: " + inProgress()
+                + " \nConfirmed: " + isConfirmed();
     }
 
     // GETTERS //
@@ -93,7 +124,7 @@ public class Transaction {
         return recipient;
     }
     
-    public double getTransactionAmount() {
+    public float getTransactionAmount() {
         return transactionAmount;
     }
     
@@ -108,7 +139,7 @@ public class Transaction {
     public Boolean isConfirmed() {
         return confirmed;
     }
-    
+
     // SETTERS //
 
     // Creates a hash of the Transaction Initiation Date, the usernames of the
@@ -143,7 +174,7 @@ public class Transaction {
         recipient = in;
     }
 
-    public void setTransactionAmount(Double in) {
+    public void setTransactionAmount(Float in) {
         transactionAmount = in;
     }
 
@@ -157,5 +188,24 @@ public class Transaction {
 
     public void setConfirmed(Boolean in) {
         confirmed = in;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(getTransactionID());
+        parcel.writeString(getTransactionStartDateString());
+        parcel.writeString(getTransactionCompleteDateString());
+        parcel.writeParcelable(getSender(), i);
+        parcel.writeParcelable(getRecipient(), i);
+        parcel.writeParcelable(getInitiator(), i);
+        parcel.writeFloat(getTransactionAmount());
+        parcel.writeString(getMemo());
+        parcel.writeByte((byte) (inProgress() ? 1 : 0));
+        parcel.writeByte((byte) (isConfirmed() ? 1 : 0));
     }
 }
