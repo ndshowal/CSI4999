@@ -101,9 +101,6 @@ public class RegisterConnection extends AsyncTask {
                     preparedStatement.setString(6, accountType);
                     rowsUpdated += preparedStatement.executeUpdate();
 
-                    // Close statement when done (Best practices)
-                    preparedStatement.close();
-
                     System.out.println("Rows updated: " + rowsUpdated);
                 }
 
