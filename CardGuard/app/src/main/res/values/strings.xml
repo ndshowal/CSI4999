@@ -118,5 +118,6 @@
     <string name="identification_settings">Identification Settings</string>
     <string name="scan_card">Scan Card</string>
     <string name="transaction_history">Transaction History</string>
-    <string name="transaction_history">Transaction History</string>
+    <string name="text_fingerprint_authentication">Fingerprint Authentication</string>
+    <string name="text_fingerprint_instructions">Please place your finger on the fingerprint sensor</string>
 </resources>

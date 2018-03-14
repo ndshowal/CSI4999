@@ -13,10 +13,35 @@ public class Account extends AppCompatActivity {
 
     User user;
 
+    TextView greeting;
+
+    TextView t1_1;
+    TextView t1_2;
+    TextView t1_3;
+    TextView t1_4;
+
+    TextView t2_1;
+    TextView t2_2;
+    TextView t2_3;
+    TextView t2_4;
+
+    TextView t3_1;
+    TextView t3_2;
+    TextView t3_3;
+    TextView t3_4;
+
+    TextView t4_1;
+    TextView t4_2;
+    TextView t4_3;
+    TextView t4_4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
+
+        greeting = (TextView) findViewById(R.id.text_greeting);
+        greeting.setText("Welcome, " + user.getUsername());
 
         user = getIntent().getParcelableExtra("UserKey");
         System.out.println(user.toString());
