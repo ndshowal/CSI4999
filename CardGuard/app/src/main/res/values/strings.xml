@@ -117,6 +117,6 @@
     <string name="cvv2">CVV</string>
     <string name="identification_settings">Identification Settings</string>
     <string name="scan_card">Scan Card</string>
-    <string name="text_fingerprint_authentication">Fingerprint Authentication</string>
-    <string name="text_fingerprint_instructions">Place finger on the fingerprint scanner</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="transaction_history">Transaction History</string>
 </resources>
