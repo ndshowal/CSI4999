@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class Account extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

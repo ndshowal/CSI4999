@@ -8,7 +8,7 @@
     tools:context="com.newtest.test.test.SignIn">
 
     <TextView
-        android:id="@+id/Welcome_text"
+        android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_cardguard"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
-        android:id="@+id/Username_label"
+        android:id="@+id/username_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/username"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.245" />
 
     <EditText
-        android:id="@+id/Username_textbox"
+        android:id="@+id/username_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -71,7 +71,7 @@
         app:layout_constraintVertical_bias="0.469" />
 
     <EditText
-        android:id="@+id/password_textbox"
+        android:id="@+id/password_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.556" />
 
     <TextView
-        android:id="@+id/ForgotPassword_label"
+        android:id="@+id/forgot_password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_my_password"

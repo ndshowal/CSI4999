@@ -3,34 +3,98 @@ package com.newtest.test.test;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.sql.SQLException;
 
 public class SignIn extends AppCompatActivity {
+    private static final String TAG = "LoginPage";
+
+    EditText usernameInput;
+    EditText passwordInput;
+    Button signInBtn;
+    Button signUpBtn;
+
+    SignInConnection connection;
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
-        //to create a Sign In Button
-        Button signinBtn = (Button)findViewById(R.id.signin_button);
+        usernameInput = findViewById(R.id.username_input);
+        passwordInput = findViewById(R.id.password_input);
 
-        signinBtn.setOnClickListener(new View.OnClickListener() {
+        //Instantiate signInBtn
+        signInBtn = (Button)findViewById(R.id.signin_button);
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignIn.this, Account.class));
+                login();
             }
         });
 
         //to create a sign up button
-        Button signupBtn = (Button)findViewById(R.id.signup_button);
+        signUpBtn = (Button)findViewById(R.id.signup_button);
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignIn.this, Register.class));
+                signUp();
             }
         });
+    }
+
+    protected void login() {
+        Log.d(TAG, "Login");
+        if(validate()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    connection = new SignInConnection(usernameInput.getText().toString(), passwordInput.getText().toString());
+                    try {
+                        user = connection.connect();
+                        startActivity(new Intent(SignIn.this, Account.class));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        Log.e(TAG, e.toString());
+                    }
+                }
+            }).start();
+        }
+    }
+
+    public void signUp() {
+        Log.d(TAG, "SignUp");
+        startActivity(new Intent(SignIn.this, Register.class));
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String username = usernameInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        if (username.isEmpty()) {
+            usernameInput.setError("Please enter your username");
+            valid = false;
+        } else {
+            usernameInput.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            passwordInput.setError("Please enter your password");
+            valid = false;
+        } else {
+            passwordInput.setError(null);
+        }
+
+        return valid;
     }
 }

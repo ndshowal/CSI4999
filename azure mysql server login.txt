@@ -1,4 +1,4 @@
-server: cardguard-db.mysql.database.azure.com
+host: cardguard-db.mysql.database.azure.com
 
 name: cardguard-admin@cardguard-db
 
