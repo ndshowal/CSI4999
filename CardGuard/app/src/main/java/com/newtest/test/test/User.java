@@ -25,6 +25,7 @@ public class User implements Parcelable{
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.accountType = accountType;
+        transactions = new ArrayList<Transaction>();
     }
 
     protected User(Parcel in) {
