@@ -40,11 +40,11 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
 
-        greeting = (TextView) findViewById(R.id.text_greeting);
-        greeting.setText("Welcome, " + user.getUsername());
-
         user = getIntent().getParcelableExtra("UserKey");
         System.out.println(user.toString());
+
+        greeting = (TextView) findViewById(R.id.text_greeting);
+        greeting.setText("Welcome, " + user.getUsername());
 
         //to create button to redirect to Sending and Receiving page
         Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);

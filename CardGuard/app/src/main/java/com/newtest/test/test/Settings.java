@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Settings extends AppCompatActivity {
 
@@ -17,6 +20,8 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
 
         user = getIntent().getParcelableExtra("UserKey");
+        TextView tv = (TextView) findViewById(R.id.user_label);
+        tv.setText(user.getUsername());
 
         //to create a logout button
         Button logoutBtn = (Button)findViewById(R.id.logout_button);
