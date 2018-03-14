@@ -1,6 +1,7 @@
 package com.newtest.test.test;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,7 +60,9 @@ public class Register extends AppCompatActivity {
                                 emailAddressInput.getText().toString(),
                                 passwordInput.getText().toString());
                         user = connection.connect();
-                        startActivity(new Intent(Register.this, Account.class));
+                        Intent intent = new Intent(Register.this, Account.class);
+                        intent.putExtra("UserKey", (Parcelable) user);
+                        startActivity(intent);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         Log.e(TAG, e.toString());

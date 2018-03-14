@@ -76,6 +76,7 @@ public class SignInConnection extends AsyncTask {
                         "SELECT * FROM users "
                                 + "WHERE username='" + username
                                 +"' AND password ='" + password +"';");
+
                 while (results.next()) {
                     String ID = results.getString(1);
                     String username = results.getString(2);
@@ -85,7 +86,6 @@ public class SignInConnection extends AsyncTask {
                     String lastName = results.getString(6);
                     String accountType = results.getString(7);
 
-                    statement.close();  // Close statement since no longer needed
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {

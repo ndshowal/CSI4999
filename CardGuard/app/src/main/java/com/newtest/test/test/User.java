@@ -1,8 +1,11 @@
 package com.newtest.test.test;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;import java.util.ArrayList;
 
-public class User {
+public class User implements Parcelable{
     private String ID;
     private String password;
     private String username;
@@ -23,6 +26,28 @@ public class User {
         this.emailAddress = emailAddress;
         this.accountType = accountType;
     }
+
+    protected User(Parcel in) {
+        ID = in.readString();
+        password = in.readString();
+        username = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+        emailAddress = in.readString();
+        accountType = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     /// Returns a string representation of this object
     @Override
@@ -98,5 +123,21 @@ public class User {
     // Adds a transaction to the arraylist of transactions for this user
     public void addTransaction(Transaction tx) {
         transactions.add(tx);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(ID);
+        parcel.writeString(password);
+        parcel.writeString(username);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(emailAddress);
+        parcel.writeString(accountType);
     }
 }

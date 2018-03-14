@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Account extends AppCompatActivity {
 
@@ -15,7 +18,8 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
 
-
+        user = getIntent().getParcelableExtra("UserKey");
+        System.out.println(user.toString());
 
         //to create button to redirect to Sending and Receiving page
         Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);
@@ -23,7 +27,9 @@ public class Account extends AppCompatActivity {
         newTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, SendReceivePage.class));
+                Intent intent = new Intent(Account.this, SendRequestPage.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -33,7 +39,9 @@ public class Account extends AppCompatActivity {
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, Settings.class));
+                Intent intent = new Intent(Account.this, Settings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -43,7 +51,9 @@ public class Account extends AppCompatActivity {
         notificationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Account.this, Notifications.class));
+                Intent intent = new Intent(Account.this, Notifications.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }

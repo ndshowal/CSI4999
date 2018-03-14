@@ -1,6 +1,7 @@
 package com.newtest.test.test;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,7 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.signin);
 
         usernameInput = findViewById(R.id.username_input);
-        passwordInput = findViewById(R.id.password_input);
+        passwordInput = findViewById(R.id.input_password);
 
         //Instantiate signInBtn
         signInBtn = (Button)findViewById(R.id.signin_button);
@@ -60,7 +61,9 @@ public class SignIn extends AppCompatActivity {
                     connection = new SignInConnection(usernameInput.getText().toString(), passwordInput.getText().toString());
                     try {
                         user = connection.connect();
-                        startActivity(new Intent(SignIn.this, Account.class));
+                        Intent intent = new Intent(SignIn.this, Account.class);
+                        intent.putExtra("UserKey", (Parcelable) user);
+                        startActivity(intent);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         Log.e(TAG, e.toString());

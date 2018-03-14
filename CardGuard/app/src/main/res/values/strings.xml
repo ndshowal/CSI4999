@@ -32,7 +32,6 @@
     <string name="receiver2">Receiver</string>
     <string name="sender2">Sender</string>
     <string name="send">Send</string>
-    <string name="receive">Receive</string>
     <string name="username_of_receiver">Username of Receiver</string>
     <string name="amount_of_transaction">Amount of Transaction</string>
     <string name="username3">Username</string>

@@ -9,10 +9,14 @@ import android.widget.Button;
 
 public class Settings extends AppCompatActivity {
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a logout button
         Button logoutBtn = (Button)findViewById(R.id.logout_button);
@@ -30,7 +34,9 @@ public class Settings extends AppCompatActivity {
         updateAccountInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, AccountSettings.class));
+                Intent intent = new Intent(Settings.this, AccountSettings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -40,7 +46,9 @@ public class Settings extends AppCompatActivity {
         updateBillingInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, BillingInformation.class));
+                Intent intent = new Intent(Settings.this, BillingInformation.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -50,7 +58,9 @@ public class Settings extends AppCompatActivity {
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, IdentificationSettings.class));
+                Intent intent = new Intent(Settings.this, IdentificationSettings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 

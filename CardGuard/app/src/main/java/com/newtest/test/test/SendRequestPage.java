@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SendReceivePage extends AppCompatActivity {
+public class SendRequestPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +19,17 @@ public class SendReceivePage extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendReceivePage.this, SendingPage.class));
+                startActivity(new Intent(SendRequestPage.this, SendingPage.class));
             }
         });
 
         //to create a receive button
-        Button receiveBtn = (Button)findViewById(R.id.receive_button);
+        Button receiveBtn = (Button)findViewById(R.id.request_button);
 
         receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendReceivePage.this, ReceivingPage.class));
+                startActivity(new Intent(SendRequestPage.this, ReceivingPage.class));
             }
         });
     }
