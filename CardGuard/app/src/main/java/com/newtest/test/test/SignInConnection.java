@@ -36,7 +36,7 @@ public class SignInConnection extends AsyncTask {
 
     public User connect() throws SQLException {
 
-        // check that the driver is installed
+        // Check that the driver is installed
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (Exception ex) {
@@ -44,7 +44,7 @@ public class SignInConnection extends AsyncTask {
             ex.printStackTrace();
         }
 
-        //System.out.println("MySQL JDBC driver detected in library path.");
+        System.out.println("MySQL JDBC driver detected in library path.");
 
         // Initialize connection object
         connection = null;
@@ -60,16 +60,14 @@ public class SignInConnection extends AsyncTask {
             properties.setProperty("verifyServerCertificate", "true");
             properties.setProperty("requireSSL", "false");
 
-            // Get connection
+            // Connect to MySQL server with set parameters
             connection = DriverManager.getConnection(url, properties);
-
-            System.out.println(properties.toString());
         } catch (SQLException ex) {
             throw new SQLException("Failed to create connection to database.", ex);
         }
 
         if (connection != null) {
-            // SQL Query
+            // Query database for all rows where username and password match (should be 1 at most)
             try {
                 System.out.println("Attempting to query database...");
 
@@ -87,6 +85,7 @@ public class SignInConnection extends AsyncTask {
                     String lastName = results.getString(6);
                     String accountType = results.getString(7);
 
+                    statement.close();  // Close statement since no longer needed
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {
@@ -99,6 +98,7 @@ public class SignInConnection extends AsyncTask {
             }
         }
 
+        connection.close(); // Close connection
         return user;
     }
 

@@ -1,6 +1,7 @@
 package com.newtest.test.test;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +12,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class RegisterConnection extends AsyncTask {
+    private final String TAG = "RegisterConnection";
     private Connection connection;
 
     //DB Connection strings
@@ -53,7 +55,7 @@ public class RegisterConnection extends AsyncTask {
             ex.printStackTrace();
         }
 
-        //System.out.println("MySQL JDBC driver detected in library path.");
+        System.out.println("MySQL JDBC driver detected in library path.");
 
         // Initialize connection object
         connection = null;
@@ -78,22 +80,17 @@ public class RegisterConnection extends AsyncTask {
         }
 
         if (connection != null) {
-            // SQL Query
+            // SQL Queries - 1st check if any users exist with the given username, and then again
+            //  if any exist with the given email address. If both checks pass, create new entry
+            //  into users table.
             try {
                 int rowsUpdated = 0;
 
                 System.out.println("Attempting to query database...");
 
-                Statement statement1 = connection.createStatement();
-                ResultSet results1 = statement1.executeQuery(
-                        "SELECT * FROM users "
-                                + "WHERE username='" + username +"';");
-                Statement statement2 = connection.createStatement();
-                ResultSet results2 = statement2.executeQuery(
-                        "SELECT * FROM users "
-                                + "WHERE email_address='" + emailAddress + "';");
 
-                if(!results1.next() && !results2.next()) {
+                // If both checks pass, create new user entry
+                if(!checkExistingEmailAddress(connection) && !checkExistingUsername(connection)) {
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(first_name, last_name, username, email_address, password, account_type)" +
                             " VALUES(?,?,?,?,?,?)");
                     preparedStatement.setString(1, firstName);
@@ -104,9 +101,14 @@ public class RegisterConnection extends AsyncTask {
                     preparedStatement.setString(6, accountType);
                     rowsUpdated += preparedStatement.executeUpdate();
 
+                    // Close statement when done (Best practices)
+                    preparedStatement.close();
+
                     System.out.println("Rows updated: " + rowsUpdated);
                 }
 
+                // Query the DB again, same code as SignInConnection - merely to ensure a new user
+                //  object is instantiated only if new entry was created
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery(
                         "SELECT * FROM users "
@@ -121,6 +123,7 @@ public class RegisterConnection extends AsyncTask {
                     String lastName = results.getString(6);
                     String accountType = results.getString(7);
 
+                    statement.close();  // Close statement
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {
@@ -133,7 +136,47 @@ public class RegisterConnection extends AsyncTask {
             }
         }
 
+        connection.close(); // Close connection
         return user;
+    }
+
+    public Boolean checkExistingUsername(Connection connection) {
+        try {
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(
+                    "SELECT * FROM users "
+                            + "WHERE username='" + username +"';");
+
+            if(results.next()) {
+                statement.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public Boolean checkExistingEmailAddress(Connection connection) {
+        try {
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(
+                    "SELECT * FROM users "
+                            + "WHERE email_address='" + emailAddress + "';");
+            if(results.next()) {
+                statement.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

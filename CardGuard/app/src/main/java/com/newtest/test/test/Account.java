@@ -15,6 +15,8 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
 
+
+
         //to create button to redirect to Sending and Receiving page
         Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);
 
