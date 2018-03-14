@@ -81,5 +81,17 @@ public class Account extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button fullTransactionHistoryBtn = (Button)findViewById(R.id.fulltransactionhistory_button);
+
+        fullTransactionHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Account.this, FullTransactionHistory.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
     }
 }
