@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.newtest.test.test.Account">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
         android:id="@+id/settings_button"
-        android:layout_width="129dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
         android:text="@string/settings"
+        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,8 +26,10 @@
     <Button
         android:id="@+id/notifications_button"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
         android:text="@string/notifications"
+        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,9 +37,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.033" />
 
+    </LinearLayout>
     <Button
         android:id="@+id/new_transaction_button"
-        android:layout_width="197dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_transaction"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +53,7 @@
     <TextView
         android:id="@+id/recenttransaction_label"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="@string/recent_transaction_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

@@ -45,7 +45,7 @@
 
     <Button
         android:id="@+id/update_billing_info_button"
-        android:layout_width="243dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update_billing_information"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,8 +79,8 @@
 
     <Button
         android:id="@+id/website_button"
-        android:layout_width="137dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Go to website"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

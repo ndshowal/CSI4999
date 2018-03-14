@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:buttonStyle">@style/CGButton</item>
+        <item name="android:editTextStyle">@style/CGEdit</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,4 +24,8 @@
         <item name="android:borderlessButtonStyle" />
         <item name="android:background">@drawable/background_bg</item>
     </style>
+
+   <style name="CGEdit">
+       <item name="android:background">@drawable/input_bg</item>
+   </style>
 </resources>
