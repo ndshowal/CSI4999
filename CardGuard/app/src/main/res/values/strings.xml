@@ -121,4 +121,6 @@
     <string name="text_fingerprint_authentication">Fingerprint Authentication</string>
     <string name="text_fingerprint_instructions">Please place your finger on the fingerprint sensor</string>
     <string name="full_history">Full History</string>
+    <string name="search">Search</string>
+    <string name="search_for_user">Search for User</string>
 </resources>
