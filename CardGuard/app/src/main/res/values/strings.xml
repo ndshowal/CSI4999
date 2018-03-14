@@ -38,7 +38,7 @@
     <string name="amount_of_transaction_in_us_dollars">Amount of Transaction (in US dollars)</string>
     <string name="amount">Amount</string>
     <string name="amount2">Amount</string>
-    <string name="username_of_sender">Username of Sender</string>
+    <string name="username_of_sender">Request from User</string>
     <string name="amount_of_transaction2">Amount of Transaction</string>
     <string name="username4">Username</string>
     <string name="amount3">Amount</string>

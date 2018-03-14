@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 
@@ -55,6 +56,8 @@ public class SignIn extends AppCompatActivity {
     protected void login() {
         Log.d(TAG, "Login");
         if(validate()) {
+            Toast.makeText(SignIn.this, "Signing you in...", Toast.LENGTH_LONG).show();
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -63,6 +66,7 @@ public class SignIn extends AppCompatActivity {
                         user = connection.connect();
                         Intent intent = new Intent(SignIn.this, Account.class);
                         intent.putExtra("UserKey", (Parcelable) user);
+
                         startActivity(intent);
                     } catch (SQLException e) {
                         e.printStackTrace();

@@ -40,6 +40,10 @@ public class AccountSettings extends AppCompatActivity {
         passwordInput = findViewById(R.id.input_password);
         confirmPasswordInput = findViewById(R.id.input_confirmation_password);
 
+        firstNameInput.setText(user.getFirstName());
+        lastNameInput.setText(user.getLastName());
+        emailAddressInput.setText(user.getEmailAddress());
+
         //to create a save changes button
         Button saveChangesBtn = (Button)findViewById(R.id.save_changes_button);
 

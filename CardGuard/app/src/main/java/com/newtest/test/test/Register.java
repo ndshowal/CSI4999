@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -50,6 +51,8 @@ public class Register extends AppCompatActivity {
 
     protected void register() {
         if (validate()) {
+            Toast.makeText(Register.this, "Registering your new account...", Toast.LENGTH_LONG  ).show();
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -62,6 +65,7 @@ public class Register extends AppCompatActivity {
                         user = connection.connect();
                         Intent intent = new Intent(Register.this, Account.class);
                         intent.putExtra("UserKey", (Parcelable) user);
+
                         startActivity(intent);
                     } catch (SQLException e) {
                         e.printStackTrace();
