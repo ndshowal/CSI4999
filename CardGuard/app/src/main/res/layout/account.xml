@@ -45,7 +45,7 @@
     <TextView
         android:id="@+id/recenttransaction_label"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="25dp"
         android:text="@string/recent_transaction_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

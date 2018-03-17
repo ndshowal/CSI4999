@@ -54,6 +54,18 @@ public class AccountSettings extends AppCompatActivity {
             }
         });
 
+        //to create a cancel button
+        Button cancelBtn = (Button)findViewById(R.id.cancel_button);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountSettings.this, Settings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
     }
 
     protected void updateSettings() {

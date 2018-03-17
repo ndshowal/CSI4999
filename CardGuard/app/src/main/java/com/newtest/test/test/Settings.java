@@ -69,6 +69,18 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        //to create a button to go back to account page
+        Button backBtn = (Button)findViewById(R.id.back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
         Button websiteBtn = (Button)findViewById(R.id.website_button);
 
         websiteBtn.setOnClickListener(new View.OnClickListener() {

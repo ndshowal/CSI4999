@@ -123,4 +123,7 @@
     <string name="full_history">Full History</string>
     <string name="search">Search</string>
     <string name="search_for_user">Search for User</string>
+    <string name="cancel">Cancel</string>
+    <string name="go_to_website">Go to website</string>
+    <string name="back_to_account">Back to Account</string>
 </resources>
