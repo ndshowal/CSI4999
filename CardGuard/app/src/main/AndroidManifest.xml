@@ -3,6 +3,11 @@
     package="com.newtest.test.test">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.USE_FINGERPRINT" />
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false"/>
 
     <application
         android:allowBackup="true"
@@ -31,10 +36,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Account" />
-        <activity android:name=".SendReceivePage" />
+        <activity android:name=".SendRequestPage" />
         <activity android:name=".SendingPage" />
         <activity android:name=".ReceivingPage" />
-        <activity android:name=".BiometricRegistration" />
+        <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
         <activity android:name=".TransactionSent" />
@@ -46,6 +51,7 @@
         <activity android:name=".BillingInformation" />
         <activity android:name=".IdentificationSettings" />
         <activity android:name=".Notifications"></activity>
+        <activity android:name=".FullTransactionHistory"></activity>
 
 
     </application>

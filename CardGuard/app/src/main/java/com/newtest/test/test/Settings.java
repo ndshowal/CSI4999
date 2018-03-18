@@ -6,13 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Settings extends AppCompatActivity {
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        user = getIntent().getParcelableExtra("UserKey");
+        TextView tv = (TextView) findViewById(R.id.user_label);
+        tv.setText(user.getUsername());
 
         //to create a logout button
         Button logoutBtn = (Button)findViewById(R.id.logout_button);
@@ -30,7 +39,9 @@ public class Settings extends AppCompatActivity {
         updateAccountInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, AccountSettings.class));
+                Intent intent = new Intent(Settings.this, AccountSettings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -40,7 +51,9 @@ public class Settings extends AppCompatActivity {
         updateBillingInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, BillingInformation.class));
+                Intent intent = new Intent(Settings.this, BillingInformation.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -50,7 +63,21 @@ public class Settings extends AppCompatActivity {
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Settings.this, IdentificationSettings.class));
+                Intent intent = new Intent(Settings.this, FingerprintAuthentication.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
+        //to create a button to go back to account page
+        Button backBtn = (Button)findViewById(R.id.back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
