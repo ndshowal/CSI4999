@@ -1,0 +1,9 @@
+server: cardguard-db.mysql.database.azure.com
+
+name: cardguard-admin@cardguard-db
+
+password: password12345!
+
+
+sign-in string from console:
+mysql -h cardguard-db.mysql.database.azure.com -u cardguard-admin@cardguard-db -p

@@ -1,9 +1,64 @@
 
+body {
+	position: relative;
+	padding-bottom: 15vw;
+	min-height: 100vh;
+}
+
+.btn {
+	cursor: pointer;
+}
+
+/* Header and Footer */
+
+.navbar-collapse {
+	flex-grow: 0!important;
+}
+
+.nav-menu {
+	text-align: center;
+}
+
+.nav-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-menu ul li {
+	padding: .375rem .75rem;
+}
+
+.nav-menu .btn {
+	margin: 3px;
+	display: block;
+}
+
+header.masthead {
+	padding-top: 8rem!important;
+	padding-bottom: 8rem!important;
+	background-attachment: fixed;
+}
+
+header.masthead h1 {
+	margin-bottom: 0;
+}
+
+
+footer {
+	position: absolute;
+	height: 15vw;
+	width: 100%;
+	bottom: 0;
+}
+
+/* Terms */
 .terms p{margin-left: 70px; margin-right: 15px;}
 .terms #p2{margin-left: 10px;}
 .terms #p3{margin-left: 10px;}
 .terms h1{margin-bottom: 10px; text-align: center;}
 .terms h2{margin-left: 50px; margin-bottom: 10px; margin-top: 50px;}
+
 
 .standard-page {
 	padding: 60px 4vw;
@@ -36,7 +91,7 @@
 }
 
 .profiles .developer {
-	flex-basis: 33%;
+	flex-basis: 100%;
 	padding: 20px;
 }
 
@@ -47,3 +102,68 @@
 	background-position: center top!important;
 }
 
+
+
+/* Account Settings */
+
+.delete-account {
+	background: none;
+	border: none;
+	color: red;
+	padding-left: 0;
+	margin-bottom: 10px;
+	cursor: pointer;
+	font-style: italic;
+}
+
+
+.settings-section {
+	margin-bottom: 4vw;
+	margin-top: 2vw;
+}
+
+.settings-section h4 {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.control-group {
+	margin-bottom: 1.4em;
+}
+	
+.control-group label {
+	margin-bottom: 5px;
+	font-weight: bold;	
+}
+
+@media screen and (min-width: 768px) {
+	
+	.nav-menu ul {
+		display: inline-block;
+		list-style: none;
+		margin-bottom: 0;
+		padding-left: 0;
+	}
+	
+	.nav-menu ul li {
+		display: inline-block;
+		padding: .375rem .75rem;
+	}
+	
+	.nav-menu .btn {
+		display: inline-block;
+	}
+		
+	.profiles .developer {
+		flex-basis: 50%;
+		padding: 20px;
+	}
+	
+}
+
+@media screen and (min-width: 1080px) {
+	.profiles .developer {
+		flex-basis: 33%;
+		padding: 20px;
+	}
+}
