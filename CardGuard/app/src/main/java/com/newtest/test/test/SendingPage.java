@@ -22,5 +22,15 @@ public class SendingPage extends AppCompatActivity {
                 startActivity(new Intent(SendingPage.this, TransactionSent.class));
             }
         });
+
+        //to create a cancel button
+        Button cancelBtn = (Button)findViewById(R.id.cancel_button);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SendingPage.this, SendRequestPage.class));
+            }
+        });
     }
 }
