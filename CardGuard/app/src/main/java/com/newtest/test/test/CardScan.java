@@ -43,6 +43,9 @@ public class CardScan extends AppCompatActivity
                 intent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
                 startActivityForResult(intent, REQUEST_SCAN);
 
+                intent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true);
+                intent.putExtra(CardIOActivity.EXTRA_USE_PAYPAL_ACTIONBAR_ICON, false);
+
             }
         });
     }

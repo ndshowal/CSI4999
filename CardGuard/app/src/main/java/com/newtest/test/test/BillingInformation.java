@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class BillingInformation extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
