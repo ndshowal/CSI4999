@@ -23,11 +23,10 @@
         android:layout_width="368dp"
         android:layout_height="407dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873">
+        app:layout_constraintVertical_bias="0.846">
 
         <TableRow
             android:id="@+id/notification1_row"

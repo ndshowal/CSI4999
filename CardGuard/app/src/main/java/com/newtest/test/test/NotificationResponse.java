@@ -6,21 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Notifications extends AppCompatActivity {
+public class NotificationResponse extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notifications);
+        setContentView(R.layout.notification_response);
 
 
-        //to create a respond button
-        Button respondBtn = (Button)findViewById(R.id.respond_button);
+        //to create a back button
+        Button backBtn = (Button)findViewById(R.id.back_button);
 
-        respondBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Notifications.this, NotificationResponse.class));
+                startActivity(new Intent(NotificationResponse.this, Notifications.class));
             }
         });
     }
