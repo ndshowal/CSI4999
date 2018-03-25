@@ -8,10 +8,14 @@ import android.widget.Button;
 
 public class RequestSent extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requestsent);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a button to return to your account
         Button returnToAccountBtn = (Button)findViewById(R.id.return_to_account_button);
@@ -19,7 +23,9 @@ public class RequestSent extends AppCompatActivity {
         returnToAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RequestSent.this, Account.class));
+                Intent intent = new Intent(RequestSent.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }

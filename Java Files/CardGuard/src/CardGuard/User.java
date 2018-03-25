@@ -2,7 +2,11 @@ package CardGuard;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class User {
+    private String ID;
+    private String password;
     private String username;
     private String firstName;
     private String lastName;
@@ -11,26 +15,37 @@ public class User {
     private ArrayList<Transaction> transactions;
     
     // CONSTRUCTOR //
-    public User(String username, String firstName, String lastName,
+    public User(String ID, String username, String password, String firstName, String lastName,
             String emailAddress, String accountType) {
+        this.ID = ID;
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.accountType = accountType;
     }
-    
+
+    /// Returns a string representation of this object
     @Override
     public String toString() {
         return "Username: " + getUsername() 
-                + " First Name: " + getFirstName() 
-                + " Last Name: " + getLastName() 
-                + " Email Address" + getEmailAddress();
+                + "\nFirst Name: " + getFirstName() 
+                + "\nLast Name: " + getLastName() 
+                + "\nEmail Address: " + getEmailAddress();
     }
     
     // GETTERS //
+    public String getID() {
+        return ID;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
     
     public String getFirstName() {
@@ -54,6 +69,14 @@ public class User {
     }
     
     // SETTERS //
+    public void setID(String in) {
+        ID = in;
+    }
+
+    public void setPassword(String in) {
+        password = in;
+    }
+
     public void setUsername(String in) {
         username = in;
     }
