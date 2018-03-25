@@ -8,10 +8,14 @@ import android.widget.Button;
 
 public class TransactionSent extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transactionsent);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a return to account button
         Button returnBtn = (Button)findViewById(R.id.return_button);

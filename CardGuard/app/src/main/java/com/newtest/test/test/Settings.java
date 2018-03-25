@@ -25,7 +25,6 @@ public class Settings extends AppCompatActivity {
 
         //to create a logout button
         Button logoutBtn = (Button)findViewById(R.id.logout_button);
-
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +34,6 @@ public class Settings extends AppCompatActivity {
 
         //to create a button to update your account info
         Button updateAccountInfoBtn = (Button)findViewById(R.id.update_account_info_button);
-
         updateAccountInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +45,6 @@ public class Settings extends AppCompatActivity {
 
         //to create a button to update billing info
         Button updateBillingInfoBtn = (Button)findViewById(R.id.update_billing_info_button);
-
         updateBillingInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +56,6 @@ public class Settings extends AppCompatActivity {
 
         //to create a button to update your identification settings
         Button updateIdentificationSettingsBtn = (Button)findViewById(R.id.update_identification_settings_button);
-
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +67,6 @@ public class Settings extends AppCompatActivity {
 
         //to create a button to go back to account page
         Button backBtn = (Button)findViewById(R.id.back_button);
-
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +77,6 @@ public class Settings extends AppCompatActivity {
         });
 
         Button websiteBtn = (Button)findViewById(R.id.website_button);
-
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,10 +8,14 @@ import android.widget.Button;
 
 public class ReceivingPage extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receiving_page);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a request button
         Button requestBtn = (Button)findViewById(R.id.request_button);
@@ -19,7 +23,9 @@ public class ReceivingPage extends AppCompatActivity {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReceivingPage.this, RequestSent.class));
+                Intent intent = new Intent(ReceivingPage.this, RequestSent.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -29,7 +35,9 @@ public class ReceivingPage extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReceivingPage.this, SendRequestPage.class));
+                Intent intent = new Intent(ReceivingPage.this, SendRequestPage.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }

@@ -24,6 +24,8 @@ public class IdentificationSettings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(IdentificationSettings.this, Settings.class));
+
+
             }
         });
 

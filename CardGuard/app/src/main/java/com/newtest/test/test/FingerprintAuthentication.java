@@ -30,6 +30,8 @@ import javax.crypto.SecretKey;
 
 public class FingerprintAuthentication extends AppCompatActivity {
 
+    User user;
+
     // Declare a string variable for the key we’re going to use in our fingerprint authentication
     private static final String KEY_NAME = "yourKey";
     private Cipher cipher;
@@ -44,6 +46,8 @@ public class FingerprintAuthentication extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_authentication);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
         // or higher before executing any fingerprint-related code
@@ -71,6 +75,7 @@ public class FingerprintAuthentication extends AppCompatActivity {
                     // and processing the authentication process events
                     FingerprintHandler helper = new FingerprintHandler(this);
                     helper.startAuth(fingerprintManager, cryptoObject);
+                    finish();
                 }
             }
         }

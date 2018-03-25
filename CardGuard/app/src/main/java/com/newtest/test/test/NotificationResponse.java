@@ -8,11 +8,14 @@ import android.widget.Button;
 
 public class NotificationResponse extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_response);
 
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a back button
         Button backBtn = (Button)findViewById(R.id.back_button);
@@ -20,7 +23,9 @@ public class NotificationResponse extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NotificationResponse.this, Notifications.class));
+                Intent intent = new Intent(NotificationResponse.this, Notifications.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -30,7 +35,9 @@ public class NotificationResponse extends AppCompatActivity {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NotificationResponse.this, FingerprintAuthentication.class));
+                Intent intent = new Intent(NotificationResponse.this, FingerprintAuthentication.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
 
@@ -40,7 +47,9 @@ public class NotificationResponse extends AppCompatActivity {
         declineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NotificationResponse.this, FingerprintAuthentication.class));
+                Intent intent = new Intent(NotificationResponse.this, FingerprintAuthentication.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }

@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 public class Notifications extends AppCompatActivity {
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notifications);
 
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a respond button
         Button respondBtn = (Button)findViewById(R.id.respond_button);
@@ -20,7 +22,9 @@ public class Notifications extends AppCompatActivity {
         respondBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Notifications.this, NotificationResponse.class));
+                Intent intent = new Intent(Notifications.this, NotificationResponse.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }
