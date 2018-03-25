@@ -11,16 +11,10 @@
     tools:context="com.newtest.test.test.SignIn">
 
     <TextView
-<<<<<<< HEAD
-        android:id="@+id/welcome_text"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-=======
         android:id="@+id/Welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
->>>>>>> Website
         android:text="@string/welcome_to_cardguard"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,14 +24,9 @@
         app:layout_constraintVertical_bias="0.268" />
     <Button
         android:id="@+id/signup_button"
-<<<<<<< HEAD
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-=======
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
->>>>>>> Website
         android:text="@string/sign_up"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,16 +52,10 @@
         app:layout_constraintVertical_bias="0.597" />
 
     <EditText
-<<<<<<< HEAD
-        android:id="@+id/input_password"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-=======
         android:id="@+id/password_textbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
->>>>>>> Website
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -83,14 +66,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.722" />
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/forgot_password_label"
-=======
 
     <Button
         android:id="@+id/signin_button"
->>>>>>> Website
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
@@ -102,31 +80,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.846" />
 
-<<<<<<< HEAD
-    <Button
-        android:id="@+id/signin_button"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:text="@string/sign_in"
-=======
+
     <TextView
         android:id="@+id/ForgotPassword_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/forgot_my_password"
->>>>>>> Website
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.883" />
-
-</android.support.constraint.ConstraintLayout>
-=======
         app:layout_constraintVertical_bias="0.967" />
 
 </android.widget.LinearLayout>
 
->>>>>>> Website

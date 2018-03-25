@@ -24,10 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/request"
-<<<<<<< HEAD
-=======
         android:textSize="30sp"
->>>>>>> Website
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintLeft_toLeftOf="parent"

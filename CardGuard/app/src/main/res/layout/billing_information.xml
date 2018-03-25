@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
 
->>>>>>> master
+
     <EditText
         android:id="@+id/card_number_textbox"
         android:layout_width="match_parent"
@@ -52,24 +52,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
-<<<<<<< HEAD
-=======
 
->>>>>>> Website
-
-    <TextView
-        android:id="@+id/expiration_date_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/expiration_date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
-
->>>>>>> master
     <EditText
         android:id="@+id/expiration_date_textbox"
         android:layout_width="match_parent"
@@ -86,22 +69,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.374" />
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/cardholder_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:text="@string/name_of_cardholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481" />
-=======
->>>>>>> Website
-
-    <EditText
+<EditText
         android:id="@+id/cardholder_name_textbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,7 +84,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.552" />
-<<<<<<< HEAD
 
     <TextView
         android:id="@+id/cvv_label"
@@ -129,24 +96,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.642" />
-=======
->>>>>>> Website
-
-    <EditText
-        android:id="@+id/cvv_textbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/cvv"
-        android:inputType="numberPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
 
     <Button
         android:id="@+id/save_changes_button"
@@ -186,21 +135,6 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.187"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842" />
-
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-=======
->>>>>>> Website
         app:layout_constraintHorizontal_bias="0.766"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
