@@ -23,12 +23,8 @@
         android:id="@+id/request_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:text="@string/receive"
-        android:textSize="30sp"
-=======
         android:text="@string/request"
->>>>>>> master
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintLeft_toLeftOf="parent"

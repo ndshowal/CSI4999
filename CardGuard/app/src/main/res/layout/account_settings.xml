@@ -32,13 +32,8 @@
         app:layout_constraintVertical_bias="0.01" />
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/first_name_textbox"
         android:layout_width="match_parent"
-=======
-        android:id="@+id/input_first_name"
-        android:layout_width="wrap_content"
->>>>>>> master
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -55,13 +50,8 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/last_name_textbox"
         android:layout_width="match_parent"
-=======
-        android:id="@+id/input_last_name"
-        android:layout_width="wrap_content"
->>>>>>> master
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -77,13 +67,8 @@
         app:layout_constraintVertical_bias="0.329" />
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/email_textbox"
         android:layout_width="match_parent"
-=======
-        android:id="@+id/input_email"
-        android:layout_width="wrap_content"
->>>>>>> master
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -100,13 +85,8 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/password_textbox"
         android:layout_width="match_parent"
-=======
-        android:id="@+id/input_password"
-        android:layout_width="wrap_content"
->>>>>>> master
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -123,13 +103,8 @@
         app:layout_constraintVertical_bias="0.675" />
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/confirm_password_textbox"
         android:layout_width="match_parent"
-=======
-        android:id="@+id/input_confirmation_password"
-        android:layout_width="wrap_content"
->>>>>>> master
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -157,22 +132,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
+
         app:layout_constraintVertical_bias="0.943" />
 </android.widget.LinearLayout>
-=======
-        app:layout_constraintVertical_bias="0.984" />
 
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.793"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
-</android.support.constraint.ConstraintLayout>
->>>>>>> master
+
+
