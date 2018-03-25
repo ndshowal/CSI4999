@@ -79,9 +79,15 @@
 
     <Button
         android:id="@+id/website_button"
+<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to website"
+=======
+        android:layout_width="137dp"
+        android:layout_height="37dp"
+        android:text="@string/go_to_website"
+>>>>>>> origin/master
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"

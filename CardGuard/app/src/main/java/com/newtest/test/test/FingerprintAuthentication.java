@@ -54,6 +54,7 @@ public class FingerprintAuthentication extends AppCompatActivity {
             fingerprintManager =
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
+<<<<<<< HEAD
             textView = (TextView) findViewById(R.id.textview);
 
             //Check whether the device has a fingerprint sensor//
@@ -90,6 +91,56 @@ public class FingerprintAuthentication extends AppCompatActivity {
                 helper.startAuth(fingerprintManager, cryptoObject);
             }
         }
+=======
+            textView = (TextView) findViewById(R.id.text_fingerprint_instructions);
+
+            if(checkFingerprintPrerequisites()) {
+                try {
+                    generateKey();
+                } catch (FingerprintException e) {
+                    e.printStackTrace();
+                }
+
+                if (initCipher()) {
+                    //If cipher is successfully created, generate a new CryptoObject with it
+                    cryptoObject = new FingerprintManager.CryptoObject(cipher);
+
+                    // Class responsible for starting the authentication process (via the startAuth method)
+                    // and processing the authentication process events
+                    FingerprintHandler helper = new FingerprintHandler(this);
+                    helper.startAuth(fingerprintManager, cryptoObject);
+                }
+            }
+        }
+    }
+
+    private Boolean checkFingerprintPrerequisites() {
+        //Check whether the device has a fingerprint sensor
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!fingerprintManager.isHardwareDetected()) {
+                // If fingerprint sensor isn’t available, inform user fingerprint authentication isn't available for them
+                textView.setText("Your device doesn't support fingerprint authentication");
+                return false;
+            }
+        }
+        //Check whether the user has granted your app the USE_FINGERPRINT permission//
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+            // If app doesn't have fingerprint scanner permission, inform user
+            textView.setText("Please enable the fingerprint permission");
+            return false;
+        }
+
+        //Check that the user has registered at least one fingerprint//
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!fingerprintManager.hasEnrolledFingerprints()) {
+                // If the user hasn’t configured any fingerprints, inform them to register a fingerprint
+                textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's settings");
+                return false;
+            }
+        }
+
+        return true;
+>>>>>>> origin/master
     }
 
 //Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//

@@ -30,6 +30,21 @@ public class SendRequestPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SendRequestPage.this, ReceivingPage.class));
+<<<<<<< HEAD:CardGuard/app/src/main/java/com/newtest/test/test/SendRequestPage.java
+=======
+            }
+        });
+
+        //to create a cancel button
+        Button cancelBtn = (Button)findViewById(R.id.cancel_button);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SendRequestPage.this, Account.class);
+                //intent.putExtra("UserKey", user);
+                startActivity(intent);
+>>>>>>> origin/master:CardGuard/app/src/main/java/com/newtest/test/test/SendRequestPage.java
             }
         });
     }

@@ -126,4 +126,17 @@
     <string name="cancel">Cancel</string>
     <string name="go_to_website">Go to website</string>
     <string name="back_to_account">Back to Account</string>
+<<<<<<< HEAD
+=======
+    <string name="respond">Respond</string>
+    <string name="_3_19_2018_11_45_am_nampolito_accepted_your_payment_of_15">3/19/2018 11:45 AM  ampolito accepted your payment of $15</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="time">Time</string>
+    <string name="memo5">Memo</string>
+    <string name="_3_15_2018">3/15/2018</string>
+    <string name="_9_35_am">9:35 AM</string>
+    <string name="lunch2">Lunch</string>
+    <string name="back_to_notifications">Back to Notifications</string>
+>>>>>>> origin/master
 </resources>

@@ -52,7 +52,11 @@
         <activity android:name=".IdentificationSettings" />
         <activity android:name=".Notifications"></activity>
         <activity android:name=".FullTransactionHistory"></activity>
+<<<<<<< HEAD
 
+=======
+        <activity android:name=".NotificationResponse"></activity>
+>>>>>>> origin/master
 
     </application>
 
