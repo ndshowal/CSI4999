@@ -13,19 +13,21 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 
-public class CardScan extends AppCompatActivity
-{
+public class CardScan extends AppCompatActivity {
+
+    User user;
     private static final int REQUEST_SCAN = 101;
     private static final int REQUEST_AUTOTEST = 200;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardscan);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         Button btnscan = (Button)findViewById(R.id.btnScan);
         btnscan.setOnClickListener(new View.OnClickListener()
@@ -43,40 +45,35 @@ public class CardScan extends AppCompatActivity
                 intent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
                 startActivityForResult(intent, REQUEST_SCAN);
 
+                intent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true);
+                intent.putExtra(CardIOActivity.EXTRA_USE_PAYPAL_ACTIONBAR_ICON, false);
+
             }
         });
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ((requestCode == REQUEST_SCAN || requestCode == REQUEST_AUTOTEST) && data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT))
-        {
+        if ((requestCode == REQUEST_SCAN || requestCode == REQUEST_AUTOTEST) && data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
             ((TextView) findViewById(R.id.tvCardDetail)).setVisibility(View.VISIBLE);
             String resultDisplayStr;
-            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT))
-            {
+            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
                 CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
-// Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
+                // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
                 resultDisplayStr = "Card Number: " + scanResult.getRedactedCardNumber() + "\n";
-// Do something with the raw number, e.g.:
-// myService.setCardNumber( scanResult.cardNumber );
-                if (scanResult.isExpiryValid())
-                {
+                // Do something with the raw number, e.g.:
+                // myService.setCardNumber( scanResult.cardNumber );
+                if (scanResult.isExpiryValid()) {
                     resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
                 }
-                if (scanResult.cvv != null)
-                {
-// Never log or display a CVV
+                if (scanResult.cvv != null) {
+                    // Never log or display a CVV
                     resultDisplayStr += "CVV has " + scanResult.cvv.length() + " digits.\n";
                 }
-                if (scanResult.postalCode != null)
-                {
+                if (scanResult.postalCode != null) {
                     resultDisplayStr += "Postal Code: " + scanResult.postalCode + "\n";
                 }
-            }
-            else
-            {
+            } else {
                 resultDisplayStr = "Scan was canceled.";
             }
             ((TextView) findViewById(R.id.tvCardDetail)).setText(resultDisplayStr);

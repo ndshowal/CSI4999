@@ -8,10 +8,14 @@ import android.widget.Button;
 
 public class PhoneNumberRegistration extends AppCompatActivity {
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_number_registration);
+
+        user = getIntent().getParcelableExtra("UserKey");
 
         //to create a submit button
         Button submitBtn = (Button)findViewById(R.id.submit_button);
@@ -20,6 +24,10 @@ public class PhoneNumberRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(PhoneNumberRegistration.this, PhoneNumberValidation.class));
+
+                Intent intent = new Intent(PhoneNumberRegistration.this, PhoneNumberValidation.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }
