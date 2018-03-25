@@ -23,5 +23,25 @@ public class NotificationResponse extends AppCompatActivity {
                 startActivity(new Intent(NotificationResponse.this, Notifications.class));
             }
         });
+
+        //to create an accept button
+        Button acceptBtn = (Button)findViewById(R.id.accept_button);
+
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NotificationResponse.this, FingerprintAuthentication.class));
+            }
+        });
+
+        //to create a decline button
+        Button declineBtn = (Button)findViewById(R.id.decline_button);
+
+        declineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NotificationResponse.this, FingerprintAuthentication.class));
+            }
+        });
     }
 }
