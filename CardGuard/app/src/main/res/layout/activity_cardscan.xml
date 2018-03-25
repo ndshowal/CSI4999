@@ -27,17 +27,19 @@
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:visibility="gone"/>
+
         <Button
             android:id="@+id/btnScan"
+            style="@style/CGButtonDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/colorPrimary"
             android:gravity="center"
             android:paddingEnd="25dp"
             android:paddingStart="25dp"
             android:text="Scan Card"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

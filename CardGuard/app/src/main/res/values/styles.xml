@@ -9,6 +9,7 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:buttonStyle">@style/CGButton</item>
         <item name="android:editTextStyle">@style/CGEdit</item>
+        <item name="android:windowBackground">@drawable/bg_light</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,6 +24,14 @@
     <style name="CGButton">
         <item name="android:borderlessButtonStyle" />
         <item name="android:background">@drawable/background_bg</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CGButtonDark" parent="CGButton">
+        <item name="android:borderlessButtonStyle" />
+        <item name="android:background">@drawable/button_dark</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
    <style name="CGEdit">
