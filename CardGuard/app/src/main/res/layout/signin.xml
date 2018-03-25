@@ -26,27 +26,11 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
-=======
         app:layout_constraintHorizontal_bias="0.699"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.779" />
->>>>>>> origin/master
-=======
-        app:layout_constraintHorizontal_bias="0.699"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
->>>>>>> origin/master
 
     <TextView
         android:id="@+id/username_label"
@@ -117,15 +101,7 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.501"
-=======
         app:layout_constraintHorizontal_bias="0.27"
->>>>>>> origin/master
-=======
-        app:layout_constraintHorizontal_bias="0.27"
->>>>>>> origin/master
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
