@@ -59,214 +59,6 @@
         android:layout_height="wrap_content"
         />
 
-    <TableLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871">
-
-        <TableRow
-            android:id="@+id/Labels"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/dateheader_label"
-                android:layout_width="73dp"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="25dp"
-                tools:layout_editor_absoluteY="227dp" />
-
-            <TextView
-                android:id="@+id/senderheader_label"
-                android:layout_width="76dp"
-                android:layout_height="wrap_content"
-                android:text="@string/sender"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/receiverheader_label"
-                android:layout_width="83dp"
-                android:layout_height="wrap_content"
-                android:text="@string/receiver"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/amountheader_label"
-                android:layout_width="61dp"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/memoheader_label"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:text="@string/memo"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="373dp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/Transaction1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/T1_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_2_18"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="340dp" />
-
-            <TextView
-                android:id="@+id/T1_sender_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zzhao" />
-
-            <TextView
-                android:id="@+id/T1_receiver_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:id="@+id/T1_amount_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_50" />
-
-            <TextView
-                android:id="@+id/T1_memo_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birthday" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/Transaction2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/T2_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_5_18"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="348dp" />
-
-            <TextView
-                android:id="@+id/T2_sender_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ampolito" />
-
-            <TextView
-                android:id="@+id/T2_receiver_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:id="@+id/T2_amount_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_25" />
-
-            <TextView
-                android:id="@+id/T2_memo_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lunch" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/Transaction3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/T3_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_11_18"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="321dp" />
-
-            <TextView
-                android:id="@+id/T3_sender_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kypawloski" />
-
-            <TextView
-                android:id="@+id/T3_receiver_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:id="@+id/T3_amount_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_10" />
-
-            <TextView
-                android:id="@+id/T3_memo_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pizza_party" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/Transaction4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/T4_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_18_18"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="330dp" />
-
-            <TextView
-                android:id="@+id/T4_sender_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ndshowal" />
-
-            <TextView
-                android:id="@+id/T4_receiver_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/jivezaj" />
-
-            <TextView
-                android:id="@+id/T4_amount_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_8" />
-
-            <TextView
-                android:id="@+id/T4_memo_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/movie_night" />
-        </TableRow>
-    </TableLayout>
-
     <TextView
         android:id="@+id/text_greeting"
         android:layout_width="wrap_content"
@@ -287,6 +79,49 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922" />
+        app:layout_constraintVertical_bias="0.989" />
+
+    <ScrollView
+        android:layout_width="352dp"
+        android:layout_height="289dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/transaction1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2/2/18 From: zzhao To: ndshowal \n$50 for Birthday"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="83dp" />
+
+            <Button
+                android:id="@+id/transaction2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2/5/18 From: ampolito To: ndshowal \n$25 for Lunch" />
+
+            <Button
+                android:id="@+id/transaction3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2/11/18 From: kypawloski To: ndshowal \n$10 for Pizza" />
+
+            <Button
+                android:id="@+id/transaction4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
