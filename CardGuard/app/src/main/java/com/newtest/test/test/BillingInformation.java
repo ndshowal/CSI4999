@@ -53,7 +53,7 @@ public class BillingInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BillingInformation.this, Settings.class);
-
+                intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
         });

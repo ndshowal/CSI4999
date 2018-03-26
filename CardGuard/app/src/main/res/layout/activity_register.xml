@@ -74,13 +74,14 @@
         app:layout_constraintVertical_bias="0.120000005" />
 
     <EditText
-        android:id="@+id/Input_Password"
+        android:id="@+id/Input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        />
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/input_confirmation_password"
