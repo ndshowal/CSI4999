@@ -37,7 +37,7 @@ public class SignIn extends AppCompatActivity {
 
 
         usernameInput = findViewById(R.id.username_input);
-        passwordInput = findViewById(R.id.input_password);
+        passwordInput = findViewById(R.id.password_input);
 
         //Instantiate signInBtn
         signInBtn = (Button)findViewById(R.id.signin_button);
