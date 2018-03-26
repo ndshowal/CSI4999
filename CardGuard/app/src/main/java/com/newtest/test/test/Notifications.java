@@ -17,7 +17,7 @@ public class Notifications extends AppCompatActivity {
         user = getIntent().getParcelableExtra("UserKey");
 
         //to create a respond button
-        Button respondBtn = (Button)findViewById(R.id.respond_button);
+        Button respondBtn = (Button)findViewById(R.id.respond_button3);
 
         respondBtn.setOnClickListener(new View.OnClickListener() {
             @Override
