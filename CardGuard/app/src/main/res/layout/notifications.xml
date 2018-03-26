@@ -20,9 +20,12 @@
 
     <ScrollView
         android:layout_width="368dp"
-        android:layout_height="381dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="121dp">
+        android:layout_height="411dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.784">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3/19/2018 ampolito accepted your payment of $15"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.377"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -47,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3/17/2018 jivezaj declined your request for $20"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.375"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -60,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3/12/2018 kypawloski requested to give you $5"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -72,8 +76,165 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3/15/2018 zzhao requested $30 from you"
+                android:textSize="14sp"
                 tools:layout_editor_absoluteX="106dp"
                 tools:layout_editor_absoluteY="240dp" />
+
+            <Button
+                android:id="@+id/respond_button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
+
+            <Button
+                android:id="@+id/respond_button16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3/19/2018 ampolito accepted your payment of $15"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223" />
         </LinearLayout>
 
     </ScrollView>
