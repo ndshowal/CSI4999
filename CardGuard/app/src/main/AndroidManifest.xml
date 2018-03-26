@@ -3,11 +3,11 @@
     package="com.newtest.test.test">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
     <uses-feature
         android:name="android.hardware.fingerprint"
-        android:required="false"/>
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -22,15 +22,16 @@
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SignIn" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".SignIn"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -50,11 +51,10 @@
         <activity android:name=".AccountSettings" />
         <activity android:name=".BillingInformation" />
         <activity android:name=".IdentificationSettings" />
-        <activity android:name=".Notifications"></activity>
-        <activity android:name=".FullTransactionHistory"></activity>
-        <activity android:name=".NotificationResponse"></activity>
-
-
+        <activity android:name=".Notifications" />
+        <activity android:name=".FullTransactionHistory" />
+        <activity android:name=".NotificationResponse" />
+        <activity android:name=".NotificationInformation"></activity>
     </application>
 
 </manifest>
