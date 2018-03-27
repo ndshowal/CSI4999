@@ -78,53 +78,61 @@
             tools:layout_editor_absoluteX="32dp"
             tools:layout_editor_absoluteY="83dp" />
 
-        <Button
-            android:id="@+id/transaction2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/5/18 From: ampolito To: ndshowal \n$25 for Lunch" />
+            <Button
+                android:id="@+id/transaction2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/5/18 From: ampolito To: ndshowal \n$25 for Lunch" />
 
-        <Button
-            android:id="@+id/transaction3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/11/18 From: kypawloski To: ndshowal \n$10 for Pizza" />
+            <Button
+                android:id="@+id/transaction3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/11/18 From: kypawloski To: ndshowal \n$10 for Pizza" />
 
-        <Button
-            android:id="@+id/transaction4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
 
-        <Button
-            android:id="@+id/transaction5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
 
-        <Button
-            android:id="@+id/transaction6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
 
-        <Button
-            android:id="@+id/transaction7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
 
-        <Button
-            android:id="@+id/transaction8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
 
-        <Button
-            android:id="@+id/transaction9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
+            <Button
+                android:id="@+id/transaction9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
     </LinearLayout>
     </ScrollView>
 
