@@ -6,35 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class FullTransactionHistory extends AppCompatActivity {
+public class TransactionInfoFromFullHistory extends AppCompatActivity {
 
     User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.full_transaction_history);
+        setContentView(R.layout.transaction_information);
 
         user = getIntent().getParcelableExtra("UserKey");
 
-        //to create a back button
+        //back button
         Button backBtn = (Button)findViewById(R.id.back_button);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FullTransactionHistory.this, Account.class);
-                intent.putExtra("UserKey", user);
-                startActivity(intent);
-            }
-        });
-
-        Button transactionInfoBtn = (Button)findViewById(R.id.transaction1);
-
-        transactionInfoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FullTransactionHistory.this, TransactionInfoFromFullHistory.class);
+                Intent intent = new Intent(TransactionInfoFromFullHistory.this, FullTransactionHistory.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

@@ -38,5 +38,17 @@ public class Notifications extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button backBtn = (Button)findViewById(R.id.back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notifications.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
     }
 }

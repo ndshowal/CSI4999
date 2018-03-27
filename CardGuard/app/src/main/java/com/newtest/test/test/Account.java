@@ -82,6 +82,7 @@ public class Account extends AppCompatActivity {
             }
         });
 
+        //to create button to go to the fullTransactionHistory page
         Button fullTransactionHistoryBtn = (Button)findViewById(R.id.fulltransactionhistory_button);
 
         fullTransactionHistoryBtn.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +93,18 @@ public class Account extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button transactionInfoBtn = (Button)findViewById(R.id.transaction1);
+
+        transactionInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Account.this, TransactionInformation.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

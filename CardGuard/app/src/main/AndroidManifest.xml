@@ -54,7 +54,9 @@
         <activity android:name=".Notifications" />
         <activity android:name=".FullTransactionHistory" />
         <activity android:name=".NotificationResponse" />
-        <activity android:name=".NotificationInformation"></activity>
+        <activity android:name=".NotificationInformation" />
+        <activity android:name=".TransactionInformation" />
+        <activity android:name=".TransactionInfoFromFullHistory"></activity>
     </application>
 
 </manifest>
