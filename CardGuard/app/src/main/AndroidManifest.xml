@@ -4,11 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-feature
         android:name="android.hardware.fingerprint"
-        android:required="false" />
-
+        android:required="false"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,25 +21,30 @@
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignIn"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".SignIn" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <!--Map-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC336AKGWqT8bJgXhfXZEJshCqZ6xahjhM"/>
+
         <activity android:name=".Account" />
-        <activity android:name=".SignInSignUpScreen" />
         <activity android:name=".SendRequestPage" />
         <activity android:name=".SendingPage" />
-        <activity android:name=".RequestPage" />
+        <activity android:name=".ReceivingPage" />
         <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
@@ -55,8 +59,8 @@
         <activity android:name=".Notifications" />
         <activity android:name=".FullTransactionHistory" />
         <activity android:name=".NotificationResponse" />
-        <activity android:name=".NotificationInformation" />
-        <activity android:name=".TransactionInformation" />
+        <activity android:name=".MapsActivity" />
+
     </application>
 
 </manifest>
