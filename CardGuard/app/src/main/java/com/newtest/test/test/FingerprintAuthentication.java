@@ -75,7 +75,6 @@ public class FingerprintAuthentication extends AppCompatActivity {
                     // and processing the authentication process events
                     FingerprintHandler helper = new FingerprintHandler(this);
                     helper.startAuth(fingerprintManager, cryptoObject);
-                    finish();
                 }
             }
         }

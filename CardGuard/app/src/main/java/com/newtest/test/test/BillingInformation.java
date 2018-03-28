@@ -20,7 +20,6 @@ public class BillingInformation extends AppCompatActivity {
 
         //to create a button to scan user's card
         Button scanCardBtn = (Button)findViewById(R.id.scan_card_button);
-
         scanCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +33,6 @@ public class BillingInformation extends AppCompatActivity {
         //to create a button to save changes
 
         Button saveChangesBtn = (Button)findViewById(R.id.save_changes_button);
-
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,12 +46,11 @@ public class BillingInformation extends AppCompatActivity {
 
         //to create a cancel button
         Button cancelBtn = (Button)findViewById(R.id.cancel_button);
-
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BillingInformation.this, Settings.class);
-
+                intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
         });

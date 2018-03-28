@@ -98,8 +98,6 @@ public class SignInConnection extends AsyncTask {
 
             // If user object is found, attempt to populate its transactions ArrayList
             if(user != null) {
-                System.out.println(user.toString());
-
                 try {
                     // Query for transactions the user was involved in
                     Statement txStatement = connection.createStatement();
@@ -200,8 +198,6 @@ public class SignInConnection extends AsyncTask {
                             Transaction tx = new Transaction(transactionID, sender, recipient, initiator,
                                     transactionAmount, memo, startDate, completionDate,
                                     inProgress, confirmed);
-
-                            System.out.println(tx.toString());
                             try {
                                 user.addTransaction(tx);
                             } catch (Exception ex) {
@@ -213,10 +209,10 @@ public class SignInConnection extends AsyncTask {
                     Log.e(TAG, ex.toString());
                     ex.printStackTrace();
                 }
+            } else {
+                return null;
             }
         }
-
-        connection.close(); // Close connection
         return user;
     }
 

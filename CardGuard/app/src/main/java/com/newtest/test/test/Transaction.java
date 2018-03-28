@@ -38,16 +38,54 @@ public class Transaction implements Parcelable {
     }
 
     protected Transaction(Parcel in) {
+        // Transaction hash (ID)
         transactionID = in.readString();
-        initiator = in.readParcelable(User.class.getClassLoader());
-        sender = in.readParcelable(User.class.getClassLoader());
-        recipient = in.readParcelable(User.class.getClassLoader());
+
+        // Transaction dates
+        long tmpTransactionStartDate = in.readLong();
+        transactionStartDate = tmpTransactionStartDate != -1 ? new Date(tmpTransactionStartDate) : null;
+        long tmpTransactionCompleteDate = in.readLong();
+        transactionCompleteDate = tmpTransactionCompleteDate != -1 ? new Date(tmpTransactionCompleteDate) : null;
+
+        // Transaction actors
+        initiator = (User) in.readValue(User.class.getClassLoader());
+        sender = (User) in.readValue(User.class.getClassLoader());
+        recipient = (User) in.readValue(User.class.getClassLoader());
+
+        // Transaction amount and memo
         transactionAmount = in.readFloat();
         memo = in.readString();
-        byte tmpInProgress = in.readByte();
-        inProgress = tmpInProgress == 0 ? null : tmpInProgress == 1;
-        byte tmpConfirmed = in.readByte();
-        confirmed = tmpConfirmed == 0 ? null : tmpConfirmed == 1;
+
+        // Transaction status flags
+        byte inProgressVal = in.readByte();
+        inProgress = inProgressVal == 0x02 ? null : inProgressVal != 0x00;
+        byte confirmedVal = in.readByte();
+        confirmed = confirmedVal == 0x02 ? null : confirmedVal != 0x00;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(transactionID);
+        dest.writeLong(transactionStartDate != null ? transactionStartDate.getTime() : -1L);
+        dest.writeLong(transactionCompleteDate != null ? transactionCompleteDate.getTime() : -1L);
+
+        dest.writeValue(initiator);
+        dest.writeValue(sender);
+        dest.writeValue(recipient);
+
+        dest.writeFloat(transactionAmount);
+        dest.writeString(memo);
+
+        if (inProgress == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (inProgress ? 0x01 : 0x00));
+        }
+        if (confirmed == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (confirmed ? 0x01 : 0x00));
+        }
     }
 
     public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
@@ -78,6 +116,7 @@ public class Transaction implements Parcelable {
     }
 
     // GETTERS //
+
     public String getTransactionID() {
         return transactionID;
     }
@@ -195,17 +234,5 @@ public class Transaction implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(getTransactionID());
-        parcel.writeString(getTransactionStartDateString());
-        parcel.writeString(getTransactionCompleteDateString());
-        parcel.writeParcelable(getSender(), i);
-        parcel.writeParcelable(getRecipient(), i);
-        parcel.writeParcelable(getInitiator(), i);
-        parcel.writeFloat(getTransactionAmount());
-        parcel.writeString(getMemo());
-        parcel.writeByte((byte) (inProgress() ? 1 : 0));
-        parcel.writeByte((byte) (isConfirmed() ? 1 : 0));
-    }
+
 }

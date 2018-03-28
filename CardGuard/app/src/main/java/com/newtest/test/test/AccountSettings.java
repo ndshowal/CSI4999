@@ -54,6 +54,7 @@ public class AccountSettings extends AppCompatActivity {
             }
         });
 
+        /*
         //to create a cancel button
         Button cancelBtn = (Button)findViewById(R.id.cancel_button);
 
@@ -64,7 +65,7 @@ public class AccountSettings extends AppCompatActivity {
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 

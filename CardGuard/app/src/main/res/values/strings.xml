@@ -105,7 +105,7 @@
     <string name="email2">Email</string>
     <string name="identification_type">Identification Type</string>
     <string name="settings2">Settings</string>
-    <string name="account_information">Account Information</string>
+    <string name="account_details">Edit Account Details</string>
     <string name="save_changes">Save Changes</string>
     <string name="billing_information">Billing Information</string>
     <string name="card_number">Card Number</string>

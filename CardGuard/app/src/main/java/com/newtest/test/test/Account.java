@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class Account extends AppCompatActivity {
 
     User user;
@@ -41,10 +43,9 @@ public class Account extends AppCompatActivity {
         setContentView(R.layout.account);
 
         user = getIntent().getParcelableExtra("UserKey");
-        System.out.println(user.toString());
 
         greeting = (TextView) findViewById(R.id.text_greeting);
-        greeting.setText("Welcome, " + user.getUsername());
+        greeting.setText("Welcome, " + user.getUsername() + "!");
 
         //to create button to redirect to Sending and Receiving page
         Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);

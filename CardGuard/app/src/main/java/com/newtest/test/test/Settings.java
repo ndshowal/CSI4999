@@ -1,6 +1,8 @@
 package com.newtest.test.test;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +30,12 @@ public class Settings extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor ed = sp.edit();
+
+                ed.putString("username", "");
+                ed.putString("password", "");
+                ed.apply();
                 startActivity(new Intent(Settings.this, SignIn.class));
             }
         });

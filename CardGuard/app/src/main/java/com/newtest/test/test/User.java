@@ -25,7 +25,7 @@ public class User implements Parcelable{
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.accountType = accountType;
-        transactions = new ArrayList<Transaction>();
+        this.transactions = new ArrayList<Transaction>();
     }
 
     protected User(Parcel in) {
@@ -36,6 +36,12 @@ public class User implements Parcelable{
         lastName = in.readString();
         emailAddress = in.readString();
         accountType = in.readString();
+        if (in.readByte() == 0x01) {
+            transactions = new ArrayList<Transaction>();
+            in.readList(transactions, Transaction.class.getClassLoader());
+        } else {
+            transactions = null;
+        }
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -132,13 +138,19 @@ public class User implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(ID);
-        parcel.writeString(password);
-        parcel.writeString(username);
-        parcel.writeString(firstName);
-        parcel.writeString(lastName);
-        parcel.writeString(emailAddress);
-        parcel.writeString(accountType);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(ID);
+        dest.writeString(password);
+        dest.writeString(username);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(emailAddress);
+        dest.writeString(accountType);
+        if (transactions == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(transactions);
+        }
     }
 }
