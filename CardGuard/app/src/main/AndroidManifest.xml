@@ -35,16 +35,10 @@
             </intent-filter>
         </activity>
 
-        <!--Map-->
-        <meta-data
-            android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC336AKGWqT8bJgXhfXZEJshCqZ6xahjhM"/>
-
         <activity android:name=".Account" />
         <activity android:name=".SendRequestPage" />
         <activity android:name=".SendingPage" />
-        <activity android:name=".ReceivingPage" />
+        <activity android:name=".RequestPage" />
         <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
@@ -59,8 +53,7 @@
         <activity android:name=".Notifications" />
         <activity android:name=".FullTransactionHistory" />
         <activity android:name=".NotificationResponse" />
-        <activity android:name=".MapsActivity" />
-
+        <activity android:name=".SignInSignUpScreen" />
     </application>
 
 </manifest>
