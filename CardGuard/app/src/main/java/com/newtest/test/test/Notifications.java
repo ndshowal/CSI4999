@@ -17,7 +17,7 @@ public class Notifications extends AppCompatActivity {
         user = getIntent().getParcelableExtra("UserKey");
 
         //to create a respond button
-        Button respondBtn = (Button)findViewById(R.id.respond_button);
+        Button respondBtn = (Button)findViewById(R.id.respond_button3);
 
         respondBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,5 +27,28 @@ public class Notifications extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button respondBtn2 = (Button)findViewById(R.id.respond_button);
+
+        respondBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notifications.this, NotificationInformation.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
+        Button backBtn = (Button)findViewById(R.id.back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notifications.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
     }
 }

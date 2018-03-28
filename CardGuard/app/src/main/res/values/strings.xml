@@ -137,4 +137,9 @@
     <string name="lunch2">Lunch</string>
     <string name="back_to_notifications">Back to Notifications</string>
     <string name="back_to_account2">Back to Account</string>
+    <string name="go_to_website2">Go to website</string>
+    <string name="initiated">Initiated</string>
+    <string name="accepted">Accepted</string>
+    <string name="back_to_account3">Back to Account</string>
+    <string name="back_to_history">Back to History</string>
 </resources>

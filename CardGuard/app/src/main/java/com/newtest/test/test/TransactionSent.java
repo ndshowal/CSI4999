@@ -23,7 +23,9 @@ public class TransactionSent extends AppCompatActivity {
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TransactionSent.this, Account.class));
+                Intent intent = new Intent(TransactionSent.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
             }
         });
     }
