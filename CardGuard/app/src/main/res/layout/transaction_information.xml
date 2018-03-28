@@ -10,7 +10,6 @@
         android:id="@+id/notification_message"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:text="zzhao gave you $50"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,12 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/initiated"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintBottom_toTopOf="@id/accepted_label"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="25dp" />
 
     <TextView
         android:id="@+id/accepted_label"
@@ -36,29 +33,29 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="208dp"
         android:text="@string/accepted"
-        app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/accepted_label"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="25dp" />
 
     <TextView
         android:id="@+id/memo_label"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="16dp"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accepted_label"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="250dp"
         android:text="@string/memo"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
+
+
+        />
 
     <TextView
         android:id="@+id/date_actual_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3/19/2018 11:24 AM"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.718"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -70,7 +67,6 @@
         android:id="@+id/time_actual_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3/19/2018 12:30 PM"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.719"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -82,7 +78,6 @@
         android:id="@+id/memo_actual_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Birthday"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintLeft_toLeftOf="parent"

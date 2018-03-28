@@ -116,7 +116,7 @@ public class SignIn extends AppCompatActivity {
                 connection = new SignInConnection(username, password);
                 try{
                     user = connection.connect();
-
+                    Toast.makeText(SignIn.this, "Signing you in...", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignIn.this, Account.class);
                     intent.putExtra("UserKey", (Parcelable) user);
                     intent.putExtra("SourceKey", "SignIn");
