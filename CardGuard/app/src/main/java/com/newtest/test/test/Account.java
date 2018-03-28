@@ -5,37 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 public class Account extends AppCompatActivity {
-
     User user;
 
     TextView greeting;
-
-    TextView t1_1;
-    TextView t1_2;
-    TextView t1_3;
-    TextView t1_4;
-
-    TextView t2_1;
-    TextView t2_2;
-    TextView t2_3;
-    TextView t2_4;
-
-    TextView t3_1;
-    TextView t3_2;
-    TextView t3_3;
-    TextView t3_4;
-
-    TextView t4_1;
-    TextView t4_2;
-    TextView t4_3;
-    TextView t4_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +25,20 @@ public class Account extends AppCompatActivity {
         greeting = (TextView) findViewById(R.id.text_greeting);
         greeting.setText("Welcome, " + user.getUsername() + "!");
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                TransactionPuller tp = new TransactionPuller(user);
+                try {
+                    tp.updateTransactions();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
         //to create button to redirect to Sending and Receiving page
-        Button newTransactionBtn = (Button)findViewById(R.id.new_transaction_button);
+        Button newTransactionBtn = findViewById(R.id.new_transaction_button);
 
         newTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +50,7 @@ public class Account extends AppCompatActivity {
         });
 
         //to create button to redirect to settings page
-        Button settingsBtn = (Button)findViewById(R.id.settings_button);
+        Button settingsBtn = findViewById(R.id.settings_button);
 
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +62,7 @@ public class Account extends AppCompatActivity {
         });
 
         //to create button to redirect to notifications page
-        Button notificationsBtn = (Button)findViewById(R.id.notifications_button);
+        Button notificationsBtn = findViewById(R.id.notifications_button);
 
         notificationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +74,7 @@ public class Account extends AppCompatActivity {
         });
 
         //to create button to go to the fullTransactionHistory page
-        Button fullTransactionHistoryBtn = (Button)findViewById(R.id.fulltransactionhistory_button);
+        Button fullTransactionHistoryBtn = findViewById(R.id.fulltransactionhistory_button);
 
         fullTransactionHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,17 +85,26 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        Button transactionInfoBtn = (Button)findViewById(R.id.transaction1);
+        //Adds a button entry for each transaction to the scroll view on the Account page
+        for(int i = 0; i < 3; i++) {
+            Button transactionInfoBtn = new Button(this);
+            final Transaction tx = user.getTransactions().get(i);
+            transactionInfoBtn.setText(tx.getSimpleDescription());
 
-        transactionInfoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Account.this, TransactionInformation.class);
-                intent.putExtra("UserKey", user);
-                startActivity(intent);
-            }
-        });
+            LinearLayout ll = (LinearLayout) findViewById(R.id.button_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,10,0,10);
+            ll.addView(transactionInfoBtn, lp);
 
-
+            transactionInfoBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Account.this, TransactionInformation.class);
+                    intent.putExtra("UserKey", user);
+                    intent.putExtra("TxKey", tx);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }

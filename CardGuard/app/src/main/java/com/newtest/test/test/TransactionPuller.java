@@ -8,39 +8,37 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class SignInConnection extends AsyncTask {
-    private final String TAG = "SignIn Connection";
+import static com.android.volley.VolleyLog.TAG;
+
+/**
+ * Created by Anthony on 3/28/2018.
+ */
+
+public class TransactionPuller extends AsyncTask {
     private Connection connection;
 
-    //DB Connection strings
-    private final String host = "cardguard-db.mysql.database.azure.com:3306";
-    private final String database = "cardguard_db";
-    private final String adminUsername = "cardguard-admin@cardguard-db";
-    private final String adminPassword = "password12345!";
+    private ArrayList<Transaction> txList;
 
-    //For DB query, nothing to do with actual DB connection
-    private String username;
-    private String password;
+    User user;
 
-    //Also nothing to do with DB connection
-    private User user;
+    private boolean newTransactionsAvailable;
 
-    public SignInConnection(String username, String password) {
-        this.username = username;
-        this.password = password;
-
-        user = null;
-
-        System.out.println("Created SignInConnection object successfully.");
+    public TransactionPuller(User user) {
+        this.user = user;
+        newTransactionsAvailable = false;
     }
 
-    public User connect() throws SQLException {
+    public ArrayList<Transaction> updateTransactions() throws SQLException {
+        //DB Connection strings
+        final String host = "cardguard-db.mysql.database.azure.com:3306";
+        final String database = "cardguard_db";
+        final String adminUsername = "cardguard-admin@cardguard-db";
+        final String adminPassword = "password12345!";
 
-
-        // Check that the driver is installed
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (Exception ex) {
@@ -48,9 +46,6 @@ public class SignInConnection extends AsyncTask {
             ex.printStackTrace();
         }
 
-        System.out.println("MySQL JDBC driver detected in library path.");
-
-        // Initialize connection object
         connection = null;
 
         try {
@@ -67,48 +62,24 @@ public class SignInConnection extends AsyncTask {
             // Connect to MySQL server with set parameters
             connection = DriverManager.getConnection(url, properties);
         } catch (SQLException ex) {
-            throw new SQLException("Failed to create connection to database.", ex);
+            ex.printStackTrace();
         }
 
-        if (connection != null) {
-            // Query database for all rows where username and password match (should be 1 at most)
+        if(connection != null) {
             try {
                 System.out.println("Attempting to query database...");
 
-                Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery(
-                        "SELECT * FROM users "
-                                + "WHERE username='" + username
-                                +"' AND password ='" + password +"';");
-
-                while (results.next()) {
-                    String ID = results.getString(1);
-                    String username = results.getString(2);
-                    String password = results.getString(3);
-                    String emailAddress = results.getString(4);
-                    String firstName = results.getString(5);
-                    String lastName = results.getString(6);
-                    String accountType = results.getString(7);
-
-                    user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
-                }
-            } catch (SQLException ex) {
-                System.out.println("Query Error");
-                System.out.print(ex.toString());
-            }
-
-            // If user object is found, attempt to populate its transactions ArrayList
-            if(user != null) {
                 try {
                     // Query for transactions the user was involved in
                     Statement txStatement = connection.createStatement();
                     ResultSet txResults = txStatement.executeQuery(
                             "SELECT * FROM transactions "
-                                    + "WHERE sender='" + username + "' "
-                                    + "OR recipient='" + username + "';");
+                                    + "WHERE sender='" + user.getUsername() + "' "
+                                    + "OR recipient='" + user.getUsername() + "';");
 
                     // While query isn't empty:
                     while (txResults.next()) {
+                        System.out.println("Transaction found");
                         //Read result to necessary transaction variables
                         String transactionID = txResults.getString(1);
                         String senderName = txResults.getString(2);
@@ -133,7 +104,7 @@ public class SignInConnection extends AsyncTask {
                             Statement usersStatement = connection.createStatement();
                             ResultSet userResults = usersStatement.executeQuery(
                                     "SELECT * FROM users "
-                                    + "WHERE username='" + senderName +"';");
+                                            + "WHERE username='" + senderName +"';");
 
                             while(userResults.next()) {
                                 String ID = userResults.getString(1);
@@ -199,8 +170,14 @@ public class SignInConnection extends AsyncTask {
                             Transaction tx = new Transaction(transactionID, sender, recipient, initiator,
                                     transactionAmount, memo, startDate, completionDate,
                                     inProgress, confirmed);
+
                             try {
-                                user.addTransaction(tx);
+                                for(Transaction t : user.getTransactions()) {
+                                    if(t.getTransactionID() != tx.getTransactionID()) {
+                                        user.addTransaction(tx);
+                                        newTransactionsAvailable = true;
+                                    }
+                                }
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
@@ -210,11 +187,16 @@ public class SignInConnection extends AsyncTask {
                     Log.e(TAG, ex.toString());
                     ex.printStackTrace();
                 }
-            } else {
-                return null;
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
-        return user;
+
+        return txList;
+    }
+
+    public boolean isNewTransactionsAvailable() {
+        return newTransactionsAvailable;
     }
 
     @Override

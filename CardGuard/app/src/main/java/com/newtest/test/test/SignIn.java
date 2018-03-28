@@ -3,6 +3,7 @@ package com.newtest.test.test;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ public class SignIn extends AppCompatActivity {
     EditText usernameInput;
     EditText passwordInput;
     Button signInBtn;
-    Button signUpBtn;
 
     SignInConnection connection;
 
@@ -35,10 +35,7 @@ public class SignIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.signin);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Access username and password in SharedPreferences file called 'userInfo"
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -51,31 +48,26 @@ public class SignIn extends AppCompatActivity {
         //If username and password are not stored in SharedPreferences, login by entering credentials
         // else, username and password are found, automatically login
         if(!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
+            System.out.println("~~~~~~~~~~~~~~~~~~~~ Credentials detected ~~~~~~~~~~~~~~~~~~~~");
             loginWithPrefs(storedUsername, storedPassword);
+        } else {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            setContentView(R.layout.signin);
+
+
+            usernameInput = findViewById(R.id.username_input);
+            passwordInput = findViewById(R.id.password_input);
+
+            //Instantiate signInBtn
+            signInBtn = findViewById(R.id.signin_button);
+            signInBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login();
+                }
+            });
         }
-
-        usernameInput = findViewById(R.id.username_input);
-        passwordInput = findViewById(R.id.password_input);
-
-        //Instantiate signInBtn
-        signInBtn = (Button) findViewById(R.id.signin_button);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-        //to create a sign up button
-        signUpBtn = (Button) findViewById(R.id.signup_button);
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp();
-            }
-        });
-
-
      }
 
     protected void login() {
@@ -124,8 +116,10 @@ public class SignIn extends AppCompatActivity {
                 connection = new SignInConnection(username, password);
                 try{
                     user = connection.connect();
+
                     Intent intent = new Intent(SignIn.this, Account.class);
                     intent.putExtra("UserKey", (Parcelable) user);
+                    intent.putExtra("SourceKey", "SignIn");
 
                     startActivity(intent);
                 } catch(Exception ex) {
@@ -133,12 +127,6 @@ public class SignIn extends AppCompatActivity {
                 }
             }
         }).start();
-    }
-
-    //Redirect to a sign up page
-    public void signUp() {
-        Log.d(TAG, "SignUp");
-        startActivity(new Intent(SignIn.this, Register.class));
     }
 
     //Checks to make sure that the username and password fields have something in them

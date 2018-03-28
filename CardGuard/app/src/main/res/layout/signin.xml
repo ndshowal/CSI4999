@@ -10,37 +10,12 @@
     app:layout_constraintBottom_toBottomOf="parent"
     tools:context="com.newtest.test.test.SignIn">
 
-    <TextView
-        android:id="@+id/Welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/welcome_to_cardguard"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-    <Button
-        android:id="@+id/signup_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="@string/sign_up"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
-
     <EditText
         android:id="@+id/username_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -73,6 +48,7 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
         android:textSize="24sp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.332"
         app:layout_constraintLeft_toLeftOf="parent"

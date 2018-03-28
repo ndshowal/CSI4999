@@ -35,7 +35,7 @@ public class SendRequestPage extends AppCompatActivity {
         receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SendRequestPage.this, ReceivingPage.class);
+                Intent intent = new Intent(SendRequestPage.this, RequestPage.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

@@ -36,7 +36,7 @@ public class Settings extends AppCompatActivity {
                 ed.putString("username", "");
                 ed.putString("password", "");
                 ed.apply();
-                startActivity(new Intent(Settings.this, SignIn.class));
+                startActivity(new Intent(Settings.this, SignInSignUpScreen.class));
             }
         });
 

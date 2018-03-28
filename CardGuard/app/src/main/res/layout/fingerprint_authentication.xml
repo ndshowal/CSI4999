@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textview"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="-50dp"
         app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
 
     <TextView
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="200dp"
         android:text="@string/text_fingerprint_instructions" />
 </RelativeLayout>

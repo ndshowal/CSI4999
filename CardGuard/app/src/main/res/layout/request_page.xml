@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="8dp"
-    tools:context="com.newtest.test.test.ReceivingPage">
+    tools:context="com.newtest.test.test.RequestPage">
 
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:text="Recieve"
+        android:text="@string/request_funds"
         android:textSize="32sp"
         android:layout_gravity="center"
         />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/amount"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:labelFor="@+id/amount_label"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="12dp"

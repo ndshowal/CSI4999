@@ -1,17 +1,21 @@
 package com.newtest.test.test;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -23,6 +27,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
@@ -30,9 +35,6 @@ import javax.crypto.SecretKey;
 
 public class FingerprintAuthentication extends AppCompatActivity {
 
-    User user;
-
-    // Declare a string variable for the key we’re going to use in our fingerprint authentication
     private static final String KEY_NAME = "yourKey";
     private Cipher cipher;
     private KeyStore keyStore;
@@ -41,25 +43,24 @@ public class FingerprintAuthentication extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+    private String source;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_authentication);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        source = getIntent().getStringExtra("SourceKey");
         user = getIntent().getParcelableExtra("UserKey");
 
-        // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
-        // or higher before executing any fingerprint-related code
+        //Verify that the device is running Marshmallow (SDK 23) or higher before executing any fingerprint-related code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //Get an instance of KeyguardManager and FingerprintManager//
-            keyguardManager =
-                    (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            fingerprintManager =
-                    (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-            textView = (TextView) findViewById(R.id.text_fingerprint_instructions);
-
+            //Verify all fingerprint prerequistes are met
             if(checkFingerprintPrerequisites()) {
                 try {
                     generateKey();
@@ -71,8 +72,7 @@ public class FingerprintAuthentication extends AppCompatActivity {
                     //If cipher is successfully created, generate a new CryptoObject with it
                     cryptoObject = new FingerprintManager.CryptoObject(cipher);
 
-                    // Class responsible for starting the authentication process (via the startAuth method)
-                    // and processing the authentication process events
+                    //Start the authentication process
                     FingerprintHandler helper = new FingerprintHandler(this);
                     helper.startAuth(fingerprintManager, cryptoObject);
                 }
@@ -81,25 +81,24 @@ public class FingerprintAuthentication extends AppCompatActivity {
     }
 
     private Boolean checkFingerprintPrerequisites() {
-        //Check whether the device has a fingerprint sensor
+        //Checks for a fingerprint sensor on the device. If no sensor exists, inform user
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!fingerprintManager.isHardwareDetected()) {
-                // If fingerprint sensor isn’t available, inform user fingerprint authentication isn't available for them
                 textView.setText("Your device doesn't support fingerprint authentication");
                 return false;
             }
         }
-        //Check whether the user has granted your app the USE_FINGERPRINT permission//
+        //Checks if fingerprint permission is given to app. If not, inform user to turn it on
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
             // If app doesn't have fingerprint scanner permission, inform user
             textView.setText("Please enable the fingerprint permission");
             return false;
         }
 
-        //Check that the user has registered at least one fingerprint//
+        //Check that the user has registered at least one fingerprint. If not, inform them that they
+        // need to register a fingerprint before continuing
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!fingerprintManager.hasEnrolledFingerprints()) {
-                // If the user hasn’t configured any fingerprints, inform them to register a fingerprint
                 textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's settings");
                 return false;
             }
@@ -108,8 +107,7 @@ public class FingerprintAuthentication extends AppCompatActivity {
         return true;
     }
 
-//Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//
-
+    //Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void generateKey() throws FingerprintException {
         try {
@@ -151,11 +149,11 @@ public class FingerprintAuthentication extends AppCompatActivity {
         }
     }
 
-    //Create a new method that we’ll use to initialize our cipher//
+    //Cipher initialization
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean initCipher() {
         try {
-            //Obtain a cipher instance and configure it with the properties required for fingerprint authentication//
+            //Obtain a cipher instance and configure it with the properties required for fingerprint authentication
             cipher = Cipher.getInstance(
                     KeyProperties.KEY_ALGORITHM_AES + "/"
                             + KeyProperties.BLOCK_MODE_CBC + "/"
@@ -170,11 +168,11 @@ public class FingerprintAuthentication extends AppCompatActivity {
             SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
                     null);
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            //Return true if the cipher has been initialized successfully//
+
+            //Return true if the cipher has been initialized successfully
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
-
-            //Return false if cipher initialization failed//
+            //Return false if cipher initialization failed
             return false;
         } catch (KeyStoreException | CertificateException
                 | UnrecoverableKeyException | IOException

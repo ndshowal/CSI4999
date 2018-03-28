@@ -3,11 +3,11 @@ package com.newtest.test.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.net.IDN;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static android.os.Build.ID;
 
 public class Transaction implements Parcelable {
     
@@ -35,6 +35,20 @@ public class Transaction implements Parcelable {
         this.inProgress = inProgress;
         this.confirmed = confirmed;
         this.transactionID = transactionID;
+    }
+
+    public Transaction(User sender, User recipient, User initiator,
+                       float transactionAmount, String memo, Date transactionStartDate, Date transactionCompleteDate,
+                       Boolean inProgress, Boolean confirmed) {
+        this.transactionStartDate = transactionStartDate;
+        this.initiator = initiator;
+        this.sender = sender;
+        this.recipient = recipient;
+        this.transactionAmount = transactionAmount;
+        this.memo = memo;
+        this.inProgress = inProgress;
+        this.confirmed = confirmed;
+        setTransactionID();
     }
 
     protected Transaction(Parcel in) {
@@ -112,7 +126,15 @@ public class Transaction implements Parcelable {
                 + " \nTransaction Amount: " + getTransactionAmount()
                 + " \nMemo: " + getMemo()
                 + " \nIn Progress: " + inProgress()
-                + " \nConfirmed: " + isConfirmed();
+                + " \nConfirmed: " + isCompleted();
+    }
+
+    public String getSimpleDescription() {
+        return getTransactionStartDateString().substring(0, 10)
+                + " \nFrom: " + getSender().getUsername()
+                + " To: " + getRecipient().getUsername()
+                + " \nAmount: " + getFormattedAmount()
+                + " \nFor: " + getMemo();
     }
 
     // GETTERS //
@@ -166,6 +188,11 @@ public class Transaction implements Parcelable {
     public float getTransactionAmount() {
         return transactionAmount;
     }
+
+    public String getFormattedAmount() {
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        return format.format(getTransactionAmount());
+    }
     
     public String getMemo() {
         return memo;
@@ -175,7 +202,7 @@ public class Transaction implements Parcelable {
         return inProgress;
     }
     
-    public Boolean isConfirmed() {
+    public Boolean isCompleted() {
         return confirmed;
     }
 
@@ -190,7 +217,15 @@ public class Transaction implements Parcelable {
                 + getSender().getUsername()
                 + getRecipient().getUsername()
                 + String.valueOf(getTransactionAmount());
-        int transactionID = toBeHashed.hashCode();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageBytes = toBeHashed.getBytes();
+            byte[] hashed = md.digest(messageBytes);
+            transactionID = hashed.toString();
+            System.out.println(getTransactionID());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setTransactionStartDate(Date in) {
@@ -225,7 +260,7 @@ public class Transaction implements Parcelable {
         inProgress = in;
     }
 
-    public void setConfirmed(Boolean in) {
+    public void setCompleted(Boolean in) {
         confirmed = in;
     }
 
@@ -233,6 +268,4 @@ public class Transaction implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-
 }

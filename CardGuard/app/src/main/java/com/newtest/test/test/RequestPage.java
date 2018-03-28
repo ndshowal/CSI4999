@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ReceivingPage extends AppCompatActivity {
+public class RequestPage extends AppCompatActivity {
 
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.receiving_page);
+        setContentView(R.layout.request_page);
 
         user = getIntent().getParcelableExtra("UserKey");
 
@@ -23,7 +23,7 @@ public class ReceivingPage extends AppCompatActivity {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReceivingPage.this, RequestSent.class);
+                Intent intent = new Intent(RequestPage.this, RequestSent.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
@@ -35,7 +35,7 @@ public class ReceivingPage extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReceivingPage.this, SendRequestPage.class);
+                Intent intent = new Intent(RequestPage.this, SendRequestPage.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

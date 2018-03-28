@@ -12,25 +12,25 @@
         android:layout_height="wrap_content">
 
 
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight=".5"
-        android:text="@string/settings"
-        android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.033" />
+        <Button
+            android:id="@+id/settings_button"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_weight=".4"
+            android:text="@string/settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.033" />
 
     <Button
         android:id="@+id/notifications_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight=".5"
+        android:layout_height="40dp"
+        android:layout_weight=".4"
         android:text="@string/notifications"
         android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,10 +41,11 @@
         app:layout_constraintVertical_bias="0.033" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/new_transaction_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:text="@string/new_transaction"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -72,8 +73,8 @@
 
     <Button
         android:id="@+id/fulltransactionhistory_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:text="@string/full_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -82,49 +83,32 @@
         app:layout_constraintVertical_bias="0.989" />
 
     <ScrollView
-        android:layout_width="352dp"
-        android:layout_height="289dp"
+        android:layout_width="350dp"
+        android:layout_height="232dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.796">
+        app:layout_constraintRight_toRightOf="parent">
 
         <LinearLayout
+            android:id="@+id/button_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/transaction1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="2/2/18 From: zzhao To: ndshowal \n$50 for Birthday"
-                tools:layout_editor_absoluteX="32dp"
-                tools:layout_editor_absoluteY="83dp" />
-
-            <Button
-                android:id="@+id/transaction2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="2/5/18 From: ampolito To: ndshowal \n$25 for Lunch" />
-
-            <Button
-                android:id="@+id/transaction3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="2/11/18 From: kypawloski To: ndshowal \n$10 for Pizza" />
-
-            <Button
-                android:id="@+id/transaction4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="2/15/18 From: ndshowal To: jivezaj \n$8 for Movie" />
-        </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            tools:ignore="DuplicateIds" />
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="@string/recent_transactions"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_transaction_button"
+        tools:layout_editor_absoluteX="9dp" />
 
 </android.support.constraint.ConstraintLayout>
