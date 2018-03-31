@@ -22,9 +22,9 @@ public class SendRequestPage extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendRequestPage.this, SendingPage.class));
+                startActivity(new Intent(SendRequestPage.this, SendTransaction.class));
 
-                Intent intent = new Intent(SendRequestPage.this, SendingPage.class);
+                Intent intent = new Intent(SendRequestPage.this, SendTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
@@ -35,7 +35,7 @@ public class SendRequestPage extends AppCompatActivity {
         receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SendRequestPage.this, RequestPage.class);
+                Intent intent = new Intent(SendRequestPage.this, RequestTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

@@ -12,6 +12,8 @@ public class TransactionInformation extends AppCompatActivity {
 
     User user;
     Transaction tx;
+    Button confirmBtn;
+    Button denyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class TransactionInformation extends AppCompatActivity {
                 notification.setText("You sent " + tx.getFormattedAmount() + " to " + tx.getRecipient().getUsername());
             }
         } else {
+            if(!tx.isCompleted()) {
+
+            }
             if(user.equals((tx.getRecipient()))) {
                 notification.setText("You received " + tx.getFormattedAmount() + " from " + tx.getSender());
             } else if(user.equals(tx.getRecipient())) {

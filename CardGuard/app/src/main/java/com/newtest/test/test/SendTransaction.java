@@ -8,12 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class RequestPage extends AppCompatActivity {
+public class SendTransaction extends AppCompatActivity {
 
     User user;
 
@@ -36,10 +38,10 @@ public class RequestPage extends AppCompatActivity {
         memoInput = findViewById(R.id.memo_textbox);
 
         dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        date = new Date();
+
 
         //to create a send button
-        Button sendBtn = (Button)findViewById(R.id.request_button);
+        Button sendBtn = (Button)findViewById(R.id.send_button);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +59,13 @@ public class RequestPage extends AppCompatActivity {
 
                                 User target = gu.getUser();
 
-                                Transaction tx = new Transaction(user, user , target,
-                                        amt, memoInput.getText().toString(), date , null, true, false);
+                                Transaction tx = new Transaction(user, target , user,
+                                        amt, memoInput.getText().toString(), new Timestamp(System.currentTimeMillis()), null, true, false);
 
                                 TransactionUploader tu = new TransactionUploader();
                                 if(tu.upload(tx)) {
                                     System.out.println("Upload successful!");
-                                    Intent intent = new Intent(RequestPage.this, RequestSent.class);
+                                    Intent intent = new Intent(SendTransaction.this, TransactionSent.class);
                                     intent.putExtra("UserKey", user);
                                     startActivity(intent);
                                 } else {
@@ -73,7 +75,7 @@ public class RequestPage extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(RequestPage.this, "No user with that username exists. Please try again.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SendTransaction.this, "No user with that username exists. Please try again.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -90,10 +92,12 @@ public class RequestPage extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequestPage.this, SendRequestPage.class);
+                Intent intent = new Intent(SendTransaction.this, SendRequestPage.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
         });
     }
+
+
 }

@@ -14,7 +14,7 @@
         android:label="CardGuard"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
 
         <!-- Splash screen -->
         <activity
@@ -37,8 +37,8 @@
 
         <activity android:name=".Account" />
         <activity android:name=".SendRequestPage" />
-        <activity android:name=".SendingPage" />
-        <activity android:name=".RequestPage" />
+        <activity android:name=".SendTransaction" />
+        <activity android:name=".RequestTransaction" />
         <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
@@ -54,6 +54,7 @@
         <activity android:name=".FullTransactionHistory" />
         <activity android:name=".NotificationResponse" />
         <activity android:name=".SignInSignUpScreen" />
+        <activity android:name=".TransactionInformation" />
     </application>
 
 </manifest>

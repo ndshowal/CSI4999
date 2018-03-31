@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Properties;
 
+//Class for creating a new transaction and uploading it to the database
 public class TransactionUploader extends AsyncTask {
     private Connection connection;
 
@@ -28,9 +29,6 @@ public class TransactionUploader extends AsyncTask {
     private Date completionDate;
     private boolean inProgress;
     private boolean completed;
-
-    private java.util.Date sDate = new Date();
-    Object param = new java.sql.Timestamp(sDate.getTime());
 
     Transaction tx;
 

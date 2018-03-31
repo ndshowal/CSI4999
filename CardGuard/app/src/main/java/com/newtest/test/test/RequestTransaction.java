@@ -13,7 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SendingPage extends AppCompatActivity {
+public class RequestTransaction extends AppCompatActivity {
 
     User user;
 
@@ -39,7 +39,7 @@ public class SendingPage extends AppCompatActivity {
         date = new Date();
 
         //to create a send button
-        Button sendBtn = (Button)findViewById(R.id.send_button);
+        Button sendBtn = (Button)findViewById(R.id.request_button);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +57,13 @@ public class SendingPage extends AppCompatActivity {
 
                                 User target = gu.getUser();
 
-                                Transaction tx = new Transaction(user, target , user,
+                                Transaction tx = new Transaction(user, user , target,
                                         amt, memoInput.getText().toString(), date , null, true, false);
 
                                 TransactionUploader tu = new TransactionUploader();
                                 if(tu.upload(tx)) {
                                     System.out.println("Upload successful!");
-                                    Intent intent = new Intent(SendingPage.this, TransactionSent.class);
+                                    Intent intent = new Intent(RequestTransaction.this, RequestSent.class);
                                     intent.putExtra("UserKey", user);
                                     startActivity(intent);
                                 } else {
@@ -73,7 +73,7 @@ public class SendingPage extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(SendingPage.this, "No user with that username exists. Please try again.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RequestTransaction.this, "No user with that username exists. Please try again.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -90,12 +90,10 @@ public class SendingPage extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SendingPage.this, SendRequestPage.class);
+                Intent intent = new Intent(RequestTransaction.this, SendRequestPage.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
         });
     }
-
-
 }
