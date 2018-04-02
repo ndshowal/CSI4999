@@ -44,6 +44,17 @@ public class AccountSettings extends AppCompatActivity {
         lastNameInput.setText(user.getLastName());
         emailAddressInput.setText(user.getEmailAddress());
 
+        Button cancelBtn = findViewById(R.id.cancel_button);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountSettings.this, Settings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
         //to create a save changes button
         Button saveChangesBtn = (Button)findViewById(R.id.save_changes_button);
 

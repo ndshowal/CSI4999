@@ -148,7 +148,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
 
-                android:text="@string/save_changes"
+                android:text="@string/save"
                 android:textSize="18dp" />
         </FrameLayout>
 
