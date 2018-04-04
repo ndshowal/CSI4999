@@ -48,6 +48,7 @@ public class SendTransaction extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        validate();
                         Float amt = Float.parseFloat(amountInput.getText().toString());
                         uc = new UserChecker();
                         String toBeSearched = usernameInput.getText().toString();
@@ -99,5 +100,9 @@ public class SendTransaction extends AppCompatActivity {
         });
     }
 
+    public Boolean validate() {
+
+        return true;
+    }
 
 }

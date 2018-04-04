@@ -75,10 +75,19 @@ public class Register extends AppCompatActivity {
                                 emailAddressInput.getText().toString(),
                                 passwordInput.getText().toString());
                         user = connection.connect();
-                        Intent intent = new Intent(Register.this, Account.class);
-                        intent.putExtra("UserKey", (Parcelable) user);
 
-                        startActivity(intent);
+                        if(user != null) {
+                            Intent intent = new Intent(Register.this, Account.class);
+                            intent.putExtra("UserKey", (Parcelable) user);
+                            startActivity(intent);
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Register.this, "There was an error creating your account, please try again", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     } catch (SQLException e) {
                         e.printStackTrace();
                         Log.e(TAG, e.toString());
