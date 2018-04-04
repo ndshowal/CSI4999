@@ -62,6 +62,9 @@ public class AccountSettings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateSettings();
+                Intent intent = new Intent(AccountSettings.this, Account.class);
+                intent.putExtra("UserKey", (Parcelable) user);
+                startActivity(intent);
             }
         });
     }
@@ -78,9 +81,6 @@ public class AccountSettings extends AppCompatActivity {
                                 emailAddressInput.getText().toString(),
                                 passwordInput.getText().toString());
                         user = connection.connect();
-                        Intent intent = new Intent(AccountSettings.this, Account.class);
-                        intent.putExtra("UserKey", (Parcelable) user);
-                        startActivity(intent);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         Log.e(TAG, e.toString());
