@@ -17,6 +17,18 @@ public class Notifications extends AppCompatActivity {
 
         user = getIntent().getParcelableExtra("UserKey");
 
+        //to create a back button
+        Button backBtn = findViewById(R.id.back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notifications.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
         // Get the transaction list for user, for each transaction that is inProgress(), create a button for it and add it to the ScrollView
         for(final Transaction t : user.getTransactions()) {
             Button transactionInfoBtn = new Button(this);

@@ -85,12 +85,12 @@
         />
 
     <Button
-    android:id="@+id/send_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="@string/send"
-    android:textSize="24sp" />
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/send"
+        android:textSize="24sp" />
 
     <FrameLayout
         android:layout_height="wrap_content"
@@ -105,7 +105,5 @@
             android:layout_gravity="bottom|center_horizontal"
             android:text="@string/cancel" />
     </FrameLayout>
-
-
 
 </LinearLayout>
