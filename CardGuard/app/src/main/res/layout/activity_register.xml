@@ -9,6 +9,19 @@
     tools:context="com.newtest.test.test.Register">
 
 
+    <TextView
+        android:id="@+id/account_information_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/register"
+        android:textSize="32sp"
+        android:layout_gravity="center"
+        />
+
     <EditText
         android:id="@+id/input_first_name"
         android:layout_width="match_parent"

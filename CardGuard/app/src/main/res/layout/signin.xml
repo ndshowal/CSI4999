@@ -7,15 +7,24 @@
     android:background="@drawable/bg_masthead"
     android:gravity="center"
     android:orientation="vertical"
+    android:paddingTop="80dp"
+    android:paddingBottom="80dp"
     app:layout_constraintBottom_toBottomOf="parent"
     tools:context="com.newtest.test.test.SignIn">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/username_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -46,9 +55,9 @@
         android:id="@+id/signin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/sign_in"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.332"
         app:layout_constraintLeft_toLeftOf="parent"
