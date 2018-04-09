@@ -88,7 +88,7 @@ public class Settings extends AppCompatActivity {
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cardguardwebsite.azurewebsites.net/"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cardguard.azurewebsites.net/"));
                 startActivity(browserIntent);
             }
         });

@@ -83,7 +83,8 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                     ResultSet txResults = txStatement.executeQuery(
                             "SELECT * FROM transactions "
                                     + "WHERE sender='" + user.getUsername() + "' "
-                                    + "OR recipient='" + user.getUsername() + "';");
+                                    + "OR recipient='" + user.getUsername() + "'" +
+                                    " ORDER BY start_date;");
 
                     // While query isn't empty:
                     while (txResults.next()) {

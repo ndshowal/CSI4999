@@ -105,7 +105,8 @@ public class SignInConnection extends AsyncTask {
                     ResultSet txResults = txStatement.executeQuery(
                             "SELECT * FROM transactions "
                                     + "WHERE sender='" + username + "' "
-                                    + "OR recipient='" + username + "';");
+                                    + "OR recipient='" + username + "'" +
+                                    " ORDER BY start_date;");
 
                     // While query isn't empty:
                     while (txResults.next()) {

@@ -20,7 +20,6 @@ public class AccountSettings extends AppCompatActivity {
     private String ID;
     private EditText firstNameInput;
     private EditText lastNameInput;
-    private EditText usernameInput;
     private EditText emailAddressInput;
     private EditText passwordInput;
     private EditText confirmPasswordInput;
@@ -35,7 +34,6 @@ public class AccountSettings extends AppCompatActivity {
 
         firstNameInput = findViewById(R.id.input_first_name);
         lastNameInput = findViewById(R.id.input_last_name);
-        //usernameInput = findViewById(R.id.input_username);
         emailAddressInput = findViewById(R.id.input_email);
         passwordInput = findViewById(R.id.input_password);
         confirmPasswordInput = findViewById(R.id.input_confirmation_password);
