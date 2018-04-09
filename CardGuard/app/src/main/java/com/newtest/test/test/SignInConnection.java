@@ -106,7 +106,7 @@ public class SignInConnection extends AsyncTask {
                             "SELECT * FROM transactions "
                                     + "WHERE sender='" + username + "' "
                                     + "OR recipient='" + username + "'" +
-                                    " ORDER BY start_date;");
+                                    " ORDER BY start_date DESC;");
 
                     // While query isn't empty:
                     while (txResults.next()) {
@@ -117,8 +117,8 @@ public class SignInConnection extends AsyncTask {
                         String initiatorName = txResults.getString(4);
                         Float transactionAmount = txResults.getFloat(5);
                         String memo = txResults.getString(6);
-                        Date startDate = txResults.getDate(7);
-                        Date completionDate = txResults.getDate(8);
+                        Date startDate = txResults.getTimestamp(7);
+                        Date completionDate = txResults.getTimestamp(8);
                         Boolean inProgress = txResults.getBoolean(9);
                         Boolean confirmed = txResults.getBoolean(10);
 

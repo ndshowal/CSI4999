@@ -11,7 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class SignInSignUpScreen extends AppCompatActivity {
+public class SignInSignUp extends AppCompatActivity {
 
     private Button btnSignIn, btnSignUp;
     SharedPreferences sp;
@@ -35,13 +35,13 @@ public class SignInSignUpScreen extends AppCompatActivity {
         // else, username and password are found, automatically login
         if(!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
             System.out.println("~~~~~~~~~~~~~~~~~~~~ Credentials detected ~~~~~~~~~~~~~~~~~~~~");
-            startActivity(new Intent(SignInSignUpScreen.this, SignIn.class));
+            startActivity(new Intent(SignInSignUp.this, SignIn.class));
         }
         btnSignIn = findViewById(R.id.signin_button);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInSignUpScreen.this, SignIn.class));
+                startActivity(new Intent(SignInSignUp.this, SignIn.class));
             }
         });
 
@@ -49,7 +49,7 @@ public class SignInSignUpScreen extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInSignUpScreen.this, Register.class));
+                startActivity(new Intent(SignInSignUp.this, Register.class));
             }
         });
     }

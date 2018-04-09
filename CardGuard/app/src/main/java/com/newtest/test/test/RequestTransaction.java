@@ -90,7 +90,7 @@ public class RequestTransaction extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequestTransaction.this, SendRequestPage.class);
+                Intent intent = new Intent(RequestTransaction.this, NewTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

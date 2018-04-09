@@ -84,7 +84,7 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                             "SELECT * FROM transactions "
                                     + "WHERE sender='" + user.getUsername() + "' "
                                     + "OR recipient='" + user.getUsername() + "'" +
-                                    " ORDER BY start_date;");
+                                    " ORDER BY start_date DESC;");
 
                     // While query isn't empty:
                     while (txResults.next()) {

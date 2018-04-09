@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.sql.SQLException;
-import java.util.concurrent.ExecutionException;
-
 public class Account extends AppCompatActivity {
     User user;
     TextView greeting;
@@ -46,7 +43,7 @@ public class Account extends AppCompatActivity {
         newTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Account.this, SendRequestPage.class);
+                Intent intent = new Intent(Account.this, NewTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
@@ -105,11 +102,8 @@ public class Account extends AppCompatActivity {
             case 3:
                 generateButtons(3);
                 break;
-            case 4:
-                generateButtons(4);
-                break;
             default:
-                generateButtons(user.getTransactions().size());
+                generateButtons(4);
 
         }
     }

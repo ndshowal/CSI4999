@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SendRequestPage extends AppCompatActivity {
+public class NewTransaction extends AppCompatActivity {
 
     User user;
 
@@ -22,9 +22,9 @@ public class SendRequestPage extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendRequestPage.this, SendTransaction.class));
+                startActivity(new Intent(NewTransaction.this, SendTransaction.class));
 
-                Intent intent = new Intent(SendRequestPage.this, SendTransaction.class);
+                Intent intent = new Intent(NewTransaction.this, SendTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
@@ -35,7 +35,7 @@ public class SendRequestPage extends AppCompatActivity {
         receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SendRequestPage.this, RequestTransaction.class);
+                Intent intent = new Intent(NewTransaction.this, RequestTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }
@@ -46,7 +46,7 @@ public class SendRequestPage extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SendRequestPage.this, Account.class);
+                Intent intent = new Intent(NewTransaction.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

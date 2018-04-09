@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.newtest.test.test.SendRequestPage">
+    tools:context="com.newtest.test.test.NewTransaction">
 
     <Button
         android:id="@+id/send_button"

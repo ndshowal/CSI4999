@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class Settings extends AppCompatActivity {
 
     private User user;
@@ -36,7 +34,7 @@ public class Settings extends AppCompatActivity {
                 ed.putString("username", "");
                 ed.putString("password", "");
                 ed.apply();
-                startActivity(new Intent(Settings.this, SignInSignUpScreen.class));
+                startActivity(new Intent(Settings.this, SignInSignUp.class));
             }
         });
 

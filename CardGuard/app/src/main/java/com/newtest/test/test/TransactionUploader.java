@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Properties;
 
@@ -45,7 +46,7 @@ public class TransactionUploader extends AsyncTask {
         inProgress = tx.inProgress();
         completed = tx.isCompleted();
 
-        java.sql.Date sqlDate = new java.sql.Date(startDate.getTime());
+        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -87,7 +88,7 @@ public class TransactionUploader extends AsyncTask {
                 preparedStatement.setString(4, initiatorName);
                 preparedStatement.setFloat(5, transactionAmount);
                 preparedStatement.setString(6, memo);
-                preparedStatement.setObject(7, sqlDate);
+                preparedStatement.setTimestamp(7, date);
                 preparedStatement.setDate(8, null);
                 preparedStatement.setBoolean(9, inProgress);
                 preparedStatement.setBoolean(10, completed);
