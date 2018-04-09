@@ -90,7 +90,7 @@ public class RegisterConnection extends AsyncTask {
 
 
                 // If both checks pass, create new user entry
-                if(!checkExistingEmailAddress(connection) && !checkExistingUsername(connection)) {
+                if(!emailAddressExists() && !usernameExists()) {
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(first_name, last_name, username, email_address, password, account_type)" +
                             " VALUES(?,?,?,?,?,?)");
                     preparedStatement.setString(1, firstName);
@@ -120,7 +120,6 @@ public class RegisterConnection extends AsyncTask {
                     String lastName = results.getString(6);
                     String accountType = results.getString(7);
 
-                    statement.close();  // Close statement
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {
@@ -130,14 +129,15 @@ public class RegisterConnection extends AsyncTask {
 
             if(user != null) {
                 System.out.println(user.toString());
+            } else {
+                System.out.println("User wasn't created");
             }
         }
 
-        connection.close(); // Close connection
         return user;
     }
 
-    public Boolean checkExistingUsername(Connection connection) {
+    public Boolean usernameExists() {
         try {
             Statement statement = null;
             statement = connection.createStatement();
@@ -146,7 +146,7 @@ public class RegisterConnection extends AsyncTask {
                             + "WHERE username='" + username +"';");
 
             if(results.next()) {
-                statement.close();
+                System.out.println("The username : " + username + " is unavailable");
                 return true;
             }
         } catch (SQLException e) {
@@ -157,7 +157,7 @@ public class RegisterConnection extends AsyncTask {
         return false;
     }
 
-    public Boolean checkExistingEmailAddress(Connection connection) {
+    public Boolean emailAddressExists() {
         try {
             Statement statement = null;
             statement = connection.createStatement();
@@ -165,7 +165,7 @@ public class RegisterConnection extends AsyncTask {
                     "SELECT * FROM users "
                             + "WHERE email_address='" + emailAddress + "';");
             if(results.next()) {
-                statement.close();
+                System.out.println("That email address is already being used");
                 return true;
             }
         } catch (SQLException e) {
