@@ -64,6 +64,7 @@ public class SendTransaction extends AppCompatActivity {
                                         amt, memoInput.getText().toString(), new Timestamp(System.currentTimeMillis()), null, true, false);
 
                                 TransactionUploader tu = new TransactionUploader();
+                                user.addTransaction(tx);
                                 if(tu.upload(tx)) {
                                     System.out.println("Upload successful!");
                                     Intent intent = new Intent(SendTransaction.this, TransactionSent.class);
