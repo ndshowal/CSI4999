@@ -31,7 +31,7 @@
                 Sender: ' . $row['sender'] . ' <br>
                 Recipient: ' . $row['recipient'] . ' <br>
                 Transaction Initiated by: ' . $row['initiator'] . ' <br>
-                Amount of Transaction: $' . $row['transaction_amt'] . ' <br>
+                Amount of Transaction: $' . $row['transaction_amount'] . ' <br>
                 Memo: ' . $row['memo'] . ' <br>
                 Transaction was initiated on: ' . $row['start_date'] . ' <br>';
                 if($row['completion_date'] != null) {
