@@ -46,6 +46,18 @@ public class FullTransactionHistory extends AppCompatActivity {
             }
         });
 
+ //transaction maps button
+        Button mapBtn = (Button)findViewById(R.id.transaction_map_button);
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FullTransactionHistory.this, ActivityMaps.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+            }
+        });
+
         System.out.println("Transactions in user list: " + user.getTransactions().size());
 
         //Adds a button entry for each transaction to the scroll view on the Account page, or informs user they don't have any yet
