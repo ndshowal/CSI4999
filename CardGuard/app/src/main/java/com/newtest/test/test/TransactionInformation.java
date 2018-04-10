@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class TransactionInformation extends AppCompatActivity {
         if(tx.getTransactionCompleteDate() != null) {
             completedText.setText(tx.getTransactionCompleteDateString());
         } else {
-            completedText.setText("Waiting for transaction to be confirmed");
+            completedText.setText(R.string.waiting_for_transaction);
         }
 
         //Confirm Button

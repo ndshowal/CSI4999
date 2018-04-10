@@ -57,9 +57,6 @@ public class FullTransactionHistory extends AppCompatActivity {
             public void run() {
                 //Only runs once (when activity is started)
                 if (flag == 0) {
-
-<<<<<<< HEAD
-                    //Create Search Button
                     final Button searchBtn = findViewById(R.id.search_button);
                     searchBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -74,21 +71,20 @@ public class FullTransactionHistory extends AppCompatActivity {
                             sortByUser(searchText.getText().toString());
                         }
                     });
-=======
- //transaction maps button
-        Button mapBtn = (Button)findViewById(R.id.transaction_map_button);
 
-        mapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FullTransactionHistory.this, ActivityMaps.class);
-                intent.putExtra("UserKey", user);
-                startActivity(intent);
-            }
-        });
+                    //transaction maps button
+                    Button mapBtn = (Button) findViewById(R.id.transaction_map_button);
 
-        System.out.println("Transactions in user list: " + user.getTransactions().size());
->>>>>>> 1a84bb335b67affd9fd375add478b8c88baabc1e
+                    mapBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(FullTransactionHistory.this, ActivityMaps.class);
+                            intent.putExtra("UserKey", user);
+                            startActivity(intent);
+                        }
+                    });
+
+                    System.out.println("Transactions in user list: " + user.getTransactions().size());
 
                     //Create a back button
                     Button backBtn = findViewById(R.id.back_button);

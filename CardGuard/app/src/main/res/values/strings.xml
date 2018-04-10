@@ -169,9 +169,7 @@
     <string name="description_bugdroid_icon">Android bugdroid image</string>
     <string name="description_fingerprint_icon">Fingerprint icon</string>
     <string name="save">Save</string>
-<<<<<<< HEAD
     <string name="back">Back</string>
-=======
- <string name="transaction_map">Transaction Map</string>
->>>>>>> 1a84bb335b67affd9fd375add478b8c88baabc1e
+     <string name="transaction_map">Transaction Map</string>
+    <string name="waiting_for_transaction">Waiting for transaction to be confirmed</string>
 </resources>
