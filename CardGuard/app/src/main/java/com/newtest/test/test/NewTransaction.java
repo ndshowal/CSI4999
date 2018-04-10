@@ -5,43 +5,49 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class NewTransaction extends AppCompatActivity {
 
     User user;
 
+    TextView headerText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sendreceivepage);
+        setContentView(R.layout.activity_new_transaction);
 
         user = getIntent().getParcelableExtra("UserKey");
 
-        //to create a send button
+        headerText = findViewById(R.id.header);
+        headerText.setTextSize(32);
+
+        //Create Send Button
         Button sendBtn = (Button)findViewById(R.id.send_button);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NewTransaction.this, SendTransaction.class));
-
-                Intent intent = new Intent(NewTransaction.this, SendTransaction.class);
+                Intent intent = new Intent(NewTransaction.this, GenerateTransaction.class);
                 intent.putExtra("UserKey", user);
+                intent.putExtra("TypeKey", "Send");
                 startActivity(intent);
             }
         });
 
-        //to create a receive button
+        //Create Receive Button
         Button receiveBtn = (Button)findViewById(R.id.request_button);
         receiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewTransaction.this, RequestTransaction.class);
+                Intent intent = new Intent(NewTransaction.this, GenerateTransaction.class);
                 intent.putExtra("UserKey", user);
+                intent.putExtra("TypeKey", "Request");
                 startActivity(intent);
             }
         });
 
-        //to create a cancel button
+        //Create Cancel Button
         Button cancelBtn = (Button)findViewById(R.id.cancel_button);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override

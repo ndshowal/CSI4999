@@ -38,8 +38,6 @@ public class SignInConnection extends AsyncTask {
     }
 
     public User connect() throws SQLException {
-
-
         // Check that the driver is installed
         try {
             Class.forName("com.mysql.jdbc.Driver");

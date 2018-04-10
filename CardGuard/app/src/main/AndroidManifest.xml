@@ -37,8 +37,7 @@
 
         <activity android:name=".Account" />
         <activity android:name=".NewTransaction" />
-        <activity android:name=".SendTransaction" />
-        <activity android:name=".RequestTransaction" />
+        <activity android:name=".GenerateTransaction" />
         <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
@@ -52,7 +51,6 @@
         <activity android:name=".IdentificationSettings" />
         <activity android:name=".Notifications" />
         <activity android:name=".FullTransactionHistory" />
-        <activity android:name=".NotificationResponse" />
         <activity android:name=".SignInSignUp" />
         <activity android:name=".TransactionInformation" />
     </application>

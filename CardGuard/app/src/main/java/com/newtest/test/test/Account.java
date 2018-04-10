@@ -14,6 +14,8 @@ public class Account extends AppCompatActivity {
     TextView greeting;
 
     AsyncTask tp;
+    int flag;
+    Button fullTransactionHistoryBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +25,12 @@ public class Account extends AppCompatActivity {
         //Get user object from parcel
         user = getIntent().getParcelableExtra("UserKey");
 
+        flag = 0;
+
         //Set greeting text
         greeting = (TextView) findViewById(R.id.text_greeting);
         greeting.setText("Welcome, " + user.getUsername() + "!");
+        greeting.setTextSize(24);
 
         //Thread for querying database to update transaction list
         new Thread(new Runnable() {
@@ -34,8 +39,10 @@ public class Account extends AppCompatActivity {
                 tp = new TransactionPuller(user, new TransactionPuller.AsyncResponse() {
                     @Override
                     public void processFinished(String output) {}}).execute();
+                flag = 1;
             }
         }).start();
+
 
         //Create button to redirect to Sending and Receiving page
         Button newTransactionBtn = findViewById(R.id.new_transaction_button);
@@ -49,7 +56,7 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        //Create button to redirect to settings page
+        //Create button to redirect to activity_settings page
         Button settingsBtn = findViewById(R.id.settings_button);
 
         settingsBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +68,7 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        //Create button to redirect to notifications page
+        //Create button to redirect to activity_notifications page
         Button notificationsBtn = findViewById(R.id.notifications_button);
 
         notificationsBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +81,7 @@ public class Account extends AppCompatActivity {
         });
 
         //Create button to go to the fullTransactionHistory page
-        Button fullTransactionHistoryBtn = findViewById(R.id.full_transaction_history_button);
+        fullTransactionHistoryBtn = findViewById(R.id.full_transaction_history_button);
 
         fullTransactionHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,33 +92,43 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        System.out.println("Transactions in user list: " + user.getTransactions().size());
+        updateUI();
+    }
 
-        //Used to determine how many buttons to place in the ScrollView for this activity, buttons will link to the corresponding
-        // transaction information page
-        switch(user.getTransactions().size()) {
-            case 0:
-                generateButtons(0);
-                break;
-            case 1:
-                generateButtons(1);
-                break;
-            case 2:
-                generateButtons(2);
-                break;
-            case 3:
-                generateButtons(3);
-                break;
-            default:
-                generateButtons(4);
+    public void updateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(flag == 0 || flag == 1) {
+                    //Used to determine how many buttons to place in the ScrollView for this activity, buttons will link to the corresponding
+                    // transaction information page
+                    switch(user.getTransactions().size()) {
+                        case 0:
+                            fullTransactionHistoryBtn.setVisibility(View.INVISIBLE);
+                            generateButtons(0);
+                            break;
+                        case 1:
+                            fullTransactionHistoryBtn.setVisibility(View.INVISIBLE);
+                            generateButtons(1);
+                            break;
+                        case 2:
+                            fullTransactionHistoryBtn.setVisibility(View.INVISIBLE);
+                            generateButtons(2);
+                            break;
+                        default:
+                            generateButtons(3);
+                    }
+                }
+            }
+        });
 
-        }
     }
 
     //Generates buttons to populate the Scroll View with up to 3 transactions, or informs the user that they don't have any yet
     private void generateButtons(int n) {
-        //If no transactions, generate a TextView and place it in the ScrollView:
+        //If no transactions, generate a TextView and place it in the ScrollView and hide fullTransactionHistoryButton
         if(n == 0) {
+
             TextView noTransactionsMessage = new TextView(Account.this);
             noTransactionsMessage.setText("You have no transactions yet! Press 'New Transaction' to get started, or wait for someone to begin one with you!");
 

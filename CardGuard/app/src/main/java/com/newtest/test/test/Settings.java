@@ -17,7 +17,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
 
         user = getIntent().getParcelableExtra("UserKey");
         TextView tv = (TextView) findViewById(R.id.user_label);
@@ -60,7 +60,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        //to create a button to update your identification settings
+        //to create a button to update your identification activity_settings
         Button updateIdentificationSettingsBtn = (Button)findViewById(R.id.update_identification_settings_button);
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

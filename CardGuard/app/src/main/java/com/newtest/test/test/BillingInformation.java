@@ -21,7 +21,7 @@ public class BillingInformation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.billing_information);
+        setContentView(R.layout.activity_billing_information);
 
         user = getIntent().getParcelableExtra("UserKey");
 

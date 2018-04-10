@@ -89,7 +89,7 @@ public class TransactionUploader extends AsyncTask {
                 preparedStatement.setFloat(5, transactionAmount);
                 preparedStatement.setString(6, memo);
                 preparedStatement.setTimestamp(7, date);
-                preparedStatement.setDate(8, null);
+                preparedStatement.setTimestamp(8, null);
                 preparedStatement.setBoolean(9, inProgress);
                 preparedStatement.setBoolean(10, completed);
                 rowsUpdated += preparedStatement.executeUpdate();

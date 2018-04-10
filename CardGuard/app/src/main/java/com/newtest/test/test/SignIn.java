@@ -13,12 +13,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class SignIn extends AppCompatActivity {
     private static final String TAG = "LoginPage";
@@ -54,7 +51,7 @@ public class SignIn extends AppCompatActivity {
         } else {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            setContentView(R.layout.signin);
+            setContentView(R.layout.activity_signin);
 
 
             usernameInput = findViewById(R.id.username_input);

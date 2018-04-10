@@ -13,7 +13,7 @@ public class TransactionSent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.transactionsent);
+        setContentView(R.layout.activity_new_sent_confirmation);
 
         user = getIntent().getParcelableExtra("UserKey");
 

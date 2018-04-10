@@ -99,7 +99,7 @@ public class FingerprintAuthentication extends AppCompatActivity {
         // need to register a fingerprint before continuing
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!fingerprintManager.hasEnrolledFingerprints()) {
-                textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's settings");
+                textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's activity_settings");
                 return false;
             }
         }

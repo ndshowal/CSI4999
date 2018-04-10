@@ -13,7 +13,7 @@ public class RequestSent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requestsent);
+        setContentView(R.layout.activity_new_request_confirmation);
 
         user = getIntent().getParcelableExtra("UserKey");
 

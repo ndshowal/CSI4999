@@ -97,8 +97,8 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                         String initiatorName = txResults.getString(4);
                         Float transactionAmount = txResults.getFloat(5);
                         String memo = txResults.getString(6);
-                        Date startDate = txResults.getDate(7);
-                        Date completionDate = txResults.getDate(8);
+                        Date startDate = txResults.getTimestamp(7);
+                        Date completionDate = txResults.getTimestamp(8);
                         Boolean inProgress = txResults.getBoolean(9);
                         Boolean confirmed = txResults.getBoolean(10);
 
@@ -197,7 +197,7 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                 ex.printStackTrace();
             }
         }
-
+        
         return null;
     }
 

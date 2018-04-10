@@ -3,6 +3,8 @@ package com.newtest.test.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
@@ -219,10 +221,8 @@ public class Transaction implements Parcelable {
                 + String.valueOf(getTransactionAmount());
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageBytes = toBeHashed.getBytes();
-            byte[] hashed = md.digest(messageBytes);
+            byte[] hashed = md.digest(toBeHashed.getBytes(StandardCharsets.UTF_8));
             transactionID = hashed.toString();
-            System.out.println(getTransactionID());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -260,7 +260,7 @@ public class Transaction implements Parcelable {
         inProgress = in;
     }
 
-    public void setCompleted(Boolean in) {
+    public void setApproved(Boolean in) {
         confirmed = in;
     }
 

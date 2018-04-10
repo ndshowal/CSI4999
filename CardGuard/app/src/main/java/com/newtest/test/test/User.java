@@ -1,7 +1,10 @@
 package com.newtest.test.test;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;import java.util.ArrayList;
 
@@ -96,6 +99,24 @@ public class User implements Parcelable{
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public ArrayList<Transaction> getTransactions(String in) {
+        ArrayList<Transaction> temp = new ArrayList<>();
+
+        if(in.equals("")) {
+            return getTransactions();
+        }
+
+        for (Transaction tx : getTransactions()) {
+            if (tx.getInitiator().getUsername().equals(in) ||
+                    tx.getSender().getUsername().equals(in) ||
+                    tx.getRecipient().getUsername().equals(in)) {
+                temp.add(tx);
+            }
+        }
+
+        return temp;
     }
 
     // SETTERS //
