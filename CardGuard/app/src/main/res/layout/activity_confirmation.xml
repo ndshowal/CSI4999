@@ -7,21 +7,23 @@
     android:layout_margin="8dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.newtest.test.test.RequestSent">
+    tools:context="com.newtest.test.test.Confirmation">
 
     <TextView
-        android:id="@+id/request_sent_label"
+        android:id="@+id/message_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/your_request_has_been_sent"
-        android:textSize="24sp"
-        />
+        android:layout_marginBottom="24dp"
+        android:text="@string/your_transaction_has_been_sent"
+        android:textSize="20sp"
+         />
 
     <Button
-        android:id="@+id/return_to_account_button"
+        android:id="@+id/return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_marginTop="16sp"
-        android:text="Return To Your Account" />
+        android:text="@string/return_to_your_account"
+        android:textSize="20sp"
+        android:layout_marginBottom="24dp"
+       />
 </android.widget.LinearLayout>

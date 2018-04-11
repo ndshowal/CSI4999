@@ -80,6 +80,11 @@ public class SignIn extends AppCompatActivity {
                     try {
                         user = connection.connect();
                         if(!(user == null)) {
+                            if(user.getUserHash() == null) {
+                                System.out.println("Setting user hash, no hash found");
+                                user.setUserHash();
+                            }
+
                             Intent intent = new Intent(SignIn.this, Account.class);
                             intent.putExtra("UserKey", (Parcelable) user);
 
@@ -89,6 +94,7 @@ public class SignIn extends AppCompatActivity {
                             ed.apply();
 
                             startActivity(intent);
+                            finish();
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -115,10 +121,11 @@ public class SignIn extends AppCompatActivity {
                 try{
                     user = connection.connect();
                     Intent intent = new Intent(SignIn.this, Account.class);
-                    intent.putExtra("UserKey", (Parcelable) user);
+                    intent.putExtra("UserKey", user);
                     intent.putExtra("SourceKey", "SignIn");
 
                     startActivity(intent);
+                    finish();
                 } catch(Exception ex) {
                     ex.printStackTrace();
                 }

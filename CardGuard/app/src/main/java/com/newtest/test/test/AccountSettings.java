@@ -27,7 +27,7 @@ public class AccountSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_settings);
+        setContentView(R.layout.activity_account_settings);
 
         user = getIntent().getParcelableExtra("UserKey");
         ID = user.getID();
@@ -50,6 +50,7 @@ public class AccountSettings extends AppCompatActivity {
                 Intent intent = new Intent(AccountSettings.this, Settings.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -63,6 +64,7 @@ public class AccountSettings extends AppCompatActivity {
                 Intent intent = new Intent(AccountSettings.this, Account.class);
                 intent.putExtra("UserKey", (Parcelable) user);
                 startActivity(intent);
+                finish();
             }
         });
     }

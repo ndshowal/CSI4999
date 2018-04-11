@@ -28,9 +28,7 @@ public class GetUser extends AsyncTask {
     public GetUser(String in) {
         username = in;
         user = null;
-    }
 
-    public User getUser() throws SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -40,39 +38,42 @@ public class GetUser extends AsyncTask {
         connection = null;
 
         try {
-        String url = String.format("jdbc:mysql://%s/%s", host, database);
+            String url = String.format("jdbc:mysql://%s/%s", host, database);
 
-        // Set connection properties
-        Properties properties = new Properties();
-        properties.setProperty("user", adminUsername);
-        properties.setProperty("password", adminPassword);
-        properties.setProperty("useSSL", "true");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
+            // Set connection properties
+            Properties properties = new Properties();
+            properties.setProperty("user", adminUsername);
+            properties.setProperty("password", adminPassword);
+            properties.setProperty("useSSL", "true");
+            properties.setProperty("verifyServerCertificate", "true");
+            properties.setProperty("requireSSL", "false");
 
-        // Connect to MySQL server with set parameters
-        connection = DriverManager.getConnection(url, properties);
+            // Connect to MySQL server with set parameters
+            connection = DriverManager.getConnection(url, properties);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public User getUser() throws SQLException{
         if(connection != null) {
             try {
                 System.out.println("Attempting to query database...");
 
                 Statement statement = connection.createStatement();
-                ResultSet results = statement.executeQuery(
+                ResultSet userResults = statement.executeQuery(
                         "SELECT * FROM users "
                                 + "WHERE username='" + username + "';");
 
-                while (results.next()) {
-                    String ID = results.getString(1);
-                    String username = results.getString(2);
-                    String password = results.getString(3);
-                    String emailAddress = results.getString(4);
-                    String firstName = results.getString(5);
-                    String lastName = results.getString(6);
-                    String accountType = results.getString(7);
+                while (userResults.next()) {
+                    String ID = userResults.getString(1);
+                    String userHash = userResults.getString(2);
+                    String username = userResults.getString(3);
+                    String password = userResults.getString(4);
+                    String emailAddress = userResults.getString(5);
+                    String firstName = userResults.getString(6);
+                    String lastName = userResults.getString(7);
+                    String accountType = userResults.getString(8);
 
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }

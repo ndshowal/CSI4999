@@ -70,13 +70,9 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
             ex.printStackTrace();
         }
 
-        System.out.println("Updating transaction list....");
-
         //If connection was successful:
         if(connection != null) {
             try {
-                System.out.println("Attempting to query database...");
-
                 try {
                     // Query for transactions the user was involved in
                     Statement txStatement = connection.createStatement();
@@ -88,8 +84,6 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
 
                     // While query isn't empty:
                     while (txResults.next()) {
-                        System.out.println("Transaction found");
-
                         //Read result to necessary transaction variables
                         String transactionID = txResults.getString(1);
                         String senderName = txResults.getString(2);
@@ -101,6 +95,10 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                         Date completionDate = txResults.getTimestamp(8);
                         Boolean inProgress = txResults.getBoolean(9);
                         Boolean confirmed = txResults.getBoolean(10);
+                        Double initialLatitude = txResults.getDouble(11);
+                        Double initialLongitude = txResults.getDouble(12);
+                        Double completionLatitude = txResults.getDouble(13);
+                        Double completionLongitude = txResults.getDouble(14);
 
                         // Because users are only represented by their names in the transactions
                         //  table, they must be created (as a field for each Transaction object) by querying again
@@ -117,13 +115,14 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
 
                             while (userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
-                                sender = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
+                                sender = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
@@ -139,14 +138,15 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
 
                             while (userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
 
-                                recipient = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                recipient = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
@@ -161,14 +161,15 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                                             + "WHERE username='" + initiatorName + "';");
                             while (userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
 
-                                initiator = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                initiator = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
@@ -181,6 +182,15 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
                             Transaction tx = new Transaction(transactionID, sender, recipient, initiator,
                                     transactionAmount, memo, startDate, completionDate,
                                     inProgress, confirmed);
+
+                            tx.setInitialLatitude(initialLatitude);
+                            tx.setInitialLongitude(initialLongitude);
+                            try {
+                                tx.setCompletionLatitude(completionLatitude);
+                                tx.setCompletionLongitude(completionLongitude);
+                            } catch (Exception ex) {
+                                tx.setCompletionLocation(null);
+                            }
 
                             txList.add(tx);
                         }

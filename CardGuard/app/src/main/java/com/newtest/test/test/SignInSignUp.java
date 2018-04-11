@@ -21,15 +21,11 @@ public class SignInSignUp extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pre_signin_signup);
 
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String storedUsername = sp.getString("username","");
         String storedPassword = sp.getString("password", "");
-
-        System.out.println(storedUsername);
-        System.out.println(storedPassword);
 
         //If username and password are not stored in SharedPreferences, login by entering credentials
         // else, username and password are found, automatically login

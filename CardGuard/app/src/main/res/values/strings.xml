@@ -165,11 +165,15 @@
     <string name="new_fingerprint_enrolled_description">A new fingerprint was added to this device, so your password is required.</string>
     <string name="use_fingerprint_in_future">Use fingerprint in the future</string>
     <string name="use_fingerprint_to_authenticate_title">Use fingerprint to authenticate</string>
-    <string name="use_fingerprint_to_authenticate_key" >use_fingerprint_to_authenticate_key</string>
+    <string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
     <string name="description_bugdroid_icon">Android bugdroid image</string>
     <string name="description_fingerprint_icon">Fingerprint icon</string>
     <string name="save">Save</string>
     <string name="back">Back</string>
-     <string name="transaction_map">Transaction Map</string>
+    <string name="transaction_map">Transaction Map</string>
     <string name="waiting_for_transaction">Waiting for transaction to be confirmed</string>
+    <string name="title_location_permission">Allow CardGuard to access your location?</string>
+    <string name="text_location_permission">Tracking your location will allow you to track where your transactions take place, to help prevent fraud.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="unconfirmed_transactions">Unconfirmed Transactions</string>
 </resources>

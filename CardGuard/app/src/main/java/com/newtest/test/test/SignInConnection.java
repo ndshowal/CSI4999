@@ -1,10 +1,12 @@
 package com.newtest.test.test;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -81,14 +83,15 @@ public class SignInConnection extends AsyncTask {
 
                 while (results.next()) {
                     String ID = results.getString(1);
-                    String username = results.getString(2);
-                    String password = results.getString(3);
-                    String emailAddress = results.getString(4);
-                    String firstName = results.getString(5);
-                    String lastName = results.getString(6);
-                    String accountType = results.getString(7);
+                    String hash = results.getString(2);
+                    String username = results.getString(3);
+                    String password = results.getString(4);
+                    String emailAddress = results.getString(5);
+                    String firstName = results.getString(6);
+                    String lastName = results.getString(7);
+                    String accountType = results.getString(8);
 
-                    user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                    user = new User(ID, hash, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {
                 System.out.println("Query Error");
@@ -119,6 +122,10 @@ public class SignInConnection extends AsyncTask {
                         Date completionDate = txResults.getTimestamp(8);
                         Boolean inProgress = txResults.getBoolean(9);
                         Boolean confirmed = txResults.getBoolean(10);
+                        Double initialLatitude = txResults.getDouble(11);
+                        Double initialLongitude = txResults.getDouble(12);
+                        Double completionLatitude = txResults.getDouble(13);
+                        Double completionLongitude = txResults.getDouble(14);
 
                         // Because users are only represented by their names in the transactions
                         //  table, they must be created by querying again
@@ -136,13 +143,14 @@ public class SignInConnection extends AsyncTask {
 
                             while(userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
-                                sender = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
+                                sender = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
@@ -158,14 +166,15 @@ public class SignInConnection extends AsyncTask {
 
                             while (userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
 
-                                recipient = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                recipient = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
@@ -180,24 +189,37 @@ public class SignInConnection extends AsyncTask {
                                             + "WHERE username='" + initiatorName +"';");
                             while(userResults.next()) {
                                 String ID = userResults.getString(1);
-                                String username = userResults.getString(2);
-                                String password = userResults.getString(3);
-                                String emailAddress = userResults.getString(4);
-                                String firstName = userResults.getString(5);
-                                String lastName = userResults.getString(6);
-                                String accountType = userResults.getString(7);
+                                String userHash = userResults.getString(2);
+                                String username = userResults.getString(3);
+                                String password = userResults.getString(4);
+                                String emailAddress = userResults.getString(5);
+                                String firstName = userResults.getString(6);
+                                String lastName = userResults.getString(7);
+                                String accountType = userResults.getString(8);
 
-                                initiator = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
+                                initiator = new User(ID, userHash, username, password, firstName, lastName, emailAddress, accountType);
                             }
                         } catch (SQLException ex) {
                             Log.e(TAG, ex.toString());
                             ex.printStackTrace();
                         }
 
+                        //If transaction has a sender, recipient, and an initiator, create the transaction
                         if(sender != null && recipient != null && initiator != null) {
                             Transaction tx = new Transaction(transactionID, sender, recipient, initiator,
                                     transactionAmount, memo, startDate, completionDate,
                                     inProgress, confirmed);
+
+                            //Set the initial location
+                            tx.setInitialLatitude(initialLatitude);
+                            tx.setInitialLongitude(initialLongitude);
+                            try {
+                                //Set the comepletion location if not yet completed, set to null
+                                tx.setCompletionLatitude(completionLatitude);
+                                tx.setCompletionLongitude(completionLongitude);
+                            } catch (Exception ex) {
+                                tx.setCompletionLocation(null);
+                            }
                             try {
                                 user.addTransaction(tx);
                             } catch (Exception ex) {
@@ -213,6 +235,29 @@ public class SignInConnection extends AsyncTask {
                 return null;
             }
         }
+
+        //Checks if user has an entry in the balances table, and generates a new entry with $0 if not
+        // for old accounts with no balances yet
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(!(new UserChecker().hasBalance(user.getUserHash()))) {
+                    //Create a new entry in the balance table
+                    try {
+                        PreparedStatement createBalanceTableEntry = connection.prepareStatement("INSERT INTO balances(user_ID, balance) VALUES(?,?)");
+
+                        createBalanceTableEntry.setString(1, user.getUserHash());
+                        createBalanceTableEntry.setFloat(2, 0);
+
+                        createBalanceTableEntry.executeUpdate();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+
         return user;
     }
 

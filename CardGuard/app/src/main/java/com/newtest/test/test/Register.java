@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
     private final String TAG = "Register Activity";
@@ -48,15 +50,14 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //to create a cancel button
+        //Create cancel button
         Button cancelBtn = (Button)findViewById(R.id.cancel_button);
-
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this, SignIn.class);
-
+                Intent intent = new Intent(Register.this, SignInSignUp.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -80,6 +81,7 @@ public class Register extends AppCompatActivity {
                             Intent intent = new Intent(Register.this, Account.class);
                             intent.putExtra("UserKey", (Parcelable) user);
                             startActivity(intent);
+                            finish();
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -98,7 +100,7 @@ public class Register extends AppCompatActivity {
     }
 
     public Boolean validate() {
-        boolean valid = true;
+        final boolean[] valid = {true};
 
         String firstName = firstNameInput.getText().toString();
         String lastName = lastNameInput.getText().toString();
@@ -109,53 +111,106 @@ public class Register extends AppCompatActivity {
 
         if(firstName.isEmpty()) {
             firstNameInput.setError("Please enter your first name.");
-            valid = false;
+            valid[0] = false;
+        } else if(!firstNameInput.getText().toString().matches("[a-zA-Z]+")) {
+            firstNameInput.setError("Name can only contain letters.");
+            valid[0] = false;
         } else {
             firstNameInput.setError(null);
         }
 
         if(lastName.isEmpty()) {
             lastNameInput.setError("Please enter your last name.");
-            valid = false;
+            valid[0] = false;
+        } else if(!lastNameInput.getText().toString().matches("[a-zA-Z]+")) {
+            lastNameInput.setError("Last name may only contain letters.");
+            valid[0] = false;
         } else {
             lastNameInput.setError(null);
         }
 
-        if (username.isEmpty()) {
+        if(username.isEmpty()) {
             usernameInput.setError("Please enter your username");
-            valid = false;
+            valid[0] = false;
+        } else if(usernameInput.getText().toString().matches("[a-zA-Z0-9]-")) {
+            usernameInput.setError("Usernames may only contain letters or numbers.");
+            valid[0] = false;
         } else {
             usernameInput.setError(null);
         }
 
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(emailAddressInput.getText().toString());
+
         if(emailAddress.isEmpty()) {
             emailAddressInput.setError("Please enter your email address");
-            valid = false;
+            valid[0] = false;
+        } if(!mat.matches()) {
+            emailAddressInput.setError("Please enter a valid email address.");
         } else {
             emailAddressInput.setError(null);
         }
 
         if (password.isEmpty()) {
-            passwordInput.setError("Please enter your password");
-            valid = false;
+            passwordInput.setError("Please enter a password.");
+            valid[0] = false;
         } else {
             passwordInput.setError(null);
         }
 
         if(confirmPassword.isEmpty()) {
-            confirmPasswordInput.setError("Please confirm your password");
-            valid = false;
+            confirmPasswordInput.setError("Please confirm your password.");
+            valid[0] = false;
         } else {
             confirmPasswordInput.setError(null);
         }
 
         if(!password.matches(confirmPassword)) {
             confirmPasswordInput.setError("Passwords do not match.");
-            valid = false;
+            valid[0] = false;
         } else {
             confirmPasswordInput.setError(null);
         }
 
-        return valid;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if(new UserChecker().usernameExists(usernameInput.getText().toString())) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                usernameInput.setError("An account with that username already exists.");
+                                valid[0] = false;
+                            }
+                        });
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if(new UserChecker().emailExists(emailAddressInput.getText().toString())) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                emailAddressInput.setError("An account with that email address already exists.");
+                                valid[0] = false;
+                            }
+                        });
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        return valid[0];
     }
 }

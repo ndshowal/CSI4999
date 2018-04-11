@@ -55,6 +55,8 @@ public class FingerprintAuthentication extends AppCompatActivity {
         source = getIntent().getStringExtra("SourceKey");
         user = getIntent().getParcelableExtra("UserKey");
 
+        textView = findViewById(R.id.text_fingerprint_instructions);
+
         //Verify that the device is running Marshmallow (SDK 23) or higher before executing any fingerprint-related code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);

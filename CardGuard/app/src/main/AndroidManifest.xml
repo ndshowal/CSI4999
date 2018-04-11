@@ -4,13 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-feature
         android:name="android.hardware.fingerprint"
-        android:required="false"/>
+        android:required="false" />
 
- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -30,40 +31,34 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".ActivityMaps"
-            android:label="@string/transaction_map">
-        </activity>
+            android:value="AIzaSyBaqnEryv3t2cWdboyEHwBiTrDsSizlq5w"/>
 
         <!-- Splash screen -->
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SignIn" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".SignIn"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Account" />
         <activity android:name=".NewTransaction" />
         <activity android:name=".GenerateTransaction" />
         <activity android:name=".FingerprintAuthentication" />
         <activity android:name=".PhoneNumberRegistration" />
         <activity android:name=".PhoneNumberValidation" />
-        <activity android:name=".TransactionSent" />
-        <activity android:name=".RequestSent" />
+        <activity android:name=".Confirmation" />
         <activity android:name=".CardScan" />
         <activity android:name=".Register" />
         <activity android:name=".Settings" />
@@ -74,6 +69,9 @@
         <activity android:name=".FullTransactionHistory" />
         <activity android:name=".SignInSignUp" />
         <activity android:name=".TransactionInformation" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

@@ -33,6 +33,7 @@ public class Settings extends AppCompatActivity {
 
                 ed.putString("username", "");
                 ed.putString("password", "");
+                ed.putString("locationPermission", "");
                 ed.apply();
                 startActivity(new Intent(Settings.this, SignInSignUp.class));
             }

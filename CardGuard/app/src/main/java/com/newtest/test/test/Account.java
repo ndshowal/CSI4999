@@ -1,6 +1,9 @@
 package com.newtest.test.test;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,32 +20,19 @@ public class Account extends AppCompatActivity {
     int flag;
     Button fullTransactionHistoryBtn;
 
+    private String userBalance;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account);
+        setContentView(R.layout.activity_account);
 
         //Get user object from parcel
         user = getIntent().getParcelableExtra("UserKey");
 
+        //For updating the UI
         flag = 0;
-
-        //Set greeting text
-        greeting = (TextView) findViewById(R.id.text_greeting);
-        greeting.setText("Welcome, " + user.getUsername() + "!");
-        greeting.setTextSize(24);
-
-        //Thread for querying database to update transaction list
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                tp = new TransactionPuller(user, new TransactionPuller.AsyncResponse() {
-                    @Override
-                    public void processFinished(String output) {}}).execute();
-                flag = 1;
-            }
-        }).start();
-
 
         //Create button to redirect to Sending and Receiving page
         Button newTransactionBtn = findViewById(R.id.new_transaction_button);
@@ -92,13 +82,62 @@ public class Account extends AppCompatActivity {
             }
         });
 
-        updateUI();
+        userBalance = "";
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userBalance = "Your current balance is: " + new UserChecker().getFormattedBalance(user);
+                tp = new TransactionPuller(user, new TransactionPuller.AsyncResponse() {
+                    @Override
+                    public void processFinished(String output) {}}).execute();
+                flag = 1;
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                updateUI();
+            }
+        });
+
+        t1.start();
+
+        try {
+            t1.join();
+            t2.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+
+        ed.putString("username" , "");
+        ed.putString("password", "");
+        ed.apply();
+
+        startActivity(new Intent(Account.this, SignInSignUp.class));
+        finish();
     }
 
     public void updateUI() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                //Set greeting text
+                greeting = findViewById(R.id.text_greeting);
+                greeting.setText("");
+
+                greeting.setText("Welcome, " + user.getUsername() + "!\n"
+                        +  userBalance);
+                greeting.setTextSize(20);
+
                 if(flag == 0 || flag == 1) {
                     //Used to determine how many buttons to place in the ScrollView for this activity, buttons will link to the corresponding
                     // transaction information page
@@ -108,11 +147,9 @@ public class Account extends AppCompatActivity {
                             generateButtons(0);
                             break;
                         case 1:
-                            fullTransactionHistoryBtn.setVisibility(View.INVISIBLE);
                             generateButtons(1);
                             break;
                         case 2:
-                            fullTransactionHistoryBtn.setVisibility(View.INVISIBLE);
                             generateButtons(2);
                             break;
                         default:
@@ -128,23 +165,29 @@ public class Account extends AppCompatActivity {
     private void generateButtons(int n) {
         //If no transactions, generate a TextView and place it in the ScrollView and hide fullTransactionHistoryButton
         if(n == 0) {
+            LinearLayout ll = findViewById(R.id.button_layout);
+            ll.removeAllViews();
 
             TextView noTransactionsMessage = new TextView(Account.this);
-            noTransactionsMessage.setText("You have no transactions yet! Press 'New Transaction' to get started, or wait for someone to begin one with you!");
+            if(noTransactionsMessage.getText().equals("")) {
+                noTransactionsMessage.setText("You have no transactions yet! Press 'New Transaction' to get started, or wait for someone to begin one with you!");
+            }
 
-            LinearLayout ll = (LinearLayout) findViewById(R.id.button_layout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             lp.setMargins(0, 10, 0, 10);
+            noTransactionsMessage.setGravity(View.TEXT_ALIGNMENT_CENTER);
             ll.addView(noTransactionsMessage, lp);
 
         //If at least 1 transaction, generate the button(s):
         } else {
+            LinearLayout ll = findViewById(R.id.button_layout);
+            ll.removeAllViews();
+
             for (int i = 0; i < n; i++) {
                 Button transactionInfoBtn = new Button(Account.this);
                 final Transaction tx = user.getTransactions().get(i);
                 transactionInfoBtn.setText(tx.getSimpleDescription());
 
-                LinearLayout ll = (LinearLayout) findViewById(R.id.button_layout);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setMargins(0, 10, 0, 10);
                 ll.addView(transactionInfoBtn, lp);

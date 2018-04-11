@@ -55,6 +55,7 @@ public class NewTransaction extends AppCompatActivity {
                 Intent intent = new Intent(NewTransaction.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
     }

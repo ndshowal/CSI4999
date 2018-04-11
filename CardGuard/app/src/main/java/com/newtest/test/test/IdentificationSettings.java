@@ -23,9 +23,10 @@ public class IdentificationSettings extends AppCompatActivity {
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IdentificationSettings.this, Settings.class));
-
-
+                Intent intent = new Intent(IdentificationSettings.this, Settings.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+                finish();
             }
         });
 

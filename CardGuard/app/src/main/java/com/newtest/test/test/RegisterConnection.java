@@ -3,6 +3,9 @@ package com.newtest.test.test;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +35,7 @@ public class RegisterConnection extends AsyncTask {
     //Also nothing to do with DB connection
     private User user;
 
-    public RegisterConnection(String firstName, String lastName, String username, String emailAddress, String password) {
+    public RegisterConnection(String firstName, String lastName, String username, String emailAddress, String password) throws SQLException {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -43,9 +46,6 @@ public class RegisterConnection extends AsyncTask {
         user = null;
 
         System.out.println("Created RegisterConnection object successfully.");
-    }
-
-    public User connect() throws SQLException {
 
         // check that the driver is installed
         try {
@@ -78,7 +78,9 @@ public class RegisterConnection extends AsyncTask {
         } catch (SQLException ex) {
             throw new SQLException("Failed to create connection to database.", ex);
         }
+    }
 
+    public User connect() throws SQLException {
         if (connection != null) {
             // SQL Queries - 1st check if any users exist with the given username, and then again
             //  if any exist with the given email address. If both checks pass, create new entry
@@ -90,22 +92,55 @@ public class RegisterConnection extends AsyncTask {
 
 
                 // If both checks pass, create new user entry
-                if(!emailAddressExists() && !usernameExists()) {
-                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(first_name, last_name, username, email_address, password, account_type)" +
-                            " VALUES(?,?,?,?,?,?)");
-                    preparedStatement.setString(1, firstName);
-                    preparedStatement.setString(2, lastName);
-                    preparedStatement.setString(3, username);
-                    preparedStatement.setString(4, emailAddress);
-                    preparedStatement.setString(5, password);
-                    preparedStatement.setString(6, accountType);
-                    rowsUpdated += preparedStatement.executeUpdate();
+                if(!(new UserChecker().usernameExists(username)) && !(new UserChecker().emailExists(emailAddress))) {
+                    String toBeHashed = firstName + lastName + username;
+                    String userHash = toBeHashed;
+                    try {
+                        MessageDigest md = MessageDigest.getInstance("MD5");
+                        byte[] hashed = md.digest(toBeHashed.getBytes());
 
-                    System.out.println("Rows updated: " + rowsUpdated);
+                        StringBuilder hexString = new StringBuilder();
+
+                        for (int i = 0; i < hashed.length; i++) {
+                            String hex = Integer.toHexString(0xFF & hashed[i]);
+                            if (hex.length() == 1) {
+                                hexString.append('0');
+                            }
+                            hexString.append(hex);
+                        }
+                        userHash = hexString.toString();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                        userHash = toBeHashed;
+                    }
+
+                    PreparedStatement createUserTableEntry = connection.prepareStatement("INSERT INTO users(first_name, last_name, username, email_address, password, account_type, user_ID)" +
+                            " VALUES(?,?,?,?,?,?,?)");
+                    createUserTableEntry.setString(1, firstName);
+                    createUserTableEntry.setString(2, lastName);
+                    createUserTableEntry.setString(3, username);
+                    createUserTableEntry.setString(4, emailAddress);
+                    createUserTableEntry.setString(5, password);
+                    createUserTableEntry.setString(6, accountType);
+                    createUserTableEntry.setString(7, userHash);
+
+                    createUserTableEntry.executeUpdate();
+
+                    //And create a new entry in the balance table
+                    PreparedStatement createBalanceTableEntry = connection.prepareStatement("INSERT INTO balances(user_ID, balance) VALUES(?,?)");
+
+                    createBalanceTableEntry.setString(1, userHash);
+                    createBalanceTableEntry.setFloat(2, 0);
+
+                    createBalanceTableEntry.executeUpdate();
+
+                } else {
+                    //Return null if user wasn't created due to name/email conflict
+                    return null;
                 }
 
-                // Query the DB again, same code as SignInConnection - merely to ensure a new user
-                //  object is instantiated only if new entry was created
+                // Query the DB again, same code as SignInConnection - returns the new user object
+                //  but only if new entry was created
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery(
                         "SELECT * FROM users "
@@ -113,67 +148,21 @@ public class RegisterConnection extends AsyncTask {
                                 +"' AND password ='" + password +"';");
                 while (results.next()) {
                     String ID = results.getString(1);
-                    String username = results.getString(2);
-                    String password = results.getString(3);
-                    String emailAddress = results.getString(4);
-                    String firstName = results.getString(5);
-                    String lastName = results.getString(6);
-                    String accountType = results.getString(7);
+                    String userHash = results.getString(2);
+                    String username = results.getString(3);
+                    String password = results.getString(4);
+                    String emailAddress = results.getString(5);
+                    String firstName = results.getString(6);
+                    String lastName = results.getString(7);
+                    String accountType = results.getString(8);
 
                     user = new User(ID, username, password, firstName, lastName, emailAddress, accountType);
                 }
             } catch (SQLException ex) {
-                System.out.println("Query Error:");
                 ex.printStackTrace();
             }
-
-            if(user != null) {
-                System.out.println(user.toString());
-            } else {
-                System.out.println("User wasn't created");
-            }
         }
-
         return user;
-    }
-
-    public Boolean usernameExists() {
-        try {
-            Statement statement = null;
-            statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(
-                    "SELECT * FROM users "
-                            + "WHERE username='" + username +"';");
-
-            if(results.next()) {
-                System.out.println("The username : " + username + " is unavailable");
-                return true;
-            }
-        } catch (SQLException e) {
-            Log.e(TAG, e.toString());
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    public Boolean emailAddressExists() {
-        try {
-            Statement statement = null;
-            statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(
-                    "SELECT * FROM users "
-                            + "WHERE email_address='" + emailAddress + "';");
-            if(results.next()) {
-                System.out.println("That email address is already being used");
-                return true;
-            }
-        } catch (SQLException e) {
-            Log.e(TAG, e.toString());
-            e.printStackTrace();
-        }
-
-        return false;
     }
 
     @Override
