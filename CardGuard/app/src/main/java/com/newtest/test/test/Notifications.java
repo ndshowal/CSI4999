@@ -32,7 +32,7 @@ public class Notifications extends AppCompatActivity {
 
         int count = 0;
         for(Transaction t : user.getTransactions()) {
-            if(t.inProgress()) {
+            if(t.inProgress() && !t.getInitiator().getUsername().equals(user.getUsername()) ) {
                 count++;
             }
         }
