@@ -71,10 +71,10 @@ public class Notifications extends AppCompatActivity {
                     } else {
                         //If user is the recipient of the transaction
                         if (user.getUsername().equals((t.getRecipient().getUsername()))) {
-                            transactionInfoBtn.setText("You received " + t.getFormattedAmount() + " from " + t.getSender().getUsername());
+                            transactionInfoBtn.setText("You received " + t.getFormattedAmount() + " from " + t.getInitiator().getUsername());
                             //If user is the sender
                         } else if(user.getUsername().equals(t.getSender().getUsername())) {
-                            transactionInfoBtn.setText(t.getSender().getUsername() + " requested " + t.getFormattedAmount() + " from you");
+                            transactionInfoBtn.setText(t.getInitiator().getUsername() + " requested " + t.getFormattedAmount() + " from you");
                         }
                     }
 
