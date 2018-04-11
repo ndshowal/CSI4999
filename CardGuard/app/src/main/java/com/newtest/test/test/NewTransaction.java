@@ -32,15 +32,16 @@ public class NewTransaction extends AppCompatActivity {
             @Override
             public void run() {
                 for(Transaction t : user.getTransactions()) {
+                    int flag = 0;
                     if(!t.getInitiator().getUsername().equals(user.getUsername())) {
                         if(contacts.size() == 0) {
                             contacts.add(t.getInitiator());
-                            return;
+                            flag = 1;
                         } else {
                             for(User u : contacts) {
                                 if(!u.getUsername().equals(t.getInitiator().getUsername())) {
                                     contacts.add(u);
-                                    return;
+                                    flag = 1;
                                 }
                             }
                         }
@@ -48,13 +49,17 @@ public class NewTransaction extends AppCompatActivity {
 
                     if(!t.getSender().getUsername().equals(user.getUsername())) {
                         if(contacts.size() == 0) {
-                            contacts.add(t.getSender());
-                            return;
+                            if(flag == 0) {
+                                contacts.add(t.getSender());
+                                flag = 1;
+                            }
                         } else {
                             for(User u : contacts) {
                                 if(!u.getUsername().equals(t.getSender().getUsername())) {
-                                    contacts.add(u);
-                                    return;
+                                    if(flag == 0) {
+                                        contacts.add(u);
+                                        flag = 1;
+                                    }
                                 }
                             }
                         }
@@ -62,13 +67,17 @@ public class NewTransaction extends AppCompatActivity {
 
                     if(!t.getRecipient().getUsername().equals(user.getUsername())) {
                         if(contacts.size() == 0) {
-                            contacts.add(t.getRecipient());
-                            return;
+                            if(flag == 0) {
+                                contacts.add(t.getRecipient());
+                                flag = 1;
+                            }
                         } else {
                             for(User u : contacts) {
                                 if(!u.getUsername().equals(t.getRecipient().getUsername())) {
-                                    contacts.add(u);
-                                    return;
+                                    if(flag == 0) {
+                                        contacts.add(u);
+                                        flag = 1;
+                                    }
                                 }
                             }
                         }

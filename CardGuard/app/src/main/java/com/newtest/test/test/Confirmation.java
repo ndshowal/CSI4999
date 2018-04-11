@@ -34,16 +34,16 @@ public class Confirmation extends AppCompatActivity {
                 messageText.setText("You have requested " + tx.getFormattedAmount() + " from " + tx.getSender().getUsername() + "!");
                 break;
             case "send funds approved":
-                messageText.setText("You approved " + tx.getRecipient().getUsername() +"'s request for " + tx.getFormattedAmount() + ".");
+                messageText.setText("You approved " + tx.getInitiator().getUsername() +"'s request for " + tx.getFormattedAmount() + ".");
                 break;
             case "send funds denied":
-                messageText.setText("You denied " + tx.getSender().getUsername() + "'s request for " + tx.getFormattedAmount() + ".");
+                messageText.setText("You denied " + tx.getInitiator().getUsername() + "'s request for " + tx.getFormattedAmount() + ".");
                 break;
             case "receive funds approved":
-                messageText.setText("You accepted " + tx.getFormattedAmount() + " from " + tx.getSender().getUsername() + "!");
+                messageText.setText("You accepted " + tx.getFormattedAmount() + " from " + tx.getInitiator().getUsername() + "!");
                 break;
             case "receive funds denied":
-                messageText.setText("You denied " + tx.getFormattedAmount() + " from " + tx.getSender().getUsername() + ".");
+                messageText.setText("You denied " + tx.getFormattedAmount() + " from " + tx.getInitiator().getUsername() + ".");
                 break;
         }
 

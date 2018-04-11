@@ -65,10 +65,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             } else {
                 //If user is the recipient of the transaction
                 if (user.getUsername().equals((tx.getRecipient().getUsername()))) {
-                    markerMessage = "You received " + tx.getFormattedAmount() + " from " + tx.getSender().getUsername();
+                    markerMessage = "You received " + tx.getFormattedAmount() + " from " + tx.getInitiator().getUsername();
                     //If user is the sender
                 } else if(user.getUsername().equals(tx.getSender().getUsername())) {
-                    markerMessage = tx.getSender().getUsername() + " requested " + tx.getFormattedAmount() + " from you";
+                    markerMessage = tx.getInitiator().getUsername() + " requested " + tx.getFormattedAmount() + " from you";
                 }
             }
 
