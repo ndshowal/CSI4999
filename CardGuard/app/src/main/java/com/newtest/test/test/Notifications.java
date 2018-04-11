@@ -58,7 +58,7 @@ public class Notifications extends AppCompatActivity {
                 Button transactionInfoBtn = new Button(this);
                 transactionInfoBtn.setTextSize(16);
                 transactionInfoBtn.setPadding(10,10,10,10);
-                if (t.inProgress()) {
+                if (t.inProgress() && !t.getInitiator().getUsername().equals(user.getUsername())) {
                     if (user.getUsername().equals(t.getInitiator().getUsername())) {
                         //If user is the sender
                         if (user.getUsername().equals(t.getRecipient().getUsername())) {
