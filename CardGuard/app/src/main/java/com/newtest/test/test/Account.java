@@ -2,9 +2,12 @@ package com.newtest.test.test;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +22,7 @@ public class Account extends AppCompatActivity {
     AsyncTask tp;
     int flag;
     Button fullTransactionHistoryBtn;
+    Button notificationsBtn;
 
     private String userBalance;
 
@@ -59,8 +63,7 @@ public class Account extends AppCompatActivity {
         });
 
         //Create button to redirect to activity_notifications page
-        Button notificationsBtn = findViewById(R.id.notifications_button);
-
+        notificationsBtn = findViewById(R.id.notifications_button);
         notificationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,15 +118,29 @@ public class Account extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor ed = sp.edit();
 
-        ed.putString("username" , "");
-        ed.putString("password", "");
-        ed.apply();
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage("Are you sure you want to sign out? Press back again to proceed.")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor ed = sp.edit();
 
-        startActivity(new Intent(Account.this, SignInSignUp.class));
-        finish();
+                        ed.putString("username" , "");
+                        ed.putString("password", "");
+                        ed.apply();
+
+                        startActivity(new Intent(Account.this, SignInSignUp.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }}).create().show();
     }
 
     public void updateUI() {
@@ -137,6 +154,13 @@ public class Account extends AppCompatActivity {
                 greeting.setText("Welcome, " + user.getUsername() + "!\n"
                         +  userBalance);
                 greeting.setTextSize(20);
+
+                for(Transaction tx : user.getTransactions()) {
+                    if(tx.inProgress() && !tx.getInitiator().getUsername().equals(user.getUsername())) {
+                        notificationsBtn.setError("");
+                        break;
+                    }
+                }
 
                 if(flag == 0 || flag == 1) {
                     //Used to determine how many buttons to place in the ScrollView for this activity, buttons will link to the corresponding

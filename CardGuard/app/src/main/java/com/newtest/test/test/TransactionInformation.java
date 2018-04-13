@@ -118,11 +118,12 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         denyBtn = findViewById(R.id.deny_button);
 
         // Hide the confirm/deny buttons if user is the initiator of the transaction
-        if (username.equals(tx.getInitiator().getUsername()) || tx.isCompleted()) {
+        if (username.equals(tx.getInitiator().getUsername()) || !tx.inProgress()) {
             confirmBtn.setVisibility(View.INVISIBLE);
             denyBtn.setVisibility(View.INVISIBLE);
         }
 
+        ////////// CONFIRM BUTTON //////////////
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,6 +187,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
             }
         });
 
+        /////////// DENY BUTTON /////////////
         denyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

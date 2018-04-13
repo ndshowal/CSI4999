@@ -5,15 +5,9 @@ import android.os.AsyncTask;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Properties;
-
-import javax.xml.transform.Result;
 
 //Class for creating a new transaction and uploading it to the database
 public class TransactionUploader extends AsyncTask {
@@ -79,7 +73,7 @@ public class TransactionUploader extends AsyncTask {
         startDate = (Timestamp) tx.getTransactionStartDate();
         completionDate = (Timestamp) tx.getTransactionCompleteDate();
         inProgress = tx.inProgress();
-        completed = tx.isCompleted();
+        completed = tx.isAccepted();
         initialLatitude = tx.getInitialLatitude();
         initialLongitude = tx.getInitialLongitude();
         completionLatitude = tx.getCompletionLatitude();

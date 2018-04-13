@@ -4,7 +4,6 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
@@ -22,7 +21,7 @@ public class Transaction implements Parcelable {
     private float transactionAmount;
     private String memo;
     private Boolean inProgress;
-    private Boolean confirmed;
+    private Boolean accepted;
     private Double initialLatitude;
     private Double initialLongitude;
     private Double completionLatitude;
@@ -31,7 +30,7 @@ public class Transaction implements Parcelable {
     // CONSTRUCTOR //
     public Transaction(String transactionID, User sender, User recipient, User initiator,
                        float transactionAmount, String memo, Date transactionStartDate, Date transactionCompleteDate,
-            Boolean inProgress, Boolean confirmed) {
+            Boolean inProgress, Boolean accepted) {
         this.transactionStartDate = transactionStartDate;
         this.transactionCompleteDate = transactionCompleteDate;
         this.initiator = initiator;
@@ -40,13 +39,13 @@ public class Transaction implements Parcelable {
         this.transactionAmount = transactionAmount;
         this.memo = memo;
         this.inProgress = inProgress;
-        this.confirmed = confirmed;
+        this.accepted = accepted;
         this.transactionID = transactionID;
     }
 
     public Transaction(User sender, User recipient, User initiator,
                        float transactionAmount, String memo, Date transactionStartDate, Date transactionCompleteDate,
-                       Boolean inProgress, Boolean confirmed) {
+                       Boolean inProgress, Boolean accepted) {
         this.transactionStartDate = transactionStartDate;
         this.transactionCompleteDate = transactionCompleteDate;
         this.initiator = initiator;
@@ -55,7 +54,7 @@ public class Transaction implements Parcelable {
         this.transactionAmount = transactionAmount;
         this.memo = memo;
         this.inProgress = inProgress;
-        this.confirmed = confirmed;
+        this.accepted = accepted;
         setTransactionID();
     }
 
@@ -72,8 +71,8 @@ public class Transaction implements Parcelable {
         memo = in.readString();
         byte inProgressVal = in.readByte();
         inProgress = inProgressVal == 0x02 ? null : inProgressVal != 0x00;
-        byte confirmedVal = in.readByte();
-        confirmed = confirmedVal == 0x02 ? null : confirmedVal != 0x00;
+        byte acceptedVal = in.readByte();
+        accepted = acceptedVal == 0x02 ? null : acceptedVal != 0x00;
         initialLatitude = in.readByte() == 0x00 ? null : in.readDouble();
         initialLongitude = in.readByte() == 0x00 ? null : in.readDouble();
         completionLatitude = in.readByte() == 0x00 ? null : in.readDouble();
@@ -95,10 +94,10 @@ public class Transaction implements Parcelable {
         } else {
             dest.writeByte((byte) (inProgress ? 0x01 : 0x00));
         }
-        if (confirmed == null) {
+        if (accepted == null) {
             dest.writeByte((byte) (0x02));
         } else {
-            dest.writeByte((byte) (confirmed ? 0x01 : 0x00));
+            dest.writeByte((byte) (accepted ? 0x01 : 0x00));
         }
         if (initialLatitude == null) {
             dest.writeByte((byte) (0x00));
@@ -150,15 +149,35 @@ public class Transaction implements Parcelable {
                 + " \nTransaction Amount: " + getTransactionAmount()
                 + " \nMemo: " + getMemo()
                 + " \nIn Progress: " + inProgress()
-                + " \nConfirmed: " + isCompleted();
+                + " \nAccepted: " + isAccepted();
     }
 
     public String getSimpleDescription() {
-        return getTransactionStartDateString().substring(0, 10)
-                + " \nFrom: " + getSender().getUsername()
-                + " To: " + getRecipient().getUsername()
-                + " \nAmount: " + getFormattedAmount()
-                + " \nFor: " + getMemo();
+        if(inProgress()) {
+            return getTransactionStartDateString()
+                    + " \nFrom: " + getSender().getUsername()
+                    + " \nTo: " + getRecipient().getUsername()
+                    + " \nAmount: " + getFormattedAmount()
+                    + " \nFor: " + getMemo()
+                    + " \nWaiting for approval by " + getNotInitiator().getUsername();
+        } else if(!inProgress()) {
+            if(isAccepted()) {
+                return getTransactionStartDateString()
+                        + " \nFrom: " + getSender().getUsername()
+                        + " \nTo: " + getRecipient().getUsername()
+                        + " \nAmount: " + getFormattedAmount()
+                        + " \nFor: " + getMemo()
+                        + " \nTransaction was accepted by " + getNotInitiator().getUsername();
+            } else if(!isAccepted()){
+                return getTransactionStartDateString()
+                        + " \nFrom: " + getSender().getUsername()
+                        + " To: " + getRecipient().getUsername()
+                        + " \nAmount: " + getFormattedAmount()
+                        + " \nFor: " + getMemo()
+                        + " \nTransaction was denied " + getNotInitiator().getUsername();
+            }
+        }
+        return "";
     }
 
     // GETTERS //
@@ -173,9 +192,8 @@ public class Transaction implements Parcelable {
 
     public String getTransactionStartDateString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String transactionStartDateString = sdf.format(transactionStartDate);
-        
-        return transactionStartDateString;
+
+        return sdf.format(transactionStartDate);
     }
     
     public Date getTransactionCompleteDate() {
@@ -188,10 +206,9 @@ public class Transaction implements Parcelable {
     
     public String getTransactionCompleteDateString() {
         if(getTransactionCompleteDate() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-            String transactionCompleteDateString = sdf.format(transactionCompleteDate);
-        
-            return transactionCompleteDateString;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            return sdf.format(transactionCompleteDate);
         } else {
             return "Transaction not yet completed.";
         }
@@ -199,6 +216,14 @@ public class Transaction implements Parcelable {
     
     public User getInitiator() {
         return initiator;
+    }
+
+    public User getNotInitiator() {
+        if(getSender().getUsername().equals(getInitiator().getUsername())) {
+            return getRecipient();
+        } else {
+            return getSender();
+        }
     }
     
     public User getSender() {
@@ -226,8 +251,8 @@ public class Transaction implements Parcelable {
         return inProgress;
     }
     
-    public Boolean isCompleted() {
-        return confirmed;
+    public Boolean isAccepted() {
+        return accepted;
     }
 
     public Double getInitialLatitude() {
@@ -324,8 +349,8 @@ public class Transaction implements Parcelable {
         inProgress = in;
     }
 
-    public void setApproved(Boolean in) {
-        confirmed = in;
+    public void setAccepted(Boolean in) {
+        accepted = in;
     }
 
     public void setInitialLatitude(Double in) {
@@ -350,8 +375,10 @@ public class Transaction implements Parcelable {
     }
 
     public void setCompletionLocation(Location loc) {
-        completionLatitude = loc.getLatitude();
-        completionLongitude = loc.getLongitude();
+        if (loc != null) {
+            completionLatitude = loc.getLatitude();
+            completionLongitude = loc.getLongitude();
+        }
     }
 
     @Override

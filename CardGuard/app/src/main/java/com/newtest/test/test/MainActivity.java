@@ -28,6 +28,7 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
      * been disabled or reset after the key was generated, or if a fingerprint got enrolled after
      * the key was generated.
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean initCipher(Cipher cipher, String keyName) {
         try {
             mKeyStore.load(null);
@@ -180,8 +182,9 @@ public class MainActivity extends AppCompatActivity {
      * @param withFingerprint {@code true} if the purchase was made by using a fingerprint
      * @param cryptoObject the Crypto object
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onPurchased(boolean withFingerprint,
-            @Nullable FingerprintManager.CryptoObject cryptoObject) {
+                            @Nullable FingerprintManager.CryptoObject cryptoObject) {
         if (withFingerprint) {
             // If the user has authenticated with fingerprint, verify that using cryptography and
             // then show the confirmation message.

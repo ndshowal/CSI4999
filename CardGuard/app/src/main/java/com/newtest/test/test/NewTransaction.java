@@ -32,54 +32,27 @@ public class NewTransaction extends AppCompatActivity {
             @Override
             public void run() {
                 for(Transaction t : user.getTransactions()) {
-                    int flag = 0;
-                    if(!t.getInitiator().getUsername().equals(user.getUsername())) {
-                        if(contacts.size() == 0) {
-                            contacts.add(t.getInitiator());
-                            flag = 1;
-                        } else {
-                            for(User u : contacts) {
-                                if(!u.getUsername().equals(t.getInitiator().getUsername())) {
-                                    contacts.add(u);
-                                    flag = 1;
-                                }
-                            }
-                        }
+                    User s = t.getSender();
+                    User r = t.getRecipient();
+                    User notUser = null;
+
+                    if (s.getUsername().equals(user.getUsername())) {
+                        notUser = r;
+                    } else if(r.getUsername().equals(user.getUsername())) {
+                        notUser = s;
                     }
 
-                    if(!t.getSender().getUsername().equals(user.getUsername())) {
-                        if(contacts.size() == 0) {
-                            if(flag == 0) {
-                                contacts.add(t.getSender());
+                    if(contacts.size() == 0 ) {
+                        contacts.add(notUser);
+                    } else {
+                        int flag = 0;
+                        for (User c : contacts) {
+                            if (notUser != null && !c.getUsername().equals(notUser.getUsername())) {
                                 flag = 1;
-                            }
-                        } else {
-                            for(User u : contacts) {
-                                if(!u.getUsername().equals(t.getSender().getUsername())) {
-                                    if(flag == 0) {
-                                        contacts.add(u);
-                                        flag = 1;
-                                    }
-                                }
                             }
                         }
-                    }
-
-                    if(!t.getRecipient().getUsername().equals(user.getUsername())) {
-                        if(contacts.size() == 0) {
-                            if(flag == 0) {
-                                contacts.add(t.getRecipient());
-                                flag = 1;
-                            }
-                        } else {
-                            for(User u : contacts) {
-                                if(!u.getUsername().equals(t.getRecipient().getUsername())) {
-                                    if(flag == 0) {
-                                        contacts.add(u);
-                                        flag = 1;
-                                    }
-                                }
-                            }
+                        if(flag == 1) {
+                            contacts.add(notUser);
                         }
                     }
                 }
