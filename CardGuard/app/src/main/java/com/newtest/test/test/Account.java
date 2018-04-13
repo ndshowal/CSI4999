@@ -26,10 +26,13 @@ public class Account extends AppCompatActivity {
 
     private String userBalance;
 
+    int backCount;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        backCount = 0;
         setContentView(R.layout.activity_account);
 
         //Get user object from parcel
@@ -114,33 +117,45 @@ public class Account extends AppCompatActivity {
         }
     }
 
+    public void onResume() {
+        super.onResume();
+        backCount = 0;
+    }
+
+    private void logout() {
+        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+
+        ed.putString("username" , "");
+        ed.putString("password", "");
+        ed.apply();
+
+        startActivity(new Intent(Account.this, SignInSignUp.class));
+        finish();
+    }
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
-
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.sign_out)
-                .setMessage("Are you sure you want to sign out? Press back again to proceed.")
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor ed = sp.edit();
-
-                        ed.putString("username" , "");
-                        ed.putString("password", "");
-                        ed.apply();
-
-                        startActivity(new Intent(Account.this, SignInSignUp.class));
-                        finish();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        return;
-                    }}).create().show();
+        backCount++;
+        if(backCount == 2) {
+            logout();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.sign_out)
+                    .setMessage("Are you sure you want to sign out? Press OK to proceed.")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            logout();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    }).create().show();
+        }
     }
 
     public void updateUI() {

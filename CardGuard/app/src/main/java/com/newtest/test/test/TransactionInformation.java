@@ -62,8 +62,6 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
             ed.apply();
         }
 
-
-
         switch(locationPermission) {
             case "granted":
                 lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -86,7 +84,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         if (username.equals(tx.getInitiator().getUsername())) {
             //If user is the sender
             if (username.equals(tx.getRecipient().getUsername())) {
-                notification.setText("Your request from " + tx.getSender().getUsername() + " for " + tx.getFormattedAmount());
+                notification.setText("You requested " + tx.getFormattedAmount() + " from " + tx.getSender().getUsername());
                 //If user is the recipient
             } else if (username.equals(tx.getSender().getUsername())) {
                 notification.setText("You sent " + tx.getFormattedAmount() + " to " + tx.getRecipient().getUsername());
@@ -107,9 +105,15 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         memoText.setText(tx.getMemo());
 
         if (tx.getTransactionCompleteDate() != null) {
+            TextView tv = findViewById(R.id.accepted_label);
+            if(!tx.isAccepted()) {
+                tv.setText("Denied on: ");
+            }
             completedText.setText(tx.getTransactionCompleteDateString());
         } else {
-            completedText.setText(R.string.waiting_for_transaction);
+            TextView tv = findViewById(R.id.accepted_label);
+            tv.setText("Unconfirmed: ");
+            completedText.setText("Waiting for transaction to be confirmed by " + tx.getNotInitiator().getUsername());
         }
 
         //Confirm Button
@@ -133,11 +137,11 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 final Transaction newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
                         tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, true);
                 if (location != null) {
-                    newTx.setCompletionLongitude(0.0);
-                    newTx.setCompletionLongitude(0.0);
+                    newTx.setCompletionLatitude(location.getLatitude());
+                    newTx.setCompletionLongitude(location.getLongitude());
                 } else {
-                    newTx.setInitialLatitude(0.0);
-                    newTx.setInitialLongitude(0.0);
+                    newTx.setCompletionLongitude(0.0);
+                    newTx.setCompletionLongitude(0.0);
                 }
                 new Thread(new Runnable() {
                     @Override
@@ -197,11 +201,11 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 final Transaction newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
                         tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, false);
                 if (location != null) {
-                    newTx.setCompletionLongitude(0.0);
-                    newTx.setCompletionLongitude(0.0);
+                    newTx.setCompletionLatitude(location.getLatitude());
+                    newTx.setCompletionLongitude(location.getLongitude());
                 } else {
-                    newTx.setInitialLatitude(0.0);
-                    newTx.setInitialLongitude(0.0);
+                    newTx.setCompletionLongitude(0.0 + Math.random());
+                    newTx.setCompletionLongitude(0.0 + Math.random());
                 }
                 new Thread(new Runnable() {
                     @Override
