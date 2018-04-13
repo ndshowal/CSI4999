@@ -36,22 +36,29 @@ public class NewTransaction extends AppCompatActivity {
                     User r = t.getRecipient();
                     User notUser = null;
 
+                    //If sender == the user, notUser = recipient
                     if (s.getUsername().equals(user.getUsername())) {
                         notUser = r;
+                    //If recipient == the user, notUser = sender
                     } else if(r.getUsername().equals(user.getUsername())) {
                         notUser = s;
                     }
 
+                    //If contacts is empty, add notUser to it
                     if(contacts.size() == 0 ) {
                         contacts.add(notUser);
+                    //Else, set comparison flag = 0
                     } else {
                         int flag = 0;
+                        //For each User in the contacts list
                         for (User c : contacts) {
-                            if (notUser != null && !c.getUsername().equals(notUser.getUsername())) {
+                            //If notUser exists and isn't the current User in contacts, set flag to 1
+                            if (notUser != null && c.getUsername().equals(notUser.getUsername())) {
                                 flag = 1;
                             }
                         }
-                        if(flag == 1) {
+                        //If flag = 0, add notUser to contacts list
+                        if(flag == 0) {
                             contacts.add(notUser);
                         }
                     }
