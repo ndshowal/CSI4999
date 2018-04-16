@@ -211,10 +211,10 @@ public class Account extends AppCompatActivity {
             if(noTransactionsMessage.getText().equals("")) {
                 noTransactionsMessage.setText("You have no transactions yet! Press 'New Transaction' to get started, or wait for someone to begin one with you!");
             }
+            noTransactionsMessage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             lp.setMargins(0, 10, 0, 10);
-            noTransactionsMessage.setGravity(View.TEXT_ALIGNMENT_CENTER);
             ll.addView(noTransactionsMessage, lp);
 
         //If at least 1 transaction, generate the button(s):

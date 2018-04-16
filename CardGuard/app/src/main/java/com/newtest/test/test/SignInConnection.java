@@ -81,6 +81,9 @@ public class SignInConnection extends AsyncTask {
                                 + "WHERE username='" + username
                                 +"' AND password ='" + password +"';");
 
+                if(!results.next()) {
+                    return null;
+                }
                 while (results.next()) {
                     String ID = results.getString(1);
                     String hash = results.getString(2);

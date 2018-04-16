@@ -348,6 +348,16 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
             valid = false;
         }
 
+        if(Float.parseFloat(amountInput.getText().toString()) == 0) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    amountInput.setError("Transaction value cannot be zero!");
+                }
+            });
+            valid = false;
+        }
+
         return valid;
     }
 

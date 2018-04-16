@@ -29,50 +29,62 @@ public class SignIn extends AppCompatActivity {
     User user;
 
     SharedPreferences sp;
-
+    private String storedUsername;
+    private String storedPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_signin);
+
 
         //Access username and password in SharedPreferences file called 'userInfo"
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String storedUsername = sp.getString("username","");
-        String storedPassword = sp.getString("password", "");
+        storedUsername = sp.getString("username", "");
+        storedPassword = sp.getString("password", "");
 
         System.out.println(storedUsername);
         System.out.println(storedPassword);
 
         //If username and password are not stored in SharedPreferences, login by entering credentials
         // else, username and password are found, automatically login
-        if(!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
+        if (!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
             System.out.println("~~~~~~~~~~~~~~~~~~~~ Credentials detected ~~~~~~~~~~~~~~~~~~~~");
             loginWithPrefs(storedUsername, storedPassword);
         } else {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            setContentView(R.layout.activity_signin);
-
-
-            usernameInput = findViewById(R.id.username_input);
-            passwordInput = findViewById(R.id.password_input);
-
-            //Instantiate signInBtn
-            signInBtn = findViewById(R.id.signin_button);
-            signInBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login();
-                }
-            });
+            generateUI();
         }
+    }
+
+     public void generateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                usernameInput = findViewById(R.id.username_input);
+                passwordInput = findViewById(R.id.password_input);
+
+                if(storedUsername != null) {
+                    usernameInput.setText(storedUsername);
+                }
+
+                //Instantiate signInBtn
+                signInBtn = findViewById(R.id.signin_button);
+                signInBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        login();
+                    }
+                });
+            }
+        });
      }
 
     protected void login() {
         Log.d(TAG, "Login");
         if(validate()) {
             Toast.makeText(SignIn.this, "Signing you in...", Toast.LENGTH_LONG).show();
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -120,26 +132,23 @@ public class SignIn extends AppCompatActivity {
                 connection = new SignInConnection(username, password);
                 try{
                     user = connection.connect();
-                    Intent intent = new Intent(SignIn.this, Account.class);
-                    intent.putExtra("UserKey", user);
-                    intent.putExtra("SourceKey", "SignIn");
+                    if(user == null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateUI();
+                                passwordInput.setError("Last known password incorrect, please re-enter password.");
+                            }
+                        });
+                    } else {
+                        Intent intent = new Intent(SignIn.this, Account.class);
+                        intent.putExtra("UserKey", user);
+                        intent.putExtra("SourceKey", "SignIn");
 
-                    startActivity(intent);
-                    finish();
+                        startActivity(intent);
+                        finish();
+                    }
                 } catch(Exception ex) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            login();
-                        }
-                    }).start();
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            passwordInput.setError("Last known password incorrect, please re-enter password.");
-                        }
-                    });
                     ex.printStackTrace();
                 }
             }
