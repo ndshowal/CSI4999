@@ -27,7 +27,7 @@ public class Account extends AppCompatActivity {
     private String userBalance;
 
     int backCount;
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -127,6 +127,19 @@ public class SignIn extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } catch(Exception ex) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            login();
+                        }
+                    }).start();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            passwordInput.setError("Last known password incorrect, please re-enter password.");
+                        }
+                    });
                     ex.printStackTrace();
                 }
             }
