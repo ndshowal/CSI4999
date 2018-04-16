@@ -9,10 +9,12 @@
     $reg_password = $_POST['reg_password'];
     $reg_confirm_password = $_POST['reg_confirm_password'];
     $reg_account_type = "Standard";
+    $reg_user_hash = hash('MD5', $reg_first_name + $reg_last_name + $reg_username);
+    
     
     if($reg_password === $reg_confirm_password) {
-	    $query = "INSERT INTO users(first_name, last_name, username, email_address, password, account_type)
-                VALUES('$reg_first_name', '$reg_last_name', '$reg_username', '$reg_email', '$reg_password', '$reg_account_type')";	
+	    $query = "INSERT INTO users(user_ID, first_name, last_name, username, email_address, password, account_type)
+                VALUES('$reg_user_hash', '$reg_first_name', '$reg_last_name', '$reg_username', '$reg_email', '$reg_password', '$reg_account_type')";	
         $query2 = "SELECT * FROM users where username='$reg_username' OR email_address='$reg_email'";
         
 		$response = @mysqli_query($db, $query2);
@@ -30,18 +32,25 @@
 		        }
 		    }
 		    
-		    mysqli_query($db, $query);
-		            
-		    $_SESSION['username'] = $reg_username;
-		    $_SESSION['password'] = $reg_password;
- 		    $_SESSION['logged_in'] = true;
-		    $_SESSION['first_name'] = $reg_first_name;
-            $_SESSION['last_name'] = $reg_last_name;
-            $_SESSION['email_address'] = $reg_email;
+		    try {
+		    	mysqli_query($db, $query);
+		    	
+	    		$_SESSION['user_hash'] = $reg_user_hash;		            
+			    $_SESSION['username'] = $reg_username;
+		    	$_SESSION['password'] = $reg_password;
+ 		    	$_SESSION['logged_in'] = true;
+		    	$_SESSION['first_name'] = $reg_first_name;
+            	$_SESSION['last_name'] = $reg_last_name;
+            	$_SESSION['email_address'] = $reg_email;
 			        
-			echo'<head><meta http-equiv="refresh" content="0;confirmation.php"></head>';
+				echo'<head><meta http-equiv="refresh" content="0;confirmation.php"></head>';
 		        
-		    exit();
+		    	exit();
+		    } catch (Exception $e) {
+		    	echo $e;
+		    }
+		        
+		
 		} 
 	} else {
 		echo 'The two passwords do not match. Please re-enter.';

@@ -28,6 +28,8 @@
 					<fieldset>
 						<div class="settings-section">
 						
+						
+						
 							<a href="transactions.php">To view your transaction history, please click here</a>
 								<br><br>
 						

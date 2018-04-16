@@ -1,6 +1,5 @@
 <?php
     include("header.php");
-    include("footer.php");
     
     $txusername = $_SESSION['username'];
     $tx_ID = $_GET['id'];
@@ -27,20 +26,44 @@
                 $txAccepted = "Denied";
             }
             
-            echo'<h3> Transaction' . $tx_ID . '</h3><br>
-                Sender: ' . $row['sender'] . ' <br>
-                Recipient: ' . $row['recipient'] . ' <br>
-                Transaction Initiated by: ' . $row['initiator'] . ' <br>
-                Amount of Transaction: $' . $row['transaction_amount'] . ' <br>
-                Memo: ' . $row['memo'] . ' <br>
-                Transaction was initiated on: ' . $row['start_date'] . ' <br>';
+    echo'
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <h1>Transaction Details</h1>
+      </div>
+    </header>
+    
+    <section class="standard-page transaction">
+    <div class="container">
+    <div class="row"><div class="col-md-10 col-lg-8 col-xl-7 mx-auto">';
+            echo'
+            
+                <p><b>Transaction Initiated by:</b> ' . $row['initiator'] . ' </p>
+                <br><p><b>Sender:</b> ' . $row['sender'] . '</p>
+                <p><b>Recipient:</b> ' . $row['recipient'] . ' </p>
+                <p><b>Amount of Transaction:</b> $' . $row['transaction_amount'] . ' </p>
+                <p><b>Memo:</b> ' . $row['memo'] . ' </p>
+                <p><b>Transaction was initiated on:</b> ' . $row['start_date'] . ' <p>';
                 if($row['completion_date'] != null) {
-                    echo'Transaction was completed on: ' . $row['completion_date'] . ' <br>
-                    Transaction was ' . $txAccepted . '.';
+                    echo'<p><b>Transaction was completed on:</b> ' . $row['completion_date'] . ' </p>';
+                    if($row['sender'] === $row['initiator']) {
+                        echo'<b>Transaction was ' . $txAccepted . ' by ' . $row['recipient'] . '</b></p>';
+                    } else if($row['recipient'] === $row['initiator']) {
+                        echo'<b>Transaction was ' . $txAccepted . ' by ' . $row['sender'] . '</b></p>';
+                    }
                 } else {
-                    echo'Transaction is still in progress.';
+                    if($row['sender'] === $row['initiator']){
+                        echo'<br><b>Transaction not yet approved by '. $row['recipient'] . '</b></p>';
+                    } else {
+                        echo'<br><b>Transaction not yet approved by '. $row['sender'] . '<.b></p>';
+                    }
                 }
-                echo'<br><br><a href="transactions.php">Back</a>';
+                echo'<a href="transactions.php" class="btn btn-primary">Back</a>';
             }
     }
+    
+    echo '</div></div></section>';
+    include("footer.php");
+
 ?>

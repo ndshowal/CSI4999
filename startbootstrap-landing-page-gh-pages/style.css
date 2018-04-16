@@ -136,6 +136,21 @@ footer {
 	font-weight: bold;	
 }
 
+
+/* Transactions */
+.transactions .table {width: 100%;}
+
+.transactions table tbody tr:nth-of-type(odd){background:#f2f2f2;}
+.transactions table thead {background: #ccf1ff; font-weight: bold; padding: 5px 0;}
+
+.transaction p {margin-bottom: 0;}
+.transaction a.btn {margin-top: 20px;}
+
+.table {display: table;}
+.table-header {display: table-header-group;}
+.table-row {display: table-row;}
+.table-cell {display: table-cell; padding: 5px 10px;}
+
 @media screen and (min-width: 768px) {
 	
 	.nav-menu ul {

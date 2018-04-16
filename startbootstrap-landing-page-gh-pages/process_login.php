@@ -27,8 +27,8 @@
         }
         
         if(!$_SESSION['logged_in']) {
-            echo 'User/password not found, please try again.';
-            echo '<br><br> <a href="signin.php">Back</a>';
+            echo "<div style='text-align:center'><br>User/password not found, please try again.</div>";
+            echo "<div style='text-align:center'><br><a href='signin.php'>Back</a></div>";
         } 
         
         exit();
