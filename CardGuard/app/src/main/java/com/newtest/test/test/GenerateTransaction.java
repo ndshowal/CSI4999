@@ -307,7 +307,7 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
         }
 
         //If user attempts to send money to themselves
-        if(usernameInput.equals(user.getUsername())) {
+        if(usernameInput.getText().toString().equals(user.getUsername())) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
