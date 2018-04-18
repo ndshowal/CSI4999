@@ -88,10 +88,14 @@ public class SignIn extends AppCompatActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    connection = new SignInConnection(usernameInput.getText().toString(), passwordInput.getText().toString());
+                    try {
+                        connection = new SignInConnection(usernameInput.getText().toString(), passwordInput.getText().toString());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     try {
                         user = connection.connect();
-                        if(!(user == null)) {
+                        if(user != null) {
                             if(user.getUserHash() == null) {
                                 System.out.println("Setting user hash, no hash found");
                                 user.setUserHash();
@@ -115,9 +119,8 @@ public class SignIn extends AppCompatActivity {
                                 }
                             });
                         }
-                    } catch (SQLException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
-                        Log.e(TAG, e.toString());
                     }
                 }
             }).start();
@@ -129,7 +132,11 @@ public class SignIn extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                connection = new SignInConnection(username, password);
+                try {
+                    connection = new SignInConnection(username, password);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 try{
                     user = connection.connect();
                     if(user == null) {

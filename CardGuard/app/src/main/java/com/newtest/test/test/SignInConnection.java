@@ -30,16 +30,12 @@ public class SignInConnection extends AsyncTask {
     //Also nothing to do with DB connection
     private User user;
 
-    public SignInConnection(String username, String password) {
+    public SignInConnection(String username, String password) throws SQLException {
         this.username = username;
         this.password = password;
 
         user = null;
 
-        System.out.println("Created SignInConnection object successfully.");
-    }
-
-    public User connect() throws SQLException {
         // Check that the driver is installed
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -66,10 +62,15 @@ public class SignInConnection extends AsyncTask {
 
             // Connect to MySQL server with set parameters
             connection = DriverManager.getConnection(url, properties);
+
+            System.out.println("Created SignInConnection object successfully.");
         } catch (SQLException ex) {
             throw new SQLException("Failed to create connection to database.", ex);
         }
 
+    }
+
+    public User connect() {
         if (connection != null) {
             // Query database for all rows where username and password match (should be 1 at most)
             try {
@@ -79,11 +80,8 @@ public class SignInConnection extends AsyncTask {
                 ResultSet results = statement.executeQuery(
                         "SELECT * FROM users "
                                 + "WHERE username='" + username
-                                +"' AND password ='" + password +"';");
+                                + "' AND password ='" + password + "';");
 
-                if(!results.next()) {
-                    return null;
-                }
                 while (results.next()) {
                     String ID = results.getString(1);
                     String hash = results.getString(2);
@@ -95,6 +93,7 @@ public class SignInConnection extends AsyncTask {
                     String accountType = results.getString(8);
 
                     user = new User(ID, hash, username, password, firstName, lastName, emailAddress, accountType);
+                    System.out.println(user.toString());
                 }
             } catch (SQLException ex) {
                 System.out.println("Query Error");
@@ -234,34 +233,36 @@ public class SignInConnection extends AsyncTask {
                     Log.e(TAG, ex.toString());
                     ex.printStackTrace();
                 }
-            } else {
-                return null;
+
+                //Checks if user has an entry in the balances table, and generates a new entry with $0 if not
+                // for old accounts with no balances yet
+                Thread t1 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(!(new UserChecker().hasBalance(user.getUserHash()))) {
+                            //Create a new entry in the balance table
+                            try {
+                                PreparedStatement createBalanceTableEntry = connection.prepareStatement("INSERT INTO balances(user_ID, balance) VALUES(?,?)");
+
+                                createBalanceTableEntry.setString(1, user.getUserHash());
+                                createBalanceTableEntry.setFloat(2, 0);
+
+                                createBalanceTableEntry.executeUpdate();
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+                t1.start();
+
+                System.out.println(user.toString());
+
+                return user;
             }
         }
-
-        //Checks if user has an entry in the balances table, and generates a new entry with $0 if not
-        // for old accounts with no balances yet
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if(!(new UserChecker().hasBalance(user.getUserHash()))) {
-                    //Create a new entry in the balance table
-                    try {
-                        PreparedStatement createBalanceTableEntry = connection.prepareStatement("INSERT INTO balances(user_ID, balance) VALUES(?,?)");
-
-                        createBalanceTableEntry.setString(1, user.getUserHash());
-                        createBalanceTableEntry.setFloat(2, 0);
-
-                        createBalanceTableEntry.executeUpdate();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-
-
-        return user;
+        return null;
     }
 
     @Override

@@ -37,7 +37,7 @@ public class User implements Parcelable{
     }
 
     // CONSTRUCTOR //
-    public User(String ID, String userHash, String username,  String password, String firstName, String lastName,
+    public User(String ID, String userHash, String username, String password, String firstName, String lastName,
                 String emailAddress, String accountType) {
         this.ID = ID;
         this.userHash = userHash;
