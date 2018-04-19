@@ -23,7 +23,7 @@
 
     <style name="CGButton">
         <item name="android:borderlessButtonStyle" />
-        <item name="android:background">@drawable/background_bg</item>
+        <item name="android:background">@drawable/button</item>
         <item name="android:gravity">center</item>
     </style>
 
