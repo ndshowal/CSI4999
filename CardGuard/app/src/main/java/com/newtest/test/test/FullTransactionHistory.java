@@ -117,6 +117,7 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                                     Intent intent = new Intent(FullTransactionHistory.this, MapsActivity.class);
                                     intent.putExtra("UserKey", user);
                                     startActivity(intent);
+
                                 }
                             });
                             break;
@@ -138,6 +139,9 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                     backBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            ProgressDialog pd = new ProgressDialog(FullTransactionHistory.this);
+                            pd.setMessage("Retrieving account information...");
+                            pd.show();
                             Intent intent = new Intent(FullTransactionHistory.this, Account.class);
                             intent.putExtra("UserKey", user);
                             startActivity(intent);
@@ -184,7 +188,9 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                                     Intent intent = new Intent(FullTransactionHistory.this, TransactionInformation.class);
                                     intent.putExtra("UserKey", user);
                                     intent.putExtra("TxKey", tx);
+                                    intent.putExtra("SourceKey", "Full Transaction History");
                                     startActivity(intent);
+                                    finish();
                                 }
                             });
                         }
@@ -294,6 +300,17 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
         } else {
             return true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        ProgressDialog pd = new ProgressDialog(FullTransactionHistory.this);
+        pd.setMessage("Retrieving account information...");
+        pd.show();
+        Intent intent = new Intent(FullTransactionHistory.this, Account.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
+        finish();
     }
 
     @Override

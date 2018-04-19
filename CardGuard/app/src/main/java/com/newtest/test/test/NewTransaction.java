@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.NetworkOnMainThreadException;
@@ -113,6 +114,9 @@ public class NewTransaction extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(NewTransaction.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(NewTransaction.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
@@ -178,7 +182,8 @@ public class NewTransaction extends AppCompatActivity {
                                                 intent.putExtra("TargetKey", u.getUsername());
                                                 startActivity(intent);
                                             }
-                                        }).setNegativeButton("Request Funds", new DialogInterface.OnClickListener() {
+                                        })
+                                        .setNegativeButton("Request Funds", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 Intent intent = new Intent(NewTransaction.this, GenerateTransaction.class);
@@ -187,12 +192,30 @@ public class NewTransaction extends AppCompatActivity {
                                                 intent.putExtra("TargetKey", u.getUsername());
                                                 startActivity(intent);
                                             }
-                                }).create().show();
+                                        })
+                                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                return;
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        .create().show();
                             }
                         });
                     }
                 }
             }
         });
+    }
+
+    public void onBackPressed() {
+        ProgressDialog pd = new ProgressDialog(NewTransaction.this);
+        pd.setMessage("Retrieving account information...");
+        pd.show();
+        Intent intent = new Intent(NewTransaction.this, Account.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
+        finish();
     }
 }

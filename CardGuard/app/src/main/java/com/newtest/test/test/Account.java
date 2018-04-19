@@ -27,8 +27,10 @@ public class Account extends AppCompatActivity {
     private Button notificationsBtn;
 
     private String userBalance;
-
+    private SharedPreferences sp;
     private ProgressDialog progressDialog;
+
+    private String fingerprintPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,9 @@ public class Account extends AppCompatActivity {
         //For updating the UI
         flag = 0;
 
+        sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        fingerprintPermission = sp.getString("useFingerprint", "");
+
         //Create button to redirect to Sending and Receiving page
         Button newTransactionBtn = findViewById(R.id.new_transaction_button);
 
@@ -51,18 +56,22 @@ public class Account extends AppCompatActivity {
                 Intent intent = new Intent(Account.this, NewTransaction.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
         //Create button to redirect to activity_settings page
         Button settingsBtn = findViewById(R.id.settings_button);
-
+        if(fingerprintPermission.equals("")){
+            settingsBtn.setError("");
+        }
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Account.this, Settings.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -71,9 +80,13 @@ public class Account extends AppCompatActivity {
         notificationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(Account.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(Account.this, Notifications.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -83,9 +96,13 @@ public class Account extends AppCompatActivity {
         fullTransactionHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(Account.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(Account.this, FullTransactionHistory.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -254,7 +271,9 @@ public class Account extends AppCompatActivity {
                         Intent intent = new Intent(Account.this, TransactionInformation.class);
                         intent.putExtra("UserKey", user);
                         intent.putExtra("TxKey", tx);
+                        intent.putExtra("SourceKey", "Account");
                         startActivity(intent);
+                        finish();
                     }
                 });
             }

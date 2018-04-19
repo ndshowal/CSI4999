@@ -13,6 +13,8 @@ import android.widget.TextView;
 public class Settings extends AppCompatActivity {
 
     private User user;
+    private SharedPreferences sp;
+    private String fingerprintPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +25,15 @@ public class Settings extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.user_label);
         tv.setText(user.getUsername());
 
+        sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        fingerprintPermission = sp.getString("useFingerprint", "");
+
+        updateUI();
+    }
+
+    private void updateUI() {
         //to create a logout button
-        Button logoutBtn = (Button)findViewById(R.id.logout_button);
+        Button logoutBtn = findViewById(R.id.logout_button);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +50,7 @@ public class Settings extends AppCompatActivity {
         });
 
         //to create a button to update your account info
-        Button updateAccountInfoBtn = (Button)findViewById(R.id.update_account_info_button);
+        Button updateAccountInfoBtn = findViewById(R.id.update_account_info_button);
         updateAccountInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +61,7 @@ public class Settings extends AppCompatActivity {
         });
 
         //to create a button to update billing info
-        Button updateBillingInfoBtn = (Button)findViewById(R.id.update_billing_info_button);
+        Button updateBillingInfoBtn = findViewById(R.id.update_billing_info_button);
         updateBillingInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,18 +72,22 @@ public class Settings extends AppCompatActivity {
         });
 
         //to create a button to update your identification activity_settings
-        Button updateIdentificationSettingsBtn = (Button)findViewById(R.id.update_identification_settings_button);
-        updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
+        Button fingerprintSettingsBtn = findViewById(R.id.update_fingerprint_settings_button);
+        if(fingerprintPermission.equals("")) {
+            fingerprintSettingsBtn.setError("");
+        }
+        fingerprintSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Settings.this, FingerprintSettings.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
+                finish();
             }
         });
 
         //to create a button to go back to account page
-        Button backBtn = (Button)findViewById(R.id.back_button);
+        Button backBtn = findViewById(R.id.back_button);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +97,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        Button websiteBtn = (Button)findViewById(R.id.website_button);
+        Button websiteBtn = findViewById(R.id.website_button);
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,5 +105,11 @@ public class Settings extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(Settings.this, Account.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
     }
 }

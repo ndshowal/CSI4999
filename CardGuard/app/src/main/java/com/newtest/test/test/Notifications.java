@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,9 @@ public class Notifications extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(Notifications.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(Notifications.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
@@ -88,11 +92,23 @@ public class Notifications extends AppCompatActivity {
                             Intent intent = new Intent(Notifications.this, TransactionInformation.class);
                             intent.putExtra("UserKey", user);
                             intent.putExtra("TxKey", t);
+                            intent.putExtra("SourceKey", "Notifications");
                             startActivity(intent);
+                            finish();
                         }
                     });
                 }
             }
         }
+    }
+
+    public void onBackPressed() {
+        ProgressDialog pd = new ProgressDialog(Notifications.this);
+        pd.setMessage("Retrieving account information...");
+        pd.show();
+        Intent intent = new Intent(Notifications.this, Account.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
+        finish();
     }
 }

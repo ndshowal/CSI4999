@@ -85,17 +85,19 @@ public class SignIn extends AppCompatActivity {
         System.out.println(storedUsername);
         System.out.println(storedPassword);
 
+        usernameInput = findViewById(R.id.username_input);
+        passwordInput = findViewById(R.id.password_input);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Signing you in...");
+        progressDialog.setCancelable(false);
+
         //If username and password are not stored in SharedPreferences, login by entering credentials
         // else, username and password are found, automatically login
         if (!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
             System.out.println("~~~~~~~~~~~~~~~~~~~~ Credentials detected ~~~~~~~~~~~~~~~~~~~~");
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Signing you in...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
 
-            usernameInput = findViewById(R.id.username_input);
-            passwordInput = findViewById(R.id.password_input);
+            progressDialog.show();
 
             if(storedUsername != null) {
                 usernameInput.setText(storedUsername);
@@ -111,23 +113,13 @@ public class SignIn extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-
                 //Instantiate signInBtn
                 signInBtn = findViewById(R.id.signin_button);
                 signInBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        switch(loginWithFingerprint) {
-                            case "true":
-                                generateFingerprintComponents();
-                                break;
-                            case "false":
-                                login();
-                                break;
-                            default:
-                                login();
-                        }
+                        progressDialog.show();
+                        login();
                     }
                 });
             }
@@ -137,7 +129,6 @@ public class SignIn extends AppCompatActivity {
     protected void login() {
         Log.d(TAG, "Login");
         if(validate()) {
-            Toast.makeText(SignIn.this, "Signing you in...", Toast.LENGTH_LONG).show();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -154,22 +145,50 @@ public class SignIn extends AppCompatActivity {
                                 user.setUserHash();
                             }
 
-                            Intent intent = new Intent(SignIn.this, Account.class);
-                            intent.putExtra("UserKey", (Parcelable) user);
-
                             SharedPreferences.Editor ed = sp.edit();
                             ed.putString("username", usernameInput.getText().toString());
                             ed.putString("password", passwordInput.getText().toString());
                             ed.apply();
 
-                            authenticated();
+                            switch (loginWithFingerprint) {
+                                case "true":
+                                    generateFingerprintComponents();
+                                    break;
+                                case "false":
+                                    authenticated();
+                                    break;
+                                default:
+                                    authenticated();
+                                    break;
+                            }
                         } else {
-                            runOnUiThread(new Runnable() {
+                            new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(SignIn.this, "Username/Password incorrect. Please try again.", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        if(new UserChecker().usernameExists(usernameInput.getText().toString())) {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    passwordInput.setError("Incorrect password, please try again.");
+                                                    progressDialog.cancel();
+                                                }
+                                            });
+                                        } else {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    usernameInput.setError("Username not found, please try again.");
+                                                    progressDialog.cancel();
+                                                }
+                                            });
+                                        }
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            });
+                            }).start();
+
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

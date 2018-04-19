@@ -91,7 +91,7 @@
     <string name="account_settings">Account Settings</string>
     <string name="update_account_information">Update Account Information</string>
     <string name="update_billing_information">Update Billing Information</string>
-    <string name="update_identification_settings">Update Identification Settings</string>
+    <string name="update_fingerprint_settings">Update Fingerprint Settings</string>
     <string name="log_out">Log Out</string>
     <string name="website">Website</string>
     <string name="first_name2">First Name</string>
@@ -150,7 +150,7 @@
     <string name="ok">OK</string>
     <string name="fingerprint_description">Confirm fingerprint to continue</string>
     <string name="fingerprint_hint">Touch sensor</string>
-    <string name="password_description">Enter your store password to continue</string>
+    <string name="password_description">Enter your CardGuard password to continue</string>
     <string name="purchase">Purchase</string>
     <string name="purchase_not_invalidated">Purchase not invalidated</string>
     <string name="purchase_button_not_invalidated_description">

@@ -76,14 +76,14 @@
             app:layout_constraintVertical_bias="0.468" />
 
         <Button
-            android:id="@+id/update_identification_settings_button"
+            android:id="@+id/update_fingerprint_settings_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/update_identification_settings"
+            android:text="@string/update_fingerprint_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -99,6 +99,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="75dp"
+            android:gravity="bottom|center_horizontal"
             android:text="Go to website" />
 
         <LinearLayout
@@ -116,10 +117,10 @@
 
                 <Button
                     android:id="@+id/back_button"
-                    android:layout_gravity="bottom"
-
                     android:layout_width="150dp"
+
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     android:layout_marginBottom="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
@@ -147,12 +148,6 @@
 
 
         </LinearLayout>
-
-
-
-
-
-
     </LinearLayout>
 
 </android.widget.LinearLayout>

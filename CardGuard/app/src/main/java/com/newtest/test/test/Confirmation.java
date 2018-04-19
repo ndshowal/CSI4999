@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,9 @@ public class Confirmation extends AppCompatActivity {
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(Confirmation.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(Confirmation.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);

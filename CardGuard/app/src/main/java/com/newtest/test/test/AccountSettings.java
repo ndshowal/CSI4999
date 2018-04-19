@@ -95,7 +95,6 @@ public class AccountSettings extends AppCompatActivity {
 
         String firstName = firstNameInput.getText().toString();
         String lastName = lastNameInput.getText().toString();
-        //String username = usernameInput.getText().toString();
         String emailAddress = emailAddressInput.getText().toString();
         String password = passwordInput.getText().toString();
         String confirmPassword = confirmPasswordInput.getText().toString();
@@ -113,13 +112,6 @@ public class AccountSettings extends AppCompatActivity {
         } else {
             lastNameInput.setError(null);
         }
-
-        /*if (username.isEmpty()) {
-            usernameInput.setError("Please enter your username");
-            valid = false;
-        } else {
-            usernameInput.setError(null);
-        }*/
 
         if(emailAddress.isEmpty()) {
             emailAddressInput.setError("Please enter your email address");

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 public class FingerprintSettings extends AppCompatActivity {
+    User user;
 
     private static final String KEY_NAME = "yourKey";
     private Cipher cipher;
@@ -57,9 +59,10 @@ public class FingerprintSettings extends AppCompatActivity {
 
         textView = findViewById(R.id.text_fingerprint_instructions);
 
+        user = getIntent().getParcelableExtra("UserKey");
+
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         fingerprintPreference = sp.getString("useFingerprint", "");
-
 
         switch (fingerprintPreference) {
             case "true":
@@ -69,7 +72,8 @@ public class FingerprintSettings extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+                                permissionFlag = true;
+                                authenticated();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -94,7 +98,8 @@ public class FingerprintSettings extends AppCompatActivity {
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+                                permissionFlag = false;
+                                authenticated();
                             }
                         }).create().show();
                 break;
@@ -112,11 +117,8 @@ public class FingerprintSettings extends AppCompatActivity {
                             .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    SharedPreferences.Editor ed = sp.edit();
-                                    ed.putString("useFingerprint", "false");
-                                    ed.apply();
-
-                                    finish();
+                                    permissionFlag = false;
+                                    authenticated();
                                 }
                             }).create().show();
         }
@@ -284,11 +286,14 @@ public class FingerprintSettings extends AppCompatActivity {
         if(permissionFlag) {
             ed.putString("useFingerprint", "true");
             ed.apply();
-        } else {
+        } else if(!permissionFlag){
             ed.putString("useFingerprint", "false");
             ed.apply();
         }
 
+        Intent intent = new Intent(this, Settings.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
         finish();
     }
 
@@ -296,5 +301,12 @@ public class FingerprintSettings extends AppCompatActivity {
         public FingerprintException(Exception e) {
             super(e);
         }
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(this, Settings.class);
+        intent.putExtra("UserKey", user);
+        startActivity(intent);
+        finish();
     }
 }

@@ -47,7 +47,7 @@ import javax.crypto.SecretKey;
 
 public class GenerateTransaction extends AppCompatActivity implements LocationListener {
 
-    private User user;
+    protected User user;
     private Transaction tx;
     private String transactionType;
     private String targetUser;
@@ -151,6 +151,12 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.show();
+                            }
+                        });
                         if (valid()) {
                             User target = null;
                             try {
@@ -171,12 +177,7 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
                                         tx.setInitialLongitude(0.0);
                                     }
 
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressDialog.show();
-                                        }
-                                    });
+
 
                                     switch(fingerprintPermission){
                                         case "true":

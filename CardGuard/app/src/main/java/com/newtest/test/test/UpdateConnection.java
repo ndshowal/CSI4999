@@ -47,8 +47,7 @@ public class UpdateConnection extends AsyncTask {
         System.out.println("Created RegisterConnection object successfully.");
     }
 
-    public User connect() throws SQLException {
-
+    public UpdateConnection() throws SQLException {
         // check that the driver is installed
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -80,7 +79,9 @@ public class UpdateConnection extends AsyncTask {
         } catch (SQLException ex) {
             throw new SQLException("Failed to create connection to database.", ex);
         }
+    }
 
+    public User connect() throws SQLException {
         if (connection != null) {
             // SQL Queries - 1st check if any users exist with the given username, and then again
             //  if any exist with the given email address. If both checks pass, update entry
@@ -99,12 +100,7 @@ public class UpdateConnection extends AsyncTask {
                             "email_address='" + emailAddress + "', " +
                             "password='" + password + "' " +
                             "WHERE id=" + ID +";");
-                    rowsUpdated += preparedStatement.executeUpdate();
-
-                    // Close statement when done (Best practices)
-                    preparedStatement.close();
-
-                    System.out.println("Rows updated: " + rowsUpdated);
+                    preparedStatement.executeUpdate();
                 }
 
                 // Query the DB again, same code as SignInConnection - merely to ensure a new user
@@ -163,13 +159,11 @@ public class UpdateConnection extends AsyncTask {
     // MySQL Query - checks the table for an existing entry with a specified email address
     public Boolean checkExistingEmailAddress(Connection connection) {
         try {
-            Statement statement = null;
-            statement = connection.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(
                     "SELECT * FROM users "
                             + "WHERE email_address='" + emailAddress + "';");
             if(results.next()) {
-                statement.close();
                 return true;
             }
         } catch (SQLException e) {

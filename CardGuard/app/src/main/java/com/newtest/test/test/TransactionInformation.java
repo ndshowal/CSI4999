@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -47,19 +48,21 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
     private final String KEY_NAME = "key";
     private TextView notification, initiatedText, completedText, memoText;
 
-    private User user;
+    protected User user;
     private Transaction tx, newTx;
     private Button confirmBtn;
     private Button denyBtn;
 
     private String acceptedFlag;
 
+    protected String sourceKey;
+
     private LocationManager lm;
     private Location location;
     private SharedPreferences sp;
     private SharedPreferences.Editor ed;
     private String locationPermission;
-    private  String fingerprintPermission;
+    private String fingerprintPermission;
     private Cipher cipher;
     private KeyStore keyStore;
     private KeyGenerator keyGenerator;
@@ -78,6 +81,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
 
         user = getIntent().getParcelableExtra("UserKey");
         tx = getIntent().getParcelableExtra("TxKey");
+        sourceKey = getIntent().getExtras().getString("SourceKey");
         initiatedText = findViewById(R.id.initiated_actual_label);
         completedText = findViewById(R.id.accepted_actual_label);
         notification = findViewById(R.id.notification_message);
@@ -227,7 +231,29 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                ProgressDialog pd = new ProgressDialog(TransactionInformation.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
+                switch(sourceKey) {
+                    case "Account":
+                        Intent intent = new Intent(TransactionInformation.this, Account.class);
+                        intent.putExtra("UserKey", user);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case "Full Transaction History":
+                        intent = new Intent(TransactionInformation.this, FullTransactionHistory.class);
+                        intent.putExtra("UserKey", user);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case "Notifications":
+                        intent = new Intent(TransactionInformation.this, Notifications.class);
+                        intent.putExtra("UserKey", user);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
             }
         });
     }
@@ -604,6 +630,33 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 | UnrecoverableKeyException | IOException
                 | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Failed to init Cipher", e);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Retrieving account information...");
+        pd.show();
+        switch(sourceKey) {
+            case "Account":
+                Intent intent = new Intent(TransactionInformation.this, Account.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+                finish();
+                break;
+            case "Full Transaction History":
+                intent = new Intent(TransactionInformation.this, FullTransactionHistory.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+                finish();
+                break;
+            case "Notifications":
+                intent = new Intent(TransactionInformation.this, Notifications.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+                finish();
+                break;
         }
     }
 

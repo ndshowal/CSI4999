@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -110,11 +111,54 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
             Bundle savedInstanceState) {
         getDialog().setTitle("Verify Fingerprint");
         View v = inflater.inflate(R.layout.fingerprint_dialog_container, container, false);
-        mCancelButton = (Button) v.findViewById(R.id.cancel_button);
+        mCancelButton = v.findViewById(R.id.cancel_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
+                if(fingerprintAuthenticationActivity != null) {
+                    Intent intent = new Intent(fingerprintAuthenticationActivity, Settings.class);
+                    intent.putExtra("UserKey", fingerprintAuthenticationActivity.user);
+                    fingerprintAuthenticationActivity.startActivity(intent);
+                    fingerprintAuthenticationActivity.finish();
+                } else if(generateTransactionActivity != null) {
+                    Intent intent = new Intent(generateTransactionActivity, NewTransaction.class);
+                    intent.putExtra("UserKey", generateTransactionActivity.user);
+                    generateTransactionActivity.startActivity(intent);
+                    generateTransactionActivity.finish();
+                } else if(transactionInformationActivity != null) {
+                    switch(transactionInformationActivity.sourceKey) {
+                        case "Account":
+                            Intent intent = new Intent(transactionInformationActivity, Account.class);
+                            intent.putExtra("UserKey", transactionInformationActivity.user);
+                            transactionInformationActivity.startActivity(intent);
+                            transactionInformationActivity.finish();
+                            break;
+                        case "Full Transaction History":
+                            intent = new Intent(transactionInformationActivity, FullTransactionHistory.class);
+                            intent.putExtra("UserKey", transactionInformationActivity.user);
+                            transactionInformationActivity.startActivity(intent);
+                            transactionInformationActivity.finish();
+                            break;
+                        case "Notifications":
+                            intent = new Intent(transactionInformationActivity, Notifications.class);
+                            intent.putExtra("UserKey", transactionInformationActivity.user);
+                            transactionInformationActivity.startActivity(intent);
+                            transactionInformationActivity.finish();
+                            break;
+                    }
+                } else if(signInActivity != null) {
+                    SharedPreferences.Editor ed = mSharedPreferences.edit();
+
+                    ed.putString("username" , "");
+                    ed.putString("password", "");
+                    ed.putString("useFingerprint", "");
+                    ed.putString("locationPermission", "");
+                    ed.apply();
+                    Intent intent = new Intent(signInActivity, SignInSignUp.class);
+                    signInActivity.startActivity(intent);
+                    signInActivity.finish();
+                }
             }
         });
 
