@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,6 +92,9 @@ public class Settings extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(Settings.this);
+                pd.setMessage("Retrieving account information...");
+                pd.show();
                 Intent intent = new Intent(Settings.this, Account.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);

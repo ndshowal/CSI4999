@@ -155,7 +155,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
                     ed.putString("useFingerprint", "");
                     ed.putString("locationPermission", "");
                     ed.apply();
-                    Intent intent = new Intent(signInActivity, SignInSignUp.class);
+                    Intent intent = new Intent(signInActivity, SignIn.class);
                     signInActivity.startActivity(intent);
                     signInActivity.finish();
                 }

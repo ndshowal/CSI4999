@@ -82,6 +82,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         user = getIntent().getParcelableExtra("UserKey");
         tx = getIntent().getParcelableExtra("TxKey");
         sourceKey = getIntent().getExtras().getString("SourceKey");
+
         initiatedText = findViewById(R.id.initiated_actual_label);
         completedText = findViewById(R.id.accepted_actual_label);
         notification = findViewById(R.id.notification_message);
@@ -226,7 +227,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         });
 
         //Back Button
-        Button backBtn = findViewById(R.id.back_button);
+        final Button backBtn = findViewById(R.id.back_button);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,6 +250,12 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                         break;
                     case "Notifications":
                         intent = new Intent(TransactionInformation.this, Notifications.class);
+                        intent.putExtra("UserKey", user);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case "Map":
+                        intent = new Intent(TransactionInformation.this, MapsActivity.class);
                         intent.putExtra("UserKey", user);
                         startActivity(intent);
                         finish();
@@ -653,6 +660,12 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 break;
             case "Notifications":
                 intent = new Intent(TransactionInformation.this, Notifications.class);
+                intent.putExtra("UserKey", user);
+                startActivity(intent);
+                finish();
+                break;
+            case "Map":
+                intent = new Intent(TransactionInformation.this, MapsActivity.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
                 finish();

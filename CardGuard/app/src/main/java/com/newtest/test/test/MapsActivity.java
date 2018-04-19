@@ -1,5 +1,6 @@
 package com.newtest.test.test;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -9,7 +10,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,14 +49,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Add a marker in Rochester Hills and move the camera
         LatLng rochesterHills = new LatLng(42.677587, -83.219336);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(rochesterHills));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rochesterHills, 10.0f));
         mMap.getUiSettings().setZoomControlsEnabled(true);
         String markerMessage = "";
 
-
-
         //Adds a map marker for the transaction coordinates
-        for(Transaction tx : user.getTransactions()) {
+        for (final Transaction tx : user.getTransactions()) {
             if (user.getUsername().equals(tx.getInitiator().getUsername())) {
                 //If user is the sender
                 if (user.getUsername().equals(tx.getRecipient().getUsername())) {
@@ -67,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (user.getUsername().equals((tx.getRecipient().getUsername()))) {
                     markerMessage = "You received " + tx.getFormattedAmount() + " from " + tx.getInitiator().getUsername();
                     //If user is the sender
-                } else if(user.getUsername().equals(tx.getSender().getUsername())) {
+                } else if (user.getUsername().equals(tx.getSender().getUsername())) {
                     markerMessage = tx.getInitiator().getUsername() + " requested " + tx.getFormattedAmount() + " from you";
                 }
             }
@@ -76,14 +78,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions()
                     .position(txInitialLocation)
                     .title(markerMessage)
+                    .snippet(tx.getTransactionID())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            if(!tx.inProgress()) {
+            if (!tx.inProgress()) {
                 LatLng txCompletedLocation = new LatLng(tx.getCompletionLatitude(), tx.getCompletionLongitude());
                 mMap.addMarker(new MarkerOptions()
                         .position(txCompletedLocation)
                         .title(markerMessage)
+                        .snippet(tx.getTransactionID())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
         }
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                for (Transaction tx : user.getTransactions()) {
+                    if (marker.getSnippet().equals(tx.getTransactionID())) {
+                        Intent intent = new Intent(MapsActivity.this, TransactionInformation.class);
+                        intent.putExtra("UserKey", user);
+                        intent.putExtra("TxKey", tx);
+                        intent.putExtra("SourceKey", "Map");
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
     }
+
 }
