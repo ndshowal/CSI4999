@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/text_greeting"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/top_buttons"
         android:layout_width="wrap_content"
@@ -46,6 +46,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_below="@id/text_greeting"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/recent_transactions"
         tools:layout_centerHorizontal="true" />
@@ -85,7 +86,6 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_dark"
         android:hapticFeedbackEnabled="true"
         android:text="@string/new_transaction" />
 </RelativeLayout>

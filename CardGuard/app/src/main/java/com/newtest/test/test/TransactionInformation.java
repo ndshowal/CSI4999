@@ -2,14 +2,22 @@ package com.newtest.test.test;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.KeyguardManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.KeyProperties;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,24 +25,51 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+
 public class TransactionInformation extends AppCompatActivity implements LocationListener {
-    TextView notification, initiatedText, completedText, memoText;
+    private final String KEY_NAME = "key";
+    private TextView notification, initiatedText, completedText, memoText;
 
-    User user;
-    Transaction tx;
-    Button confirmBtn;
-    Button denyBtn;
+    private User user;
+    private Transaction tx, newTx;
+    private Button confirmBtn;
+    private Button denyBtn;
 
-    LocationManager lm;
-    Location location;
-    SharedPreferences sp;
-    SharedPreferences.Editor ed;
-    String locationPermission;
+    private String acceptedFlag;
+
+    private LocationManager lm;
+    private Location location;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor ed;
+    private String locationPermission;
+    private  String fingerprintPermission;
+    private Cipher cipher;
+    private KeyStore keyStore;
+    private KeyGenerator keyGenerator;
+    private FingerprintManager fingerprintManager;
+    private String errorString;
+    private KeyguardManager keyguardManager;
+
+    private TransactionUploader tu;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +88,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         ed = sp.edit();
         locationPermission = sp.getString("locationPermission", "");
+        fingerprintPermission = sp.getString("useFingerprint", "");
 
         if (ActivityCompat.checkSelfPermission(TransactionInformation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(TransactionInformation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -127,67 +163,34 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
             denyBtn.setVisibility(View.INVISIBLE);
         }
 
+        progressDialog = new ProgressDialog(TransactionInformation.this);
+        progressDialog.setMessage("Updating transaction...");
+        progressDialog.setCancelable(false);
+
         ////////// CONFIRM BUTTON //////////////
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                java.util.Date utilDate = tx.getTransactionStartDate();
-                java.sql.Timestamp tempTimestamp = new java.sql.Timestamp(utilDate.getTime());
-
-                final Transaction newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
-                        tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, true);
-                if (location != null) {
-                    newTx.setCompletionLatitude(location.getLatitude());
-                    newTx.setCompletionLongitude(location.getLongitude());
-                } else {
-                    newTx.setCompletionLongitude(0.0);
-                    newTx.setCompletionLongitude(0.0);
-                }
-                new Thread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TransactionUploader tu = null;
-                        try {
-                            tu = new TransactionUploader();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            if (tu.upload(newTx)) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(TransactionInformation.this, "Updating transaction...", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        Intent intent = new Intent(TransactionInformation.this, Confirmation.class);
-                        intent.putExtra("UserKey", user);
-                        intent.putExtra("TxKey", newTx);
-
-                        //If sending party = user, recipient balance ^, user balance v
-                        if(newTx.getSender().getUsername().equals(user.getUsername())) {
-                            tu.updateBalances(tx.getRecipient(), user, tx.getTransactionAmount());
-                        //If recipient party = user, user balance ^, sending party v
-                        } else if(newTx.getRecipient().getUsername().equals(user.getUsername())) {
-                            tu.updateBalances(user, tx.getSender(), tx.getTransactionAmount());
-                        }
-
-                        if(!tx.getInitiator().getUsername().equals(user.getUsername()) && tx.getSender().getUsername().equals(user.getUsername())) {
-                            intent.putExtra("TxMessage", "send funds approved");
-                        } else if(!tx.getInitiator().getUsername().equals(user.getUsername()) && tx.getRecipient().getUsername().equals(user.getUsername())) {
-                            intent.putExtra("TxMessage", "receive funds approved");
-                        }
-
-                        startActivity(intent);
-                        finish();
+                        progressDialog.show();
                     }
-                }).start();
+                });
+                acceptedFlag = "true";
+
+                switch (fingerprintPermission) {
+                    case "true":
+                        generateFingerprintComponents();
+                        break;
+                    case "false":
+                        authenticated();
+                        break;
+                    default:
+                        authenticated();
+                }
+
+
             }
         });
 
@@ -195,48 +198,26 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
         denyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                java.util.Date utilDate = tx.getTransactionStartDate();
-                java.sql.Timestamp tempTimestamp = new java.sql.Timestamp(utilDate.getTime());
-
-                final Transaction newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
-                        tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, false);
-                if (location != null) {
-                    newTx.setCompletionLatitude(location.getLatitude());
-                    newTx.setCompletionLongitude(location.getLongitude());
-                } else {
-                    newTx.setCompletionLongitude(0.0 + Math.random());
-                    newTx.setCompletionLongitude(0.0 + Math.random());
-                }
-                new Thread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            if(new TransactionUploader().upload(newTx)) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(TransactionInformation.this, "Updating transaction...", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        Intent intent = new Intent(TransactionInformation.this, Confirmation.class);
-                        intent.putExtra("UserKey", user);
-                        intent.putExtra("TxKey", newTx);
-
-                        if(newTx.getSender().getUsername().equals(user.getUsername())) {
-                            intent.putExtra("TxMessage", "send funds denied");
-                        } else if(newTx.getRecipient().getUsername().equals(user.getUsername())) {
-                            intent.putExtra("TxMessage", "receive funds denied");
-                        }
-
-                        startActivity(intent);
-                        finish();
+                        progressDialog.show();
                     }
-                }).start();
+                });
+                acceptedFlag = "false";
+
+                switch (fingerprintPermission) {
+                    case "true":
+                        generateFingerprintComponents();
+                        break;
+                    case "false":
+                        authenticated();
+                        break;
+                    default:
+                        authenticated();
+                }
+
+
             }
         });
 
@@ -348,6 +329,281 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 == PackageManager.PERMISSION_GRANTED) {
 
             lm.removeUpdates(this);
+        }
+    }
+
+    public void authenticated() {
+        switch (acceptedFlag) {
+            case "true":
+                java.util.Date utilDate = tx.getTransactionStartDate();
+                java.sql.Timestamp tempTimestamp = new java.sql.Timestamp(utilDate.getTime());
+
+                newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
+                        tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, true);
+                if (location != null) {
+                    newTx.setCompletionLatitude(location.getLatitude());
+                    newTx.setCompletionLongitude(location.getLongitude());
+                } else {
+                    newTx.setCompletionLongitude(0.0);
+                    newTx.setCompletionLongitude(0.0);
+                }
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            tu = new TransactionUploader();
+                            if (tu.upload(newTx)) {
+                                //If sending party = user, recipient balance ^, user balance v
+                                if(newTx.getSender().getUsername().equals(user.getUsername())) {
+                                    tu.updateBalances(tx.getRecipient(), user, tx.getTransactionAmount());
+                                //If recipient party = user, user balance ^, sending party v
+                                } else if(newTx.getRecipient().getUsername().equals(user.getUsername())) {
+                                    tu.updateBalances(user, tx.getSender(), tx.getTransactionAmount());
+                                }
+                            } else {
+                                new AlertDialog.Builder(TransactionInformation.this)
+                                        .setTitle("Error")
+                                        .setMessage("There was an error updating this transaction.")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                confirmBtn.setError("");
+                                            }
+                                        }).create().show();
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent intent = new Intent(TransactionInformation.this, Confirmation.class);
+                        intent.putExtra("UserKey", user);
+                        intent.putExtra("TxKey", newTx);
+
+                        if(!tx.getInitiator().getUsername().equals(user.getUsername()) && tx.getSender().getUsername().equals(user.getUsername())) {
+                            intent.putExtra("TxMessage", "send funds approved");
+                        } else if(!tx.getInitiator().getUsername().equals(user.getUsername()) && tx.getRecipient().getUsername().equals(user.getUsername())) {
+                            intent.putExtra("TxMessage", "receive funds approved");
+                        }
+
+                        progressDialog.cancel();
+                        startActivity(intent);
+                        finish();
+                    }
+                }).start();
+                break;
+
+            case "false":
+                utilDate = tx.getTransactionStartDate();
+                tempTimestamp = new java.sql.Timestamp(utilDate.getTime());
+
+                newTx = new Transaction(tx.getTransactionID(), tx.getSender(), tx.getRecipient(), tx.getInitiator(),
+                        tx.getTransactionAmount(), tx.getMemo(), tempTimestamp, new Timestamp(System.currentTimeMillis()), false, false);
+                if (location != null) {
+                    newTx.setCompletionLatitude(location.getLatitude());
+                    newTx.setCompletionLongitude(location.getLongitude());
+                } else {
+                    newTx.setCompletionLongitude(0.0 + Math.random());
+                    newTx.setCompletionLongitude(0.0 + Math.random());
+                }
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if(new TransactionUploader().upload(newTx)) {
+                                Intent intent = new Intent(TransactionInformation.this, Confirmation.class);
+                                intent.putExtra("UserKey", user);
+                                intent.putExtra("TxKey", newTx);
+
+                                if(newTx.getSender().getUsername().equals(user.getUsername())) {
+                                    intent.putExtra("TxMessage", "send funds denied");
+                                } else if(newTx.getRecipient().getUsername().equals(user.getUsername())) {
+                                    intent.putExtra("TxMessage", "receive funds denied");
+                                }
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressDialog.cancel();
+                                    }
+                                });
+
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                new AlertDialog.Builder(TransactionInformation.this)
+                                        .setTitle("Error")
+                                        .setMessage("There was an error updating this transaction.")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                denyBtn.setError("");
+                                            }
+                                        }).create().show();
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                break;
+        }
+    }
+
+    public void generateFingerprintComponents() {
+        //Verify that the device is running Marshmallow (SDK 23) or higher before executing any fingerprint-related code
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+
+            //Verify all fingerprint prerequistes are met
+            if(checkFingerprintPrerequisites()) {
+                try {
+                    generateKey();
+                } catch (FingerprintSettings.FingerprintException e) {
+                    e.printStackTrace();
+                }
+
+                if (initCipher()) {
+                    // Show the fingerprint dialog. The user has the option to use the fingerprint with
+                    // crypto, or you can fall back to using a server-side verified password.
+                    FingerprintAuthenticationDialogFragment fragment
+                            = new FingerprintAuthenticationDialogFragment(this);
+                    fragment.setCryptoObject(new FingerprintManager.CryptoObject(cipher));
+                    boolean useFingerprintPreference = true;
+                    if (useFingerprintPreference) {
+                        fragment.setStage(
+                                FingerprintAuthenticationDialogFragment.Stage.FINGERPRINT);
+                    } else {
+                        fragment.setStage(
+                                FingerprintAuthenticationDialogFragment.Stage.PASSWORD);
+                    }
+                    fragment.show(getFragmentManager(), "");
+                } else {
+                    // This happens if the lock screen has been disabled or or a fingerprint got
+                    // enrolled. Thus show the dialog to authenticate with their password first
+                    // and ask the user if they want to authenticate with fingerprints in the
+                    // future
+                    FingerprintAuthenticationDialogFragment fragment
+                            = new FingerprintAuthenticationDialogFragment(this);
+                    fragment.setCryptoObject(new FingerprintManager.CryptoObject(cipher));
+                    fragment.setStage(
+                            FingerprintAuthenticationDialogFragment.Stage.NEW_FINGERPRINT_ENROLLED);
+                    fragment.show(getFragmentManager(), "");
+                }
+            } else {
+                new android.support.v7.app.AlertDialog.Builder(this)
+                        .setTitle("Fingerprint Error")
+                        .setMessage(errorString)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).create().show();
+            }
+        }
+    }
+
+    private Boolean checkFingerprintPrerequisites() {
+        //Checks for a fingerprint sensor on the device. If no sensor exists, inform user
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!fingerprintManager.isHardwareDetected()) {
+                errorString = "Your device doesn't support fingerprint authentication";
+                return false;
+            }
+        }
+        //Checks if fingerprint permission is given to app. If not, inform user to turn it on
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+            // If app doesn't have fingerprint scanner permission, inform user
+            errorString = "Please enable fingerprint permission in your device's settings.";
+            return false;
+        }
+
+        //Check that the user has registered at least one fingerprint. If not, inform them that they
+        // need to register a fingerprint before continuing
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!fingerprintManager.hasEnrolledFingerprints()) {
+                errorString = "No fingerprint configured. Please register at least one fingerprint in your device's settings";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void generateKey() throws FingerprintSettings.FingerprintException {
+        try {
+            // Obtain a reference to the Keystore using the standard Android keystore container identifier (“AndroidKeystore”)//
+            keyStore = KeyStore.getInstance("AndroidKeyStore");
+
+            //Generate the key//
+            keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
+
+            //Initialize an empty KeyStore//
+            keyStore.load(null);
+
+            //Initialize the KeyGenerator//
+            keyGenerator.init(new
+
+                    //Specify the operation(s) this key can be used for//
+                    KeyGenParameterSpec.Builder(KEY_NAME,
+                    KeyProperties.PURPOSE_ENCRYPT |
+                            KeyProperties.PURPOSE_DECRYPT)
+                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+
+                    //Configure this key so that the user has to confirm their identity with a fingerprint each time they want to use it//
+                    .setUserAuthenticationRequired(true)
+                    .setEncryptionPaddings(
+                            KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                    .build());
+
+            //Generate the key//
+            keyGenerator.generateKey();
+
+        } catch (KeyStoreException
+                | NoSuchAlgorithmException
+                | NoSuchProviderException
+                | InvalidAlgorithmParameterException
+                | CertificateException
+                | IOException exc) {
+            exc.printStackTrace();
+            throw new FingerprintSettings.FingerprintException(exc);
+        }
+    }
+
+    //Cipher initialization
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public boolean initCipher() {
+        try {
+            //Obtain a cipher instance and configure it with the properties required for fingerprint authentication
+            cipher = Cipher.getInstance(
+                    KeyProperties.KEY_ALGORITHM_AES + "/"
+                            + KeyProperties.BLOCK_MODE_CBC + "/"
+                            + KeyProperties.ENCRYPTION_PADDING_PKCS7);
+        } catch (NoSuchAlgorithmException |
+                NoSuchPaddingException e) {
+            throw new RuntimeException("Failed to get Cipher", e);
+        }
+
+        try {
+            keyStore.load(null);
+            SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
+                    null);
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+            //Return true if the cipher has been initialized successfully
+            return true;
+        } catch (KeyPermanentlyInvalidatedException e) {
+            //Return false if cipher initialization failed
+            return false;
+        } catch (KeyStoreException | CertificateException
+                | UnrecoverableKeyException | IOException
+                | NoSuchAlgorithmException | InvalidKeyException e) {
+            throw new RuntimeException("Failed to init Cipher", e);
         }
     }
 

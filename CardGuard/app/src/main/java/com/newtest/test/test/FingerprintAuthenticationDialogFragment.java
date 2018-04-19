@@ -16,6 +16,7 @@
 
 package com.newtest.test.test;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -23,7 +24,7 @@ import android.content.SharedPreferences;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,14 +57,47 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 
     private FingerprintManager.CryptoObject mCryptoObject;
     private FingerprintUiHelper mFingerprintUiHelper;
-    private MainActivity mActivity;
+
+    private FingerprintSettings fingerprintAuthenticationActivity;
+    private SignIn signInActivity;
+    private GenerateTransaction generateTransactionActivity;
+    private TransactionInformation transactionInformationActivity;
 
     private InputMethodManager mInputMethodManager;
-    private SharedPreferences mSharedPreferences;
+    SharedPreferences mSharedPreferences;
 
+    public FingerprintAuthenticationDialogFragment() {}
+
+    @SuppressLint("ValidFragment")
+    public FingerprintAuthenticationDialogFragment(GenerateTransaction generateTransactionActivity) {
+        this.generateTransactionActivity = generateTransactionActivity;
+    }
+    @SuppressLint("ValidFragment")
+    public FingerprintAuthenticationDialogFragment(SignIn signInActivity) {
+        this.signInActivity = signInActivity;
+        signInActivity.stopProgressDialog();
+    }
+
+    @SuppressLint("ValidFragment")
+    public FingerprintAuthenticationDialogFragment(TransactionInformation transactionInformationActivity) {
+        this.transactionInformationActivity = transactionInformationActivity;
+    }
+
+    @SuppressLint("ValidFragment")
+    public FingerprintAuthenticationDialogFragment(FingerprintSettings fingerprintAuthenticationActivity) {
+        this.fingerprintAuthenticationActivity = fingerprintAuthenticationActivity;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.setCancelable(false);
+
+        mSharedPreferences = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String password = mSharedPreferences.getString("password", "");
+        System.out.println("USER PASSWORD IS: " + password);
 
         // Do not create a new Fragment when the Activity is re-created such as orientation changes.
         setRetainInstance(true);
@@ -74,7 +108,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        getDialog().setTitle(getString(R.string.sign_in));
+        getDialog().setTitle("Verify Fingerprint");
         View v = inflater.inflate(R.layout.fingerprint_dialog_container, container, false);
         mCancelButton = (Button) v.findViewById(R.id.cancel_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -97,17 +131,32 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         });
         mFingerprintContent = v.findViewById(R.id.fingerprint_container);
         mBackupContent = v.findViewById(R.id.backup_container);
-        mPassword = (EditText) v.findViewById(R.id.password);
+        mPassword = v.findViewById(R.id.password);
         mPassword.setOnEditorActionListener(this);
-        mPasswordDescriptionTextView = (TextView) v.findViewById(R.id.password_description);
-        mUseFingerprintFutureCheckBox = (CheckBox)
-                v.findViewById(R.id.use_fingerprint_in_future_check);
-        mNewFingerprintEnrolledTextView = (TextView)
-                v.findViewById(R.id.new_fingerprint_enrolled_description);
-        mFingerprintUiHelper = new FingerprintUiHelper(
-                mActivity.getSystemService(FingerprintManager.class),
-                (ImageView) v.findViewById(R.id.fingerprint_icon),
-                (TextView) v.findViewById(R.id.fingerprint_status), this);
+        mPasswordDescriptionTextView = v.findViewById(R.id.password_description);
+        mUseFingerprintFutureCheckBox = v.findViewById(R.id.use_fingerprint_in_future_check);
+        mNewFingerprintEnrolledTextView = v.findViewById(R.id.new_fingerprint_enrolled_description);
+        if(generateTransactionActivity != null) {
+            mFingerprintUiHelper = new FingerprintUiHelper(
+                    generateTransactionActivity.getSystemService(FingerprintManager.class),
+                    (ImageView) v.findViewById(R.id.fingerprint_icon),
+                    (TextView) v.findViewById(R.id.fingerprint_status), this);
+        } else if(signInActivity != null) {
+            mFingerprintUiHelper = new FingerprintUiHelper(
+                    signInActivity.getSystemService(FingerprintManager.class),
+                    (ImageView) v.findViewById(R.id.fingerprint_icon),
+                    (TextView) v.findViewById(R.id.fingerprint_status), this);
+        } else if(transactionInformationActivity != null) {
+            mFingerprintUiHelper = new FingerprintUiHelper(
+                    transactionInformationActivity.getSystemService(FingerprintManager.class),
+                    (ImageView) v.findViewById(R.id.fingerprint_icon),
+                    (TextView) v.findViewById(R.id.fingerprint_status), this);
+        } else if(fingerprintAuthenticationActivity != null) {
+            mFingerprintUiHelper = new FingerprintUiHelper(
+                    fingerprintAuthenticationActivity.getSystemService(FingerprintManager.class),
+                    (ImageView) v.findViewById(R.id.fingerprint_icon),
+                    (TextView) v.findViewById(R.id.fingerprint_status), this);
+        }
         updateStage();
 
         // If fingerprint authentication is not available, switch immediately to the backup
@@ -136,12 +185,11 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         mFingerprintUiHelper.stopListening();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (MainActivity) getActivity();
         mInputMethodManager = context.getSystemService(InputMethodManager.class);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     /**
@@ -173,10 +221,12 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
      * let's the activity know about the result.
      */
     private void verifyPassword() {
-        if (!checkPassword(mPassword.getText().toString())) {
-            return;
+        boolean valid = true;
+        if(!checkPassword(mPassword.getText().toString())) {
+            mPassword.setError("Incorrect password.");
+            valid = false;
         }
-        if (mStage == Stage.NEW_FINGERPRINT_ENROLLED) {
+        if(mStage == Stage.NEW_FINGERPRINT_ENROLLED) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putBoolean(getString(R.string.use_fingerprint_to_authenticate_key),
                     mUseFingerprintFutureCheckBox.isChecked());
@@ -184,13 +234,22 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 
             if (mUseFingerprintFutureCheckBox.isChecked()) {
                 // Re-create the key so that fingerprints including new ones are validated.
-                mActivity.createKey(MainActivity.DEFAULT_KEY_NAME, true);
                 mStage = Stage.FINGERPRINT;
             }
         }
         mPassword.setText("");
-        mActivity.onPurchased(false /* without Fingerprint */, null);
-        dismiss();
+        if(valid) {
+            if(fingerprintAuthenticationActivity != null) {
+                fingerprintAuthenticationActivity.authenticated();
+            } else if(signInActivity != null) {
+                signInActivity.authenticated();
+            } else if(generateTransactionActivity != null) {
+                generateTransactionActivity.authenticated();
+            } else if(transactionInformationActivity != null) {
+                transactionInformationActivity.authenticated();
+            }
+            dismiss();
+        }
     }
 
     /**
@@ -199,7 +258,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     private boolean checkPassword(String password) {
         // Assume the password is always correct.
         // In the real world situation, the password needs to be verified in the server side.
-        return password.length() > 0;
+        return password.equals(mSharedPreferences.getString("password", ""));
     }
 
     private final Runnable mShowKeyboardRunnable = new Runnable() {
@@ -242,11 +301,21 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onAuthenticated() {
         // Callback from FingerprintUiHelper. Let the activity know that authentication was
         // successful.
-        mActivity.onPurchased(true /* withFingerprint */, mCryptoObject);
+        if(fingerprintAuthenticationActivity != null) {
+            fingerprintAuthenticationActivity.authenticated();
+        } else if(signInActivity != null) {
+            signInActivity.authenticated();
+        } else if(generateTransactionActivity != null) {
+            generateTransactionActivity.authenticated();
+        } else if(transactionInformationActivity != null) {
+            transactionInformationActivity.authenticated();
+        }
+
         dismiss();
     }
 

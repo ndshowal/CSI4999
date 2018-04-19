@@ -34,6 +34,7 @@ public class Settings extends AppCompatActivity {
                 ed.putString("username", "");
                 ed.putString("password", "");
                 ed.putString("locationPermission", "");
+                ed.putString("useFingerprint", "");
                 ed.apply();
                 startActivity(new Intent(Settings.this, SignInSignUp.class));
             }
@@ -66,7 +67,7 @@ public class Settings extends AppCompatActivity {
         updateIdentificationSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Settings.this, FingerprintAuthentication.class);
+                Intent intent = new Intent(Settings.this, FingerprintSettings.class);
                 intent.putExtra("UserKey", user);
                 startActivity(intent);
             }

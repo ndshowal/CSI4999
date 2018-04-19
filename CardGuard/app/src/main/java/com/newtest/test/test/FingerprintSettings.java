@@ -2,29 +2,21 @@ package com.newtest.test.test;
 
 import android.Manifest;
 import android.app.KeyguardManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -36,215 +28,98 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.sql.SQLException;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class SignIn extends AppCompatActivity {
-    private static final String TAG = "LoginPage";
+public class FingerprintSettings extends AppCompatActivity {
+
     private static final String KEY_NAME = "yourKey";
-
-    EditText usernameInput;
-    EditText passwordInput;
-    Button signInBtn;
-
-    SignInConnection connection;
-
-    User user;
-
-    SharedPreferences sp;
-    private String loginWithFingerprint;
-    private String storedUsername;
-    private String storedPassword;
-    private KeyguardManager keyguardManager;
-    private FingerprintManager fingerprintManager;
-    private String errorString;
     private Cipher cipher;
     private KeyStore keyStore;
     private KeyGenerator keyGenerator;
+    private TextView textView;
+    private FingerprintManager fingerprintManager;
+    private KeyguardManager keyguardManager;
+    private SharedPreferences sp;
+    private String errorString;
+    private String fingerprintPreference;
 
-    private ProgressDialog progressDialog;
+    boolean permissionFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fingerprint_settings);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_signin);
 
-        //Access username and password in SharedPreferences file called 'userInfo"
+        textView = findViewById(R.id.text_fingerprint_instructions);
+
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        storedUsername = sp.getString("username", "");
-        storedPassword = sp.getString("password", "");
-        loginWithFingerprint = sp.getString("useFingerprint", "");
-
-        System.out.println(storedUsername);
-        System.out.println(storedPassword);
-
-        //If username and password are not stored in SharedPreferences, login by entering credentials
-        // else, username and password are found, automatically login
-        if (!storedUsername.isEmpty() && !storedPassword.isEmpty()) {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~ Credentials detected ~~~~~~~~~~~~~~~~~~~~");
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Signing you in...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-
-            usernameInput = findViewById(R.id.username_input);
-            passwordInput = findViewById(R.id.password_input);
-
-            if(storedUsername != null) {
-                usernameInput.setText(storedUsername);
-            }
-
-            loginWithPrefs(storedUsername, storedPassword);
-        } else {
-            generateUI();
-        }
-    }
-
-     public void generateUI() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        fingerprintPreference = sp.getString("useFingerprint", "");
 
 
-                //Instantiate signInBtn
-                signInBtn = findViewById(R.id.signin_button);
-                signInBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        switch(loginWithFingerprint) {
-                            case "true":
-                                generateFingerprintComponents();
-                                break;
-                            case "false":
-                                login();
-                                break;
-                            default:
-                                login();
-                        }
-                    }
-                });
-            }
-        });
-     }
-
-    protected void login() {
-        Log.d(TAG, "Login");
-        if(validate()) {
-            Toast.makeText(SignIn.this, "Signing you in...", Toast.LENGTH_LONG).show();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        connection = new SignInConnection(usernameInput.getText().toString(), passwordInput.getText().toString());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        user = connection.connect();
-                        if(user != null) {
-                            if(user.getUserHash() == null) {
-                                System.out.println("Setting user hash, no hash found");
-                                user.setUserHash();
-                            }
-
-                            Intent intent = new Intent(SignIn.this, Account.class);
-                            intent.putExtra("UserKey", (Parcelable) user);
-
-                            SharedPreferences.Editor ed = sp.edit();
-                            ed.putString("username", usernameInput.getText().toString());
-                            ed.putString("password", passwordInput.getText().toString());
-                            ed.apply();
-
-                            authenticated();
-                        } else {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(SignIn.this, "Username/Password incorrect. Please try again.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
-    }
-
-    //If app detects that login credentials are stored, automatically login with those
-    protected void loginWithPrefs(final String username, final String password) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    connection = new SignInConnection(username, password);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try{
-                    user = connection.connect();
-                    if(user == null) {
-                        runOnUiThread(new Runnable() {
+        switch (fingerprintPreference) {
+            case "true":
+                new android.support.v7.app.AlertDialog.Builder(this)
+                        .setTitle("Fingerprint Authentication")
+                        .setMessage("Continue to use your fingerprint for verification?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
-                            public void run() {
-                                generateUI();
-                                passwordInput.setError("Last known password incorrect, please re-enter password.");
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
                             }
-                        });
-                    } else {
-                        switch (loginWithFingerprint) {
-                            case "true":
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                permissionFlag = false;
                                 generateFingerprintComponents();
-                                break;
-                            case "false":
-                                authenticated();
-                                break;
-                            default:
-                                authenticated();
-                                break;
-                        }
-                    }
-                } catch(Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }).start();
-    }
+                            }
+                        }).create().show();
+                break;
+            case "false":
+                new android.support.v7.app.AlertDialog.Builder(this)
+                        .setTitle("Fingerprint Authentication")
+                        .setMessage("Use your fingerprint to verify transactions and to login to the app?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                permissionFlag = true;
+                                generateFingerprintComponents();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).create().show();
+                break;
+            default:
+                new android.support.v7.app.AlertDialog.Builder(this)
+                            .setTitle("Fingerprint Authentication")
+                            .setMessage("Use your fingerprint to verify transactions and to login to the app!")
+                            .setPositiveButton("Sure!", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    permissionFlag = true;
+                                    generateFingerprintComponents();
+                                }
+                            })
+                            .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    SharedPreferences.Editor ed = sp.edit();
+                                    ed.putString("useFingerprint", "false");
+                                    ed.apply();
 
-    //Checks to make sure that the username and password fields have something in them
-    public boolean validate() {
-        boolean valid = true;
-
-        String username = usernameInput.getText().toString();
-        String password = passwordInput.getText().toString();
-
-        if (username.isEmpty()) {
-            usernameInput.setError("Please enter your username");
-            valid = false;
-        } else {
-            usernameInput.setError(null);
+                                    finish();
+                                }
+                            }).create().show();
         }
-
-        if (password.isEmpty()) {
-            passwordInput.setError("Please enter your password");
-            valid = false;
-        } else {
-            passwordInput.setError(null);
-        }
-
-        return valid;
-    }
-
-    public void stopProgressDialog() {
-        progressDialog.cancel();
     }
 
     public void generateFingerprintComponents() {
@@ -257,7 +132,7 @@ public class SignIn extends AppCompatActivity {
             if(checkFingerprintPrerequisites()) {
                 try {
                     generateKey();
-                } catch (FingerprintSettings.FingerprintException e) {
+                } catch (FingerprintException e) {
                     e.printStackTrace();
                 }
 
@@ -331,7 +206,7 @@ public class SignIn extends AppCompatActivity {
 
     //Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void generateKey() throws FingerprintSettings.FingerprintException {
+    private void generateKey() throws FingerprintException {
         try {
             // Obtain a reference to the Keystore using the standard Android keystore container identifier (“AndroidKeystore”)//
             keyStore = KeyStore.getInstance("AndroidKeyStore");
@@ -367,7 +242,7 @@ public class SignIn extends AppCompatActivity {
                 | CertificateException
                 | IOException exc) {
             exc.printStackTrace();
-            throw new FingerprintSettings.FingerprintException(exc);
+            throw new FingerprintException(exc);
         }
     }
 
@@ -404,12 +279,22 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void authenticated() {
-        stopProgressDialog();
-        Intent intent = new Intent(SignIn.this, Account.class);
-        intent.putExtra("UserKey", user);
-        intent.putExtra("SourceKey", "SignIn");
+        SharedPreferences.Editor ed = sp.edit();
 
-        startActivity(intent);
+        if(permissionFlag) {
+            ed.putString("useFingerprint", "true");
+            ed.apply();
+        } else {
+            ed.putString("useFingerprint", "false");
+            ed.apply();
+        }
+
         finish();
+    }
+
+    public static class FingerprintException extends Exception {
+        public FingerprintException(Exception e) {
+            super(e);
+        }
     }
 }

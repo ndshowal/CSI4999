@@ -1,7 +1,9 @@
 package com.newtest.test.test;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.NetworkOnMainThreadException;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -144,11 +146,18 @@ public class NewTransaction extends AppCompatActivity {
                     lp.setMargins(10, 10, 10, 10);
                     ll.addView(messageText, lp);
                 } else {
-                    for (User u : contacts) {
+                    int count = 0;
+                    for (final User u : contacts) {
+                        count++;
+
                         Button userBtn = new Button(NewTransaction.this);
                         userBtn.setTextSize(16);
                         userBtn.setText(u.getUsername());
                         userBtn.setPadding(10, 10, 10, 10);
+
+                        if(count % 2 == 0) {
+                            userBtn.setBackgroundResource(R.drawable.button_alt);
+                        }
 
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         lp.setMargins(10, 10, 10, 10);
@@ -157,7 +166,28 @@ public class NewTransaction extends AppCompatActivity {
                         userBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
+                                new AlertDialog.Builder(NewTransaction.this)
+                                        .setTitle("Initiate transaction with " + u.getUsername() + "?")
+                                        .setMessage("Select \"Request Funds\" or \"Send Funds\" to begin a transaction with " + u.getUsername())
+                                        .setPositiveButton("Send Funds", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(NewTransaction.this, GenerateTransaction.class);
+                                                intent.putExtra("UserKey", user);
+                                                intent.putExtra("TypeKey", "Send");
+                                                intent.putExtra("TargetKey", u.getUsername());
+                                                startActivity(intent);
+                                            }
+                                        }).setNegativeButton("Request Funds", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(NewTransaction.this, GenerateTransaction.class);
+                                                intent.putExtra("UserKey", user);
+                                                intent.putExtra("TypeKey", "Request");
+                                                intent.putExtra("TargetKey", u.getUsername());
+                                                startActivity(intent);
+                                            }
+                                }).create().show();
                             }
                         });
                     }

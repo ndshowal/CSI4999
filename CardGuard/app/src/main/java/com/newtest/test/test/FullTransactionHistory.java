@@ -3,6 +3,7 @@ package com.newtest.test.test;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -160,9 +161,18 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                         //For each transaction, create a button and add it to the defined layout
                         LinearLayout ll = findViewById(R.id.button_layout);
                         ll.removeAllViews();
+
+                        int count = 0;
+
                         for (final Transaction tx : user.getTransactions()) {
+                            count++;
+
                             Button transactionInfoBtn = new Button(FullTransactionHistory.this);
                             transactionInfoBtn.setText(tx.getSimpleDescription());
+
+                            if(count % 2 == 0) {
+                                transactionInfoBtn.setBackgroundResource(R.drawable.button_alt);
+                            }
 
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                             lp.setMargins(0, 10, 0, 10);
@@ -185,9 +195,17 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                     LinearLayout ll = findViewById(R.id.button_layout);
                     ll.removeAllViews();
 
+                    int count = 0;
+
                     for (final Transaction tx : user.getTransactions(searchKey)) {
+                        count++;
+
                         Button transactionInfoBtn = new Button(FullTransactionHistory.this);
                         transactionInfoBtn.setText(tx.getSimpleDescription());
+
+                        if(count % 2 == 0) {
+                            transactionInfoBtn.setBackgroundResource(R.drawable.button_alt);
+                        }
 
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         lp.setMargins(0, 10, 0, 10);

@@ -20,6 +20,8 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
 
     private Connection connection;
 
+    private Account accountActivity;
+
     public AsyncResponse delegate = null;
 
     //AsyncTask interface
@@ -225,7 +227,10 @@ public class TransactionPuller extends AsyncTask<Void, Void, Void> {
         for(int i = user.getTransactions().size() - 1; i >= 0; user.getTransactions().size(), i--) {
             user.getTransactions().remove(i);
         }
+
+        int count = 0;
         for(Transaction t : txList) {
+            count++;
             user.addTransaction(t);
         }
     }

@@ -93,7 +93,6 @@ public class SignInConnection extends AsyncTask {
                     String accountType = results.getString(8);
 
                     user = new User(ID, hash, username, password, firstName, lastName, emailAddress, accountType);
-                    System.out.println(user.toString());
                 }
             } catch (SQLException ex) {
                 System.out.println("Query Error");
@@ -256,8 +255,6 @@ public class SignInConnection extends AsyncTask {
                 });
 
                 t1.start();
-
-                System.out.println(user.toString());
 
                 return user;
             }
