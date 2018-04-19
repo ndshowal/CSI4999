@@ -151,13 +151,13 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.show();
-                            }
-                        });
                         if (valid()) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.show();
+                                }
+                            });
                             User target = null;
                             try {
                                 target = new GetUser(usernameInput.getText().toString()).getUser();
