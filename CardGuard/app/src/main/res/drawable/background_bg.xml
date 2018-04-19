@@ -10,5 +10,6 @@ android:top="5dp"
 android:right="15dp"
 android:bottom="5dp" />
 <solid
-android:color="@color/colorLight" />
+    android:state_pressed="true"
+    android:color="@color/colorLight" />
 </shape>
