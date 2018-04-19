@@ -100,6 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         intent.putExtra("TxKey", tx);
                         intent.putExtra("SourceKey", "Map");
                         startActivity(intent);
+                        finish();
                     }
                 }
             }

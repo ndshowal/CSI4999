@@ -1,6 +1,7 @@
 package com.newtest.test.test;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
@@ -108,8 +109,37 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                 lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (lm != null) {
                     lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1, this);
-                    location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    Toast.makeText(TransactionInformation.this, String.valueOf(location.getLatitude()) + ", " +  String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                    Thread t1 = new Thread(new Runnable() {
+                        @SuppressLint("MissingPermission")
+                        @Override
+                        public void run() {
+                            while(location == null) {
+                                location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            }
+                        }
+                    });
+
+                    Thread t2 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(TransactionInformation.this, String.valueOf(location.getLatitude()) + ", " +  String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+
+                    t1.start();
+
+                    try {
+                        t1.join();
+                        t2.start();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     location.setLatitude(0.0);
                     location.setLongitude(0.0);
@@ -261,6 +291,8 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                         startActivity(intent);
                         finish();
                         break;
+                    default:
+                        finish();
                 }
             }
         });

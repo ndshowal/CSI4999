@@ -63,7 +63,7 @@ public class Account extends AppCompatActivity {
         //Create button to redirect to activity_settings page
         Button settingsBtn = findViewById(R.id.settings_button);
         if(fingerprintPermission.equals("")){
-            settingsBtn.setError("");
+            settingsBtn.setError("Your fingerprint settings need to be set!");
         }
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

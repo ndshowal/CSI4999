@@ -223,6 +223,7 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
                                 Intent intent = new Intent(FullTransactionHistory.this, TransactionInformation.class);
                                 intent.putExtra("UserKey", user);
                                 intent.putExtra("TxKey", tx);
+                                intent.putExtra("SourceKey", "Full Transaction History");
                                 startActivity(intent);
                             }
                         });

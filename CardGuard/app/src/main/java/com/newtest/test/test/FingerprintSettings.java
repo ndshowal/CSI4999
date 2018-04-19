@@ -172,7 +172,7 @@ public class FingerprintSettings extends AppCompatActivity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+                                onBackPressed();
                             }
                         }).create().show();
             }
