@@ -346,9 +346,7 @@ public class FullTransactionHistory extends AppCompatActivity implements Locatio
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-
-    }
+    public void onLocationChanged(Location location) {}
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {

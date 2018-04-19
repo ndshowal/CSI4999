@@ -100,8 +100,8 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
             case "granted":
                 lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (lm != null) {
-                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, this);
-                    location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1, this);
+                    location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 } else {
                     location.setLatitude(0.0);
                     location.setLongitude(0.0);
@@ -293,7 +293,7 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
                         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
                         //Request location updates:
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, this);
+                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1, this);
                     }
                 } else {
                     SharedPreferences.Editor ed = sp.edit();
@@ -313,7 +313,9 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, this);
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1, this);
+            location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Toast.makeText(GenerateTransaction.this, String.valueOf(location.getLatitude()) + ", " +  String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -616,7 +618,8 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
 
     @Override
     public void onLocationChanged(Location location) {
-
+        this.location = location;
+        System.out.println("Updating location...");
     }
 
     @Override
