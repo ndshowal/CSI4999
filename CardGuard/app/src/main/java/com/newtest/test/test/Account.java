@@ -1,11 +1,13 @@
 package com.newtest.test.test;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,23 +18,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Account extends AppCompatActivity {
-    User user;
-    TextView greeting;
+    private User user;
+    private TextView greeting;
 
-    AsyncTask tp;
-    int flag;
-    Button fullTransactionHistoryBtn;
-    Button notificationsBtn;
+    private AsyncTask tp;
+    private int flag;
+    private Button fullTransactionHistoryBtn;
+    private Button notificationsBtn;
 
     private String userBalance;
 
-    int backCount;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        backCount = 0;
         setContentView(R.layout.activity_account);
 
         //Get user object from parcel
@@ -89,9 +90,25 @@ public class Account extends AppCompatActivity {
         });
 
         userBalance = "";
+
+        progressDialog = new ProgressDialog(Account.this);
+        progressDialog.setMessage("Fetching your account details...");
+        progressDialog.setCancelable(false);
+
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            progressDialog.show();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
                 userBalance = "Your current balance is: " + new UserChecker().getFormattedBalance(user);
                 tp = new TransactionPuller(user, new TransactionPuller.AsyncResponse() {
                     @Override
@@ -111,15 +128,11 @@ public class Account extends AppCompatActivity {
 
         try {
             t1.join();
+            progressDialog.cancel();
             t2.start();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public void onResume() {
-        super.onResume();
-        backCount = 0;
     }
 
     private void logout() {
@@ -128,40 +141,39 @@ public class Account extends AppCompatActivity {
 
         ed.putString("username" , "");
         ed.putString("password", "");
+        ed.putString("useFingerprint", "");
+        ed.putString("locationPermission", "");
         ed.apply();
 
         startActivity(new Intent(Account.this, SignInSignUp.class));
         finish();
     }
     @Override
-    public void onBackPressed()
-    {
-        backCount++;
-        if(backCount == 2) {
-            logout();
-        } else {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.sign_out)
-                    .setMessage("Are you sure you want to sign out? Press OK to proceed.")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            logout();
-                        }
-                    })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            return;
-                        }
-                    }).create().show();
-        }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage("Are you sure you want to sign out? Press OK to proceed.")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        logout();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                }).create().show();
     }
 
     public void updateUI() {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                progressDialog.cancel();
+
                 //Set greeting text
                 greeting = findViewById(R.id.text_greeting);
                 greeting.setText("");
@@ -226,6 +238,10 @@ public class Account extends AppCompatActivity {
                 Button transactionInfoBtn = new Button(Account.this);
                 final Transaction tx = user.getTransactions().get(i);
                 transactionInfoBtn.setText(tx.getSimpleDescription());
+
+                if(i == 1) {
+                    transactionInfoBtn.setBackgroundResource(R.drawable.button_alt);
+                }
 
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setMargins(0, 10, 0, 10);
