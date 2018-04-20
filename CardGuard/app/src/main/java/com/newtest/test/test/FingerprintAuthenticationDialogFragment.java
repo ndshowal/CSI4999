@@ -98,7 +98,6 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 
         mSharedPreferences = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String password = mSharedPreferences.getString("password", "");
-        System.out.println("USER PASSWORD IS: " + password);
 
         // Do not create a new Fragment when the Activity is re-created such as orientation changes.
         setRetainInstance(true);

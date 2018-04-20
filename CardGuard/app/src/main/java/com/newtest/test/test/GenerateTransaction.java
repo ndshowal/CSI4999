@@ -315,7 +315,6 @@ public class GenerateTransaction extends AppCompatActivity implements LocationLi
             lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1, this);
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            Toast.makeText(GenerateTransaction.this, String.valueOf(location.getLatitude()) + ", " +  String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
         }
     }
 

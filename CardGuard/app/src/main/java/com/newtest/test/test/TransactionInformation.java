@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -119,27 +118,7 @@ public class TransactionInformation extends AppCompatActivity implements Locatio
                         }
                     });
 
-                    Thread t2 = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(TransactionInformation.this, String.valueOf(location.getLatitude()) + ", " +  String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-
                     t1.start();
-
-                    try {
-                        t1.join();
-                        t2.start();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
                 } else {
                     location.setLatitude(0.0);
                     location.setLongitude(0.0);
